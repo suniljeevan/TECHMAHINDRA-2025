@@ -49,7 +49,63 @@ SELECT * FROM COURSES;
 SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY COURSEID;
 
 
-     
+https://github.com/suniljeevan/TECHMAHINDRA-2025     
+
+mysql> use techtest;
+Database changed
+mysql> select * from student;
++------+-----------+---------------------+-----------+----------------+
+| sid  | sname     | email               | address   | admission_year |
++------+-----------+---------------------+-----------+----------------+
+| 1001 | lakshman  | lakshman@gmail.com  | bengaluru |           2022 |
+| 1002 | lakshman2 | lakshman2@gmail.com | bengaluru |           2022 |
+| 1003 | lakshman3 | lakshman3@gmail.com | hyderabad |           2022 |
+| 1004 | lakshman4 | lakshman4@gmail.com | hyderabad |           2022 |
+| 1005 | lakshman5 | lakshman5@gmail.com | delhi     |           2022 |
++------+-----------+---------------------+-----------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from course;
++----------+------------+--------+------------+
+| courseid | coursename | credit | ctype      |
++----------+------------+--------+------------+
+| CSE1001  | JAVA       |      3 | INTEGRATED |
+| CSE1002  | OS         |      4 | THEORY     |
+| CSE1003  | DBMS       |      3 | THEORY     |
+| CSE1004  | ADV.JAVA   |      3 | LAB        |
++----------+------------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from enrollment;
++--------+----------+
+| studid | courseid |
++--------+----------+
+| 1001   | cse1001  |
+| 1001   | cse1002  |
+| 1002   | cse1002  |
+| 1002   | cse1003  |
+| 1004   | cse1003  |
+| 1003   | cse1004  |
++--------+----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY COURSEID;
++-------------+----------+
+| COURSECOUNT | COURSEID |
++-------------+----------+
+|           1 | cse1001  |
+|           2 | cse1002  |
+|           2 | cse1003  |
+|           1 | cse1004  |
++-------------+----------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+
 
 
 
