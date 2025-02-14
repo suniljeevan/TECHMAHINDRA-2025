@@ -100,6 +100,77 @@ mysql> SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY 
 +-------------+----------+
 4 rows in set (0.00 sec)
 
+Display the details of student who 
+have enrolled for a particular course
+
+select * from student s,course c, enrollment e 
+where c.courseid=e.courseid && 
+e.studid=s.sid && c.coursename='java';
+-------------------------------------------
+post api to database
+-------------------
+insert a new student
+input - single object-challenge- forming attributes to object
+  insert into student values('1005','lakshman5',null,null);
+  retuns no.of records affected.
+
+  int insert(object) 
+
+put api to database
+-------------------
+int update(String,object)
+
+delete api
+----------
+int delete(String)
+
+
+
+update the details of lakshman2 
+        email, address, 
+
+update student set email='lakshman@techmahindra.com', address='andhra pradesh' where sid='1002';
+
+delete from student where sid='1001';
+
+---------------------------------------------------------------
+
+Java objects to represent tables
+--------------------------------
+pojo - plain old java object.
+poji - plain old java Interface.
+    Loose coupling
+This is also called bean, entity, model, 
+container- bean/enterprise java bean
+MVC
+framework
+   @bean
+
+
+course, student, enrollment,
+UMS , student, 
+
+-----------------------------------------
+pojo
+Student , Course, Enrollment
+
+1. attributes represents column
+2. getter and setter 
+3. constructors
+4. toString()
+5. equals() and hashCode()
+6. Serializable Interface (loose coupling)
+   (Network transferable)
+    by default servlet is assigning this feature
+    @Bean
+
+-----------------------------------------------------
+
+
+
+
+
+
 
 
 
