@@ -165,8 +165,14 @@ Student , Course, Enrollment
     @Bean
 
 -----------------------------------------------------
+create 1 project - sms
+src-  package - model
 
-
+ORM - Object Relational Mapping
+      1. JDBC
+      2. Hibernate
+      3. JPA 
+      4. Spring Data JPA    
 
 
 
