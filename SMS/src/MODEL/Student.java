@@ -70,8 +70,7 @@ public class Student implements Serializable {
 		this.year = year;
 	}
 	public Student() {
-		super();
+		
 	}
-	
 
 }
