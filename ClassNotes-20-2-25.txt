@@ -1,0 +1,97 @@
+Techmahindra 
+---------------
+Backend
+---------
+
+
+
+1. Java acts as a middle Layer engine?
+
+2. Front end-> backend
+3. Database - mysql, mongodb, redis
+4. API ( Restful )/ end points
+    (HTTP methods)
+5. API Testing  - Postman
+6. Web engine - (jsp, servlet, frameworks)
+7. Web services over webapp
+8. Datstructure for Database
+9. Presentation of content
+    (HTML, CSS, Javascript, Frameworks)
+10. CMS - wordpress, Adobe
+
+Task 
+   - Environment setup.
+     1. mysql, postgresql, mongodb
+     2. web engine (
+          servlet jar, Spring jar,Eclipse)
+           STS - download spring boot
+     3. java 21 
+      (jdk 8, jdk 21)
+     4. React
+Forest#321  Forest#123
+Scott@123
+
+populate 
+CRUD
+
+// get API  fetches collection or attributes
+    or object// array
+Display the course available.
+    // get api fetches Set.
+Display the no. of students enrolled
+  in every course
+
+Display the details of student who 
+have enrolled for a particular course
+
+SELECT * FROM COURSES;
+
+SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY COURSEID;
+
+
+Class 3 :
+----------
+
+ Bean, Model, Entity,pojo, Loose coupling, Repository, 
+ Collection, Java 8 - Lambda Expression, Functional Interface,
+ Method Reference, Stream, Data Access Object, Reflection,
+ Optional, Annotation.
+  SOLID - Single, Open-close, Lyskoiv, Iterface, Dependency
+
+  50- mcq  
+  30- project  - Adobe+
+  20 - Coding Question
+  65% - 55%
+-------------------------------------
+
+   sir
+   Dean - Interface 
+         
+
+
+
+
+int  insert (object)
+
+int     update(object, int)
+int    delete(int)
+
+List<Object> fetch()
+
+   Partial Implemention of an Interface methods is not allowed
+   until java 8 Lambda Expression
+
+
+  Exception  Handling :
+   avoid the Exception  - throws 
+   try-catch 
+
+
+
+
+
+
+     
+
+
+
