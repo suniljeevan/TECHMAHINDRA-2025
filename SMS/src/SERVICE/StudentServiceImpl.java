@@ -3,19 +3,25 @@ package SERVICE;
 import java.util.List;
 
 import MODEL.Student;
+import Repository.StudentRepository;
 
 public class StudentServiceImpl implements StudentService{
+	private StudentRepository repository;
+	
+	public StudentServiceImpl(StudentRepository repository) {
+		this.repository = repository;
+	}
 	public int insertStudent(Student s) {
-		return 0;
+		return repository.insertStudent(s);
 	}
 	public int updateStudent(Student s, String id) {
-		return 0;
+		return repository.updateStudent(s, id);
 	}
 	public int deleteStudent(String s) {
-		return 0;
+		return repository.deleteStudent(s);
 	}
 	public List<Student> fetchAll() {
-		return null;
+		return repository.fetchAllStudents();
 	}
 	public Student fetchOneStudent(String s) {
 		return null;
