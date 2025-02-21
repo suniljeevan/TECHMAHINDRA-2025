@@ -8,6 +8,9 @@ import Repository.StudentRepository;
 public class StudentServiceImpl implements StudentService{
 	private StudentRepository repository;
 	
+	public StudentServiceImpl() {
+		super();
+	}
 	public StudentServiceImpl(StudentRepository repository) {
 		this.repository = repository;
 	}

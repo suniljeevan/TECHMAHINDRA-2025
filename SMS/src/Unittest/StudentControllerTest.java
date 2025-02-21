@@ -24,13 +24,13 @@ class StudentControllerTest {
         // Creating a sample student object
         Student student = new Student();
         student.setSid("1");
-        student.setSname("John Doe");
+        student.setSname("Jerin");
         student.setYear(2021);
 
         // Inserting student and getting the result
         int result = controller.insertStudent(student);
 
         // Assuming service.insertStudent() returns 1 on successful insertion
-        assertEquals(1, result, "Student insertion failed!");
+        assertEquals(1, result, "Student insertion success!");
     }
 }
