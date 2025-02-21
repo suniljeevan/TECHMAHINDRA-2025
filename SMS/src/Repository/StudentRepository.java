@@ -61,11 +61,31 @@ public class StudentRepository {
 			s=new Student(id,name,email,address,year);
 			list.add(s);
 		}
-		
 		}catch(Exception e) {}
 		return list;
 	}
-	
+	public int updateStudent(Student s, String id) {
+		int r=0;
+		try {
+		String sql="update student set address=?, admission_year=? where sid=?";	
+		PreparedStatement ps=connection.getConnection().prepareStatement(sql);
+		ps.setString(1, s.getAddress());
+		ps.setInt(2, s.getYear());
+		ps.setString(3, id);
+		r=ps.executeUpdate();
+		}catch(Exception e) {}
+		return r;
+	}
+	public int deleteStudent(String id) {
+		int r=0;
+		try {
+			String sql="delete from student where sid=?";	
+			PreparedStatement ps=connection.getConnection().prepareStatement(sql);
+			ps.setString(1,id);
+			r=ps.executeUpdate();
+		}catch(Exception e) {}
+		return r;
+	}
 
 }
 
