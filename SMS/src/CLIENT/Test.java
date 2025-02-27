@@ -1,5 +1,8 @@
 package CLIENT;
 
+import java.util.List;
+import java.util.ListIterator;
+
 import Controller.StudentController;
 import DataSource.MySqlDBConnection;
 import MODEL.Student;
@@ -15,8 +18,23 @@ public class Test {
 		StudentRepository repository=new StudentRepository(connection);
 		StudentServiceImpl service=new StudentServiceImpl(repository);
 		StudentController controller=new StudentController(service);
-		int res=controller.insertStudent(s);
-		System.out.println(res+" record inserted");
+		//int res=controller.insertStudent(s);
+		//System.out.println(res+" record inserted");
+		List<Student> studentlist=controller.fetchALlStudent();
+		System.out.println(studentlist);
+		for(Student i:studentlist) {
+			System.out.println(i);
+		}
+		//which collection for course, student->List,Set	
+		//which collection for Enrollment - Map
+		System.out.println("Using Iterator");
+		ListIterator itr=studentlist.listIterator();
+		while(itr.hasNext()) {
+			System.out.println(itr.next());
+		}
+		
+		
+		
 	}
 
 }

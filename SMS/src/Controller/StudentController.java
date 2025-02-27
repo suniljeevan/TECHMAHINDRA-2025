@@ -19,7 +19,7 @@ public class StudentController {
 		return service.insertStudent(s);
 	}
 	public List<Student> fetchALlStudent() {
-		return null;
+		return service.fetchAll();
 	}
 	
 	
