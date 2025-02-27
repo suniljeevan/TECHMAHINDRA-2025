@@ -35,7 +35,7 @@ public class StudentControllerTest3 {
 
     @Test
     public void testInsertStudent() {
-    	Student s=new Student("3000","amith","Amith@gmail.com","Hyderabad",2021);
+    	Student s=new Student("3002","amith","Amith@gmail.com","Hyderabad",2021);
     	assertNotNull(s);  // Modify assertion as needed
         int result=studentController.insertStudent(s);
         assertEquals(1, result, "Student insertion success!");
