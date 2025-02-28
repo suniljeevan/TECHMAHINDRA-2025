@@ -3,7 +3,7 @@ package MODEL;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Student implements Serializable {
+public class Student implements Comparable<Student>,Serializable {
 	/**
 	 * 
 	 */
@@ -76,5 +76,11 @@ public class Student implements Serializable {
 	public Student() {
 		
 	}
+	public int compareTo(Student s) {
+		return sid.compareTo(s.getSid());
+	}
 
 }
+
+
+

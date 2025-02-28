@@ -2,6 +2,7 @@ package CLIENT;
 
 import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 import Controller.StudentController;
 import DataSource.MySqlDBConnection;
@@ -32,7 +33,34 @@ public class Test {
 		while(itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-		
+		//filter students from bengaluru
+		List<Student> templist=
+			studentlist.stream().filter(x
+					->x.getAddress().equalsIgnoreCase("bengaluru")
+					
+					).collect(Collectors.toList())	;
+		System.out.println(templist);
+		//print all students fetched
+		studentlist.stream().forEach(x->System.out.println(x));
+		System.out.println("Method reference");
+		studentlist.stream().forEach(System.out::println);
+		//find the lowest id
+		System.out.println("lowest id");
+		Student student_lowestid=studentlist.stream()
+				.min((x,y)->
+		     x.getSid().compareTo(y.getSid())
+				).get();
+       System.out.println(student_lowestid);		
+	boolean result=	studentlist.stream().allMatch(
+				x->x.getAddress().equalsIgnoreCase("bengaluru")
+				);
+	System.out.println(result);
+	//
+	studentlist.stream().sorted().forEach(
+			System.out::println
+			);
+	
+	
 		
 		
 	}
