@@ -1,8 +1,11 @@
 package CLIENT;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 
 import Controller.StudentController;
 import DataSource.MySqlDBConnection;
@@ -59,9 +62,13 @@ public class Test {
 	studentlist.stream().sorted().forEach(
 			System.out::println
 			);
-	
-	
-		
+	System.out.println("Sorted by address");
+	Collections.sort(studentlist,
+			(x,y)->{
+				return x.getAddress().compareTo(y.getAddress());
+			}
+			);
+	System.out.println(studentlist);	
 		
 	}
 
