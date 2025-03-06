@@ -3,7 +3,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 //Consumer Interface builtin
 //Use Consumer to check even or odd integers
 // in a List

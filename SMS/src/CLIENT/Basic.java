@@ -12,8 +12,8 @@ public class Basic {
 		Student s2=new Student();
 		s2.setSname("sunit");
 		System.out.println(s1.getSname().compareTo(s2.getSname()));
-		List<Student> list=new ArrayList<Student>();
-		list.ad
+		//List<Student> list=new ArrayList<Student>();
+		//list.ad
 		Collections.sort(null);
 		
 	}
