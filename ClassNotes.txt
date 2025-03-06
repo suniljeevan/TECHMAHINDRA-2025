@@ -49,140 +49,260 @@ SELECT * FROM COURSES;
 SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY COURSEID;
 
 
-https://github.com/suniljeevan/TECHMAHINDRA-2025     
-
-mysql> use techtest;
-Database changed
-mysql> select * from student;
-+------+-----------+---------------------+-----------+----------------+
-| sid  | sname     | email               | address   | admission_year |
-+------+-----------+---------------------+-----------+----------------+
-| 1001 | lakshman  | lakshman@gmail.com  | bengaluru |           2022 |
-| 1002 | lakshman2 | lakshman2@gmail.com | bengaluru |           2022 |
-| 1003 | lakshman3 | lakshman3@gmail.com | hyderabad |           2022 |
-| 1004 | lakshman4 | lakshman4@gmail.com | hyderabad |           2022 |
-| 1005 | lakshman5 | lakshman5@gmail.com | delhi     |           2022 |
-+------+-----------+---------------------+-----------+----------------+
-5 rows in set (0.00 sec)
-
-mysql> select * from course;
-+----------+------------+--------+------------+
-| courseid | coursename | credit | ctype      |
-+----------+------------+--------+------------+
-| CSE1001  | JAVA       |      3 | INTEGRATED |
-| CSE1002  | OS         |      4 | THEORY     |
-| CSE1003  | DBMS       |      3 | THEORY     |
-| CSE1004  | ADV.JAVA   |      3 | LAB        |
-+----------+------------+--------+------------+
-4 rows in set (0.00 sec)
-
-mysql> select * from enrollment;
-+--------+----------+
-| studid | courseid |
-+--------+----------+
-| 1001   | cse1001  |
-| 1001   | cse1002  |
-| 1002   | cse1002  |
-| 1002   | cse1003  |
-| 1004   | cse1003  |
-| 1003   | cse1004  |
-+--------+----------+
-6 rows in set (0.00 sec)
-
-mysql> SELECT COUNT(COURSEID) "COURSECOUNT" , COURSEID FROM ENROLLMENT GROUP BY COURSEID;
-+-------------+----------+
-| COURSECOUNT | COURSEID |
-+-------------+----------+
-|           1 | cse1001  |
-|           2 | cse1002  |
-|           2 | cse1003  |
-|           1 | cse1004  |
-+-------------+----------+
-4 rows in set (0.00 sec)
-
-Display the details of student who 
-have enrolled for a particular course
-
-select * from student s,course c, enrollment e 
-where c.courseid=e.courseid && 
-e.studid=s.sid && c.coursename='java';
--------------------------------------------
-post api to database
--------------------
-insert a new student
-input - single object-challenge- forming attributes to object
-  insert into student values('1005','lakshman5',null,null);
-  retuns no.of records affected.
-
-  int insert(object) 
-
-put api to database
--------------------
-int update(String,object)
-
-delete api
+Class 3 :
 ----------
-int delete(String)
 
+ Bean, Model, Entity,pojo, Loose coupling, Repository, 
+ Collection, Java 8 - Lambda Expression, Functional Interface,
+ Method Reference, Stream, Data Access Object, Reflection,
+ Optional, Annotation.
 
+  50- mcq  
+  30- project  - Adobe+
+  20 - Coding Question
+  65% - 55%
+-------------------------------------
 
-update the details of lakshman2 
-        email, address, 
-
-update student set email='lakshman@techmahindra.com', address='andhra pradesh' where sid='1002';
-
-delete from student where sid='1001';
-
----------------------------------------------------------------
-
-Java objects to represent tables
---------------------------------
-pojo - plain old java object.
-poji - plain old java Interface.
-    Loose coupling
-This is also called bean, entity, model, 
-container- bean/enterprise java bean
-MVC
-framework
-   @bean
-
-
-course, student, enrollment,
-UMS , student, 
-
------------------------------------------
-pojo
-Student , Course, Enrollment
-
-1. attributes represents column
-2. getter and setter 
-3. constructors
-4. toString()
-5. equals() and hashCode()
-6. Serializable Interface (loose coupling)
-   (Network transferable)
-    by default servlet is assigning this feature
-    @Bean
-
------------------------------------------------------
-create 1 project - sms
-src-  package - model
-
-ORM - Object Relational Mapping
-      1. JDBC
-      2. Hibernate
-      3. JPA 
-      4. Spring Data JPA    
+   sir
+   Dean - Interface 
+         
 
 
 
 
+int  insert (object)
+
+int     update(object, int)
+int    delete(int)
+
+List<Object> fetch()
+
+   Partial Implemention of an Interface methods is not allowed
+   until java 8 Lambda Expression
+
+
+
+
+import java.util.*; 
+   
+public class RotateDemo 
+{ 
+    public static void main(String[] args) 
+    { 
+        // Let us create a list of strings 
+        List<String>  mylist = new ArrayList<String>(); 
+        mylist.add("practice"); 
+        mylist.add("code"); 
+        mylist.add("quiz"); 
+        mylist.add("geeksforgeeks"); 
+   
+        System.out.println("Original List : " + mylist); 
+   
+        // Here we are using rotate() method 
+        // to rotate the element by distance 2 
+        Collections.rotate(mylist, 1);
+Collections.rotate(mylist, 2);
+Collections.rotate(mylist, 3);
+Collections.rotate(mylist, 4); 
+    Collections.rotate(mylist, -1);
+Collections.rotate(mylist, -2);
+Collections.rotate(mylist, -3);
+Collections.rotate(mylist, -4); 
+   
+        System.out.println("Rotated List: " + mylist); 
+    } 
+} 
+
+
+Collection, Calender, date and time
+-------------------------------------
+Thursday
 
 
 
 
 
 
+Method Reference for Consumer,Predicate, Comparator
+------------------------------------------------------
+
+Default method in interface:
+----------------------------
+Java8.
+
+//public in same package
+//backward compatibilty
+// interface -> partial implementation is not allowed
+default methodname() {
+
+}
+can i update interface x after 2 implementation?
+interface x {
+void m1();
+void m2();
+void m3();
+default void m4(){//}
+}
+
+class C implements x {
+  public void m1() {
+
+   }
+public void m2() {
+  
+  }
+ public void m3() {
+
+	}
+
+ }
+class D implements x {
+  public void m1() {
+
+   }
+public void m2() {
+  
+  }
+ public void m3() {
+
+	}
+
+ }
+count the error.3
+
+
+
+Functional Interface
+____________________
+Consumer, Producer, Predicate, Function
+
+Functional interface -> 
+one abstract method
+n default method allowed
+@FunctionInterface
+
+Lamdba Expression 
+------------------
+1. easy for functional interface
+2. solution for non-function interface.
+
+Create a functional interface to check 
+   1. two integers are same or not
+   2. two doubles are same or not
+   3. two strings are same or not
+use only one Functional interface
+3 reference 
+
+
+  methods in functional interface 
+  1. receives nothing returns nothing
+  2. receives input returns nothing ----> Consumer
+  3. receives nothing returns output----> producer/Supplier
+  4. receives input returns output  ----> Function
+  5. receives input returns boolean-----> Predicate
+
+Utilize the project for API request
+10 Collectors methods
+Functional Interface
+
+Method Generic in functional interface to apply
+Stream
+1000 items  1000 product Retails 
+Consumer Functional Interface
+
+Consumer<Generic> -> 
+accept(parameter)
+
+Supplier<Generic> -> get()
+
+Function<Generic,Generic> -> apply(param1,param2)
+
+Predicate<Generic> -> test(input)
+
+Method Reference
+
+Collectors
+
+-----------------------------------
+Create abstract class Shape 
+and override method area()
+
+Improvise Shape to Interface
+
+Improvise Shape to Functional Interface
+
+Replace area() with Function<> functional
+interface
+
+Abstract class and Interface 
+
+A Class is group of attributes and business methods.
+An abstract class is group of business methods.
+An interface is a group of guidelines for business
+methods.
+An interface is a pure abstract class.
+The best feature of java abstraction which facilitates
+loose coupling.
+A Functional Interface tightly loose coupling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Create a Custom Functional Interface to print random integer number (2digit)
+-------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Question 1: Grouping By Length and Counting
+Given a list of strings, write a Java 8 Stream program to group the strings by their length and count the number of strings in each group.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
 
 
 
