@@ -10,21 +10,22 @@ interface X <T extends Number>{
 
 public class BasicDemo2 {
 	public static void main(String[] args) {
-       X r1=()-> {
-    	   Random R=new Random();
-    	   System.out.println(R.nextInt()%100);
-       };
-       r.compare();
-    X r2=()-> {
-    	Random R=new Random();
- 	   System.out.println(Math.ceil(R.nextFloat()*100));
+       X r1=(x,y)-> {
+    	  if(x.intValue()>y.intValue()) 
+    		  System.out.println("first is greater");
+    	  else 
+    		  System.out.println("second is greater");
+    	    };
+       r1.compare(10,20);
+    X r2=(x,y)-> {
+    	if(x.doubleValue()>y.doubleValue()) 
+  		  System.out.println("first is greater");
+  	  else 
+  		  System.out.println("second is greater");	
+ 	  
     };
-    r2.compare();
-    X r3=() -> {
-    	
-    	
-    };
-       
+    r2.compare(10.5,9.5);
+          
 	}
 
 }
