@@ -1,5 +1,5 @@
 body{
-    background-color: red;
+    background-color: skyblue;
     color: blue;
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -12,10 +12,13 @@ a:hover{
 }
 table{
     border: 1px solid black;
-    width:100%;
+    width:25%;
     border-spacing: 0;
     min-height: 100px;
     overflow-x: auto;
+    padding:20px;
+    background-color: yellow;
+   
 }
 
 tr,th{
@@ -27,8 +30,9 @@ tr{
     padding: 10px;
 }
 td{
+	 border: none;
     padding: 10px;
-    border-right: 1px solid white;
+   
 }
 tbody{
     height: auto;
