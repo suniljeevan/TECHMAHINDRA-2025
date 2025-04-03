@@ -11,7 +11,12 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import org.cms.DATASOURCES.MySqlDBSource;
 import org.cms.MODEL.Student;
+
+import org.cms.REPOSITORY.*;
+
+import org.cms.SERVICES.*;
 
 /**
  * Servlet implementation class RegistrationController
@@ -61,7 +66,19 @@ public class RegistrationController extends HttpServlet {
 		s.setYear(Integer.parseInt(
 				request.getParameter("year").toString()));
 		// perform database operation
+		int r=0;
+		try {
+		MySqlDBSource ds=new MySqlDBSource();
+		StudentRepository repository=new StudentRepository(ds);
+		StudentServiceImpl service=new StudentServiceImpl(repository);
+	     r=service.insertStudent(s);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		if(r==1)
 		response.sendRedirect("success.jsp");
+		else
+		response.sendRedirect("error.jsp");	
 	}
 
 }
