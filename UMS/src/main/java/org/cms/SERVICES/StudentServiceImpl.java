@@ -6,6 +6,7 @@ import org.cms.MODEL.Student;
 import org.cms.REPOSITORY.StudentRepository;
 
 public class StudentServiceImpl implements StudentService{
+	//Explicit Wiring/ Inject
 	private StudentRepository repository;
 	
 	public StudentServiceImpl() {

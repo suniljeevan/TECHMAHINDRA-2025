@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import org.cms.MODEL.Student;
+
 /**
  * Servlet implementation class RegistrationController
  */
@@ -51,7 +53,13 @@ public class RegistrationController extends HttpServlet {
 		HttpSession session=request.getSession();
 		//HttpSession session=request.getSession(false);
 		//Receive from Request
-		
+		Student s=new Student();
+		s.setSid(request.getParameter("id"));
+		s.setSname(request.getParameter("name"));
+		s.setEmail(request.getParameter("email"));
+		s.setAddress(request.getParameter("address"));
+		s.setYear(Integer.parseInt(
+				request.getParameter("year").toString()));
 		// perform database operation
 		response.sendRedirect("success.jsp");
 	}
