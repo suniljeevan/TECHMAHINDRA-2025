@@ -76,7 +76,8 @@ public class RegistrationController extends HttpServlet {
 			System.out.println(e);
 		}
 		if(r==1)
-		response.sendRedirect("success.jsp");
+			response.sendRedirect("success.jsp");	
+		//request.getRequestDispatcher("/WEB-INF/views/success.jsp").forward(request, response);
 		else
 		response.sendRedirect("error.jsp");	
 	}

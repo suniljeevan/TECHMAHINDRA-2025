@@ -9,5 +9,10 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="C:/Users/HP/Downloads/tomcat-servlet-api-10.0.0-M4.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Apache Software Foundation/apache-tomcat-10.1.26/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Downloads/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Downloads/spring-web-6.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Downloads/spring-webmvc-6.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/HP/Downloads/spring-context-6.2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
