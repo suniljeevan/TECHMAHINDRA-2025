@@ -1,5 +1,14 @@
 package org.cms.controllers;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -8,23 +17,23 @@ import org.cms.MODEL.Student;
 import org.cms.REPOSITORY.StudentRepository;
 import org.cms.SERVICES.StudentServiceImpl;
 
-import jakarta.servlet.ServletConfig;
-import jakarta.servlet.ServletContext;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-public class FetchAllStudentsController extends HttpServlet {
+public class FetchAllStudentSController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	private ServletContext context;
-	private ServletConfig config;
-	public void init(ServletConfig config) {
+	private ServletConfig config;   
+   
+    public FetchAllStudentSController() {
+        super();
+    }
+    public void init(ServletConfig config) {
 		this.config=config;
 		this.context=getServletContext();
 		System.out.println("Servlet Loaded");	
-		}
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
+	}
+    public ServletConfig getServletConfig() {
+		return config;
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException,IOException {
     	//config for receiving the details
     	// of the user for authentication and authorization
     	// BASIC , JWT 
@@ -52,10 +61,5 @@ public class FetchAllStudentsController extends HttpServlet {
     	
     	// jsp for projecting fetched student
     	request.getRequestDispatcher("show.jsp").forward(request, response); 
-    	
-    	
-    	
-    	
-    	
     }
 }

@@ -2,21 +2,21 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
   <display-name>UMS</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>register.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
     <display-name>RegistrationController</display-name>
     <servlet-name>RegistrationController</servlet-name>
     <servlet-class>org.cms.controllers.RegistrationController</servlet-class>
-      <init-param>
+    <init-param>
       <param-name>username</param-name>
       <param-value>root</param-value>
     </init-param>
-   <init-param>
+    <init-param>
       <param-name>password</param-name>
       <param-value>root</param-value>
-    </init-param> 
+    </init-param>
     <init-param>
       <param-name>driver</param-name>
       <param-value>com.mysql.jdbc.Driver</param-value>
@@ -26,8 +26,19 @@
     <servlet-name>RegistrationController</servlet-name>
     <url-pattern>/RC</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchStudentSController</display-name>
+    <servlet-name>FetchStudentSController</servlet-name>
+    <servlet-class>org.cms.controllers.FetchAllStudentSController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchStudentSController</servlet-name>
+    <url-pattern>/FetchAll</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>admin</param-name>
     <param-value>admin@presidencyuniversity.in</param-value>
   </context-param>
+  
 </web-app>
