@@ -69,13 +69,17 @@ public class StudentRepository {
 	public int updateStudent(Student s, String id) {
 		int r=0;
 		try {
-		String sql="update student set address=?, admission_year=? where sid=?";	
+		String sql="update student set sname=?,email=?,address=?, admission_year=? where sid=?";	
 		PreparedStatement ps=ds.getConnection().prepareStatement(sql);
-		ps.setString(1, s.getAddress());
-		ps.setInt(2, s.getYear());
-		ps.setString(3, id);
+		ps.setString(1, s.getSname());
+		ps.setString(2, s.getEmail());
+		ps.setString(3, s.getAddress());
+		ps.setInt(4, s.getYear());
+		ps.setString(5, id);
 		r=ps.executeUpdate();
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return r;
 	}
 	public int deleteStudent(String id) {

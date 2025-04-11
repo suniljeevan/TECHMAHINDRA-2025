@@ -48,15 +48,14 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>EditStudentController</display-name>
-    <servlet-name>EditStudentController</servlet-name>
-    <servlet-class>org.cms.controllers.EditStudentController</servlet-class>
+    <display-name>UpdateStudentController</display-name>
+    <servlet-name>UpdateStudentController</servlet-name>
+    <servlet-class>org.cms.controllers.UpdateStudentController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>EditStudentController</servlet-name>
-    <url-pattern>/edit-student</url-pattern>
+    <servlet-name>UpdateStudentController</servlet-name>
+    <url-pattern>/update-student</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description></description>
     <display-name>DeleteStudentController</display-name>
@@ -66,6 +65,16 @@
   <servlet-mapping>
     <servlet-name>DeleteStudentController</servlet-name>
     <url-pattern>/delete-student</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <description></description>
+    <display-name>UpdateStudentPostController</display-name>
+    <servlet-name>UpdateStudentPostController</servlet-name>
+    <servlet-class>org.cms.controllers.UpdateStudentPostController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateStudentPostController</servlet-name>
+    <url-pattern>/update-studentPost</url-pattern>
   </servlet-mapping>
   <context-param>
     <param-name>admin</param-name>

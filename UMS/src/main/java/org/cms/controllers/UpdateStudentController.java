@@ -8,14 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import org.cms.DATASOURCES.MySqlDBSource;
+import org.cms.MODEL.Student;
 import org.cms.REPOSITORY.StudentRepository;
 
 /**
- * Servlet implementation class DeleteStudentController
+ * Servlet implementation class EditStudentController
  */
-public class DeleteStudentController extends HttpServlet {
+public class UpdateStudentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
 	private MySqlDBSource ds;
 	private StudentRepository studentRepo;
 
@@ -27,15 +28,14 @@ public class DeleteStudentController extends HttpServlet {
     	}catch(Exception e) {}
     }
 
-	    @Override
-	    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-	       String id = request.getParameter("id");
-	       int r= studentRepo.deleteStudent(id);
-	        if (r==1)
-	        	response.sendRedirect("Student");
-	        else
-	        	response.sendRedirect("error.jsp");
-	    }
-	}
+        String sid = request.getParameter("id");
+        Student student = studentRepo.fetchOneStudent(sid);
+        request.setAttribute("student", student);
+        request.getRequestDispatcher("update-student.jsp").forward(request, response);
+       
+    }
+}

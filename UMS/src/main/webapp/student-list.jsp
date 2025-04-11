@@ -36,7 +36,7 @@ HttpSession oldsession=request.getSession(false);
             <td><%= student.getEmail() %></td>
             
             <td>
-                <a href="edit-student?id=<%= student.getSid() %>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="update-student?id=<%= student.getSid() %>" class="btn btn-sm btn-primary">Edit</a>
                 <a href="delete-student?id=<%= student.getSid() %>" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
