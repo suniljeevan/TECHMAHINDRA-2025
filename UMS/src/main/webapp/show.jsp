@@ -13,7 +13,8 @@
 try {
 HttpSession oldsession=request.getSession(false);
 List<Student> fetchedStudents=(List<Student>)oldsession.getAttribute("xyz");
-// project in a html
+// project in a html table 
+
 out.println(fetchedStudents);
 }catch(Exception e){}
 %>

@@ -28,6 +28,6 @@ public class StudentServiceImpl implements StudentService{
 		return repository.fetchAllStudents();
 	}
 	public Student fetchOneStudent(String s) {
-		return null;
+		return repository.fetchOneStudent(s);
 	}
 }

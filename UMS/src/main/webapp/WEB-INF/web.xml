@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
   <display-name>UMS</display-name>
   <welcome-file-list>
-    <welcome-file>register.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -36,9 +36,39 @@
     <servlet-name>FetchStudentSController</servlet-name>
     <url-pattern>/FetchAll</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentServlet</display-name>
+    <servlet-name>StudentServlet</servlet-name>
+    <servlet-class>org.cms.controllers.StudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentServlet</servlet-name>
+    <url-pattern>/Student</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditStudentController</display-name>
+    <servlet-name>EditStudentController</servlet-name>
+    <servlet-class>org.cms.controllers.EditStudentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditStudentController</servlet-name>
+    <url-pattern>/edit-student</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>DeleteStudentController</display-name>
+    <servlet-name>DeleteStudentController</servlet-name>
+    <servlet-class>org.cms.controllers.DeleteStudentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteStudentController</servlet-name>
+    <url-pattern>/delete-student</url-pattern>
+  </servlet-mapping>
   <context-param>
     <param-name>admin</param-name>
     <param-value>admin@presidencyuniversity.in</param-value>
   </context-param>
-  
 </web-app>

@@ -42,7 +42,9 @@ public class StudentRepository {
 		ps.setInt(5, s.getYear());
 		 r=ps.executeUpdate();
 		
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return r;
 	}
 	public List<Student> fetchAllStudents() {
@@ -83,8 +85,30 @@ public class StudentRepository {
 			PreparedStatement ps=ds.getConnection().prepareStatement(sql);
 			ps.setString(1,id);
 			r=ps.executeUpdate();
-		}catch(Exception e) {}
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 		return r;
+	}
+	public Student fetchOneStudent(String id) {
+		Student s=new Student();
+		try {
+			String sql="select * from student where sid=?";	
+			PreparedStatement ps=ds.getConnection().prepareStatement(sql);
+			ps.setString(1,id);
+			ResultSet r=ps.executeQuery();
+			while(r.next()) {
+			s.setSid(r.getString(1));
+			s.setSname(r.getString(2));
+			s.setEmail(r.getString(3));
+			s.setAddress(r.getString(4));
+			s.setYear(r.getInt(5));
+			}
+			System.out.print(s);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		return s;
 	}
 
 }
