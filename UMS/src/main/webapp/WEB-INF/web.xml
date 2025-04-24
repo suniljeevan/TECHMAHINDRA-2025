@@ -66,7 +66,7 @@
     <servlet-name>DeleteStudentController</servlet-name>
     <url-pattern>/delete-student</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <description></description>
     <display-name>UpdateStudentPostController</display-name>
     <servlet-name>UpdateStudentPostController</servlet-name>
@@ -76,6 +76,26 @@
     <servlet-name>UpdateStudentPostController</servlet-name>
     <url-pattern>/update-studentPost</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginController</display-name>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>org.cms.controllers.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Authentication Filter -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>org.cms.controllers.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
   <context-param>
     <param-name>admin</param-name>
     <param-value>admin@presidencyuniversity.in</param-value>

@@ -42,7 +42,7 @@
             </ul>
             <div class="d-flex align-items-center">
                 <button class="btn btn-outline-light me-3" onclick="toggleTheme()">Toggle Dark Mode</button>
-                <a class="btn btn-danger" href="logout.jsp">Logout</a>
+                <a class="btn btn-danger" href="login.html">Login</a>
             </div>
         </div>
     </div>
