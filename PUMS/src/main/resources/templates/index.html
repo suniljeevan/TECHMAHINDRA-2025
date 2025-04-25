@@ -1,27 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Student List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>University Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            min-height: 100vh;
+        }
+        .card {
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        footer {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+    </style>
 </head>
-<body>
-<div class="container mt-4">
-    <h2>Student List</h2>
-    <a href="/students/new" class="btn btn-success mb-3">Add Student</a>
-    <table class="table table-striped">
-        <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Actions</th></tr></thead>
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.sid}"></td>
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.email}"></td>
-            <td>
-                <a th:href="@{/students/edit/{id}(id=${student.sid})}" class="btn btn-sm btn-primary">Edit</a>
-                <a th:href="@{/students/delete/{id}(id=${student.sid})}" class="btn btn-sm btn-danger">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<body data-bs-theme="light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">UMS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-outline-light me-3" onclick="toggleTheme()">Toggle Dark Mode</button>
+                <a class="btn btn-danger" th:href="@{/login}">Login</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-primary fw-bold">University Management System</h1>
+        <p class="lead">Manage Students, Courses, and Enrollments with ease</p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+        <!-- Student Card -->
+        <div class="col">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Student Management</h5>
+                    <p class="card-text">Add, update, view, or delete students</p>
+                    <a th:href="@{/students}" class="btn btn-outline-primary">Manage Students</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Card -->
+        <div class="col">
+            <div class="card shadow-sm border-success">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Course Management</h5>
+                    <p class="card-text">Add, update, or delete courses</p>
+                    <a th:href="@{/courses}" class="btn btn-outline-success">Manage Courses</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrollment Card -->
+        <div class="col">
+            <div class="card shadow-sm border-warning">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Enrollment Management</h5>
+                    <p class="card-text">Enroll students in courses</p>
+                    <a th:href="@{/enrollments}" class="btn btn-outline-warning">Manage Enrollments</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Card -->
+        <div class="col">
+            <div class="card shadow-sm border-info">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Statistics</h5>
+                    <p class="card-text">View insights and reports</p>
+                    <a th:href="@{/statistics}" class="btn btn-outline-info">View Statistics</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="container">
+        <p class="mb-0">© 2025 University Management System. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function toggleTheme() {
+        const body = document.body;
+        const isDark = body.getAttribute("data-bs-theme") === "dark";
+        body.setAttribute("data-bs-theme", isDark ? "light" : "dark");
+    }
+</script>
+
 </body>
 </html>

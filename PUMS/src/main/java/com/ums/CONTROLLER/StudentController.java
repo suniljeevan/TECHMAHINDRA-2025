@@ -20,10 +20,10 @@ public class StudentController {
         this.service = service;
     }
 
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
+    @GetMapping("/students")
+    public String viewStudents(Model model) {
         model.addAttribute("students", service.getAllStudents());
-        return "index";
+        return "students";
     }
 
     @GetMapping("/students/new")
