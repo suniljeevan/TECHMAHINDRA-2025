@@ -7,7 +7,7 @@ import com.ums.MODEL.Course;
 
 public interface CourseService {
 	List<Course> getAllCourses();
-    Course getCourseById(String id);
+    Course getCourseById(long id);
     Course saveCourse(Course course);
-    void deleteCourse(String id);
+    void deleteCourse(long id);
 }

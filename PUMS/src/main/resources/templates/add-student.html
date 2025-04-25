@@ -30,10 +30,7 @@
         </div>
         <div class="card-body">
             <form th:action="@{/students}" th:object="${student}" method="post">
-                <div class="mb-3">
-                    <label for="sid" class="form-label">Student ID</label>
-                    <input type="text" th:field="*{sid}" class="form-control" id="sid" placeholder="Enter Student ID" required>
-                </div>
+                
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
                     <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter Full Name" required>

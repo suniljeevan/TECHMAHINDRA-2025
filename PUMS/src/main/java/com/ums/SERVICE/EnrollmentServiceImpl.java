@@ -19,7 +19,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return repo.findAll();
     }
 
-    public Enrollment getEnrollmentById(String id) {
+    public Enrollment getEnrollmentById(long id) {
         return repo.findById(id).orElse(null);
     }
 
@@ -27,7 +27,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         return repo.save(enrollment);
     }
 
-    public void deleteEnrollment(String id) {
+    public void deleteEnrollment(long id) {
         repo.deleteById(id);
     }
 

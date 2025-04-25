@@ -20,7 +20,7 @@ public class CourseServiceImpl implements CourseService {
         return repo.findAll();
     }
 
-    public Course getCourseById(String id) {
+    public Course getCourseById(long id) {
         return repo.findById(id).orElse(null);
     }
 
@@ -28,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
         return repo.save(course);
     }
 
-    public void deleteCourse(String id) {
+    public void deleteCourse(long id) {
         repo.deleteById(id);
     }
 }

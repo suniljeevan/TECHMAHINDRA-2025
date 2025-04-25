@@ -5,16 +5,16 @@ import jakarta.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String sid;
+     Long sid;
 
-    private String name;
-    private String email;
-    private String address;
-    private String year;
+     String name;
+     String email;
+     String address;
+     String year;
     
     // Getters & Setters and constructors
     
-	public Student(String sid, String name, String email, String address, String year) {
+	public Student(long sid, String name, String email, String address, String year) {
 		super();
 		this.sid = sid;
 		this.name = name;
@@ -25,10 +25,10 @@ public class Student {
 	public Student() {
 		super();
 	}
-	public String getSid() {
+	public long getSid() {
 		return sid;
 	}
-	public void setSid(String sid) {
+	public void setSid(long sid) {
 		this.sid = sid;
 	}
 	public String getName() {

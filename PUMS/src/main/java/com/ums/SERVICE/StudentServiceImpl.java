@@ -18,7 +18,7 @@ public class StudentServiceImpl implements StudentService {
         return repo.findAll();
     }
 
-    public Student getStudentById(String id) {
+    public Student getStudentById(long id) {
         return repo.findById(id).orElse(null);
     }
 
@@ -26,7 +26,7 @@ public class StudentServiceImpl implements StudentService {
         return repo.save(student);
     }
 
-    public void deleteStudent(String id) {
+    public void deleteStudent(long id) {
         repo.deleteById(id);
     }
 }

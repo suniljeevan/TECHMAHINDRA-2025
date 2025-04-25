@@ -2,6 +2,7 @@ package com.ums.REPOSITORY;
 
 import com.ums.MODEL.*;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface StudentRepository extends JpaRepository<Student, String> {
+import org.springframework.stereotype.Repository;
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
 }

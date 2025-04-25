@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private long id;
 
     @ManyToOne
     private Student student;
@@ -16,7 +16,7 @@ public class Enrollment {
     
     // Getters and Setters and constructors
 
-	public Enrollment(String id, Student student, Course course) {
+	public Enrollment(long id, Student student, Course course) {
 		super();
 		this.id = id;
 		this.student = student;
@@ -27,11 +27,11 @@ public class Enrollment {
 		super();
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

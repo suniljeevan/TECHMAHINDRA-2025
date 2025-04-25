@@ -1,5 +1,6 @@
 package com.ums.CONTROLLER;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,21 +39,21 @@ public class StudentController {
         return "redirect:/";
     }
 
-    @GetMapping("/students/edit/{id}")
-    public String editForm(@PathVariable String id, Model model) {
+    @GetMapping("/students/edit/{sid}")
+    public String editForm(@PathVariable long id, Model model) {
         model.addAttribute("student", service.getStudentById(id));
         return "edit-student";
     }
 
-    @PostMapping("/students/{id}")
-    public String updateStudent(@PathVariable String id, @ModelAttribute Student student) {
+    @PostMapping("/students/{sid}")
+    public String updateStudent(@PathVariable long id, @ModelAttribute Student student) {
         student.setSid(id);
         service.saveStudent(student);
         return "redirect:/";
     }
 
-    @GetMapping("/students/delete/{id}")
-    public String deleteStudent(@PathVariable String id) {
+    @GetMapping("/students/delete/{sid}")
+    public String deleteStudent(@PathVariable long id) {
         service.deleteStudent(id);
         return "redirect:/";
     }

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String cid;
+    private long cid;
 
     private String cname;
     private int credit;
@@ -14,10 +14,10 @@ public class Course {
     
     // Getters and Setters and constructors
     
-	public String getCid() {
+	public long getCid() {
 		return cid;
 	}
-	public void setCid(String cid) {
+	public void setCid(long cid) {
 		this.cid = cid;
 	}
 	public String getCname() {
@@ -38,7 +38,7 @@ public class Course {
 	public void setCtype(String ctype) {
 		this.ctype = ctype;
 	}
-	public Course(String cid, String cname, int credit, String ctype) {
+	public Course(long cid, String cname, int credit, String ctype) {
 		super();
 		this.cid = cid;
 		this.cname = cname;
