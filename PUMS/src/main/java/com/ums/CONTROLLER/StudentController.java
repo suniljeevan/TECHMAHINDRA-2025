@@ -40,21 +40,21 @@ public class StudentController {
     }
 
     @GetMapping("/students/edit/{sid}")
-    public String editForm(@PathVariable long id, Model model) {
-        model.addAttribute("student", service.getStudentById(id));
+    public String editForm(@PathVariable long sid, Model model) {
+        model.addAttribute("student", service.getStudentById(sid));
         return "edit-student";
     }
 
-    @PostMapping("/students/{sid}")
-    public String updateStudent(@PathVariable long id, @ModelAttribute Student student) {
-        student.setSid(id);
+    @PostMapping("/students/{sid}/update")
+    public String updateStudent(@PathVariable long sid, @ModelAttribute Student student) {
+        student.setSid(sid);
         service.saveStudent(student);
         return "redirect:/";
     }
 
     @GetMapping("/students/delete/{sid}")
-    public String deleteStudent(@PathVariable long id) {
-        service.deleteStudent(id);
+    public String deleteStudent(@PathVariable long sid) {
+        service.deleteStudent(sid);
         return "redirect:/";
     }
 }

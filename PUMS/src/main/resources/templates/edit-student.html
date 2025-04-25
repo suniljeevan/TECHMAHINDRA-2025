@@ -3,12 +3,80 @@
 <head>
     <title>Edit Student</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+		body {
+			font-family: Segoe UI, Tahoma, Geneva,Verdana, Geneva, Tahoma, sans-serif;
+			background: #f0f4f8;
+			padding: 30px;			
+		}
+		.form-container {
+			background: #ffffff;
+			border-radius: 10px;
+			padding: 30px;
+			max-width: 600px;
+			margin: auto;
+			box-shadow: 0 0 10px rgba(0,0,0,0,1);
+		}
+		h1 {
+			text-align: center;
+			color: #333;
+		}
+		label {
+			display: block;
+            margin-top: 15px;
+            font-weight: bold;
+		}
+		input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+         button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+	</style>
+	<script>
+		function validateForm() {
+			const name = document.querySelector("[name=name").value.trim();
+			const email = document.querySelector("[name='email']").value.trim();
+            if (name === "" || email === "") {
+                alert("Name and Email fields cannot be empty.");
+                return false;
+            }
+            return true;
+		}
+	</script>
 </head>
 <body>
+	<div class="form-container">
     <h1>Edit Student</h1>
 
-    <form th:action="@{/students/update}" th:object="${student}" method="post">
-        <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/students/{sid}/update(sid=${student.sid})}" th:object="${student}" method="post">
+        <input type="hidden" th:field="*{sid}" />
 
         <label for="name">Name:</label>
         <input type="text" th:field="*{name}" required /><br/>
@@ -16,12 +84,22 @@
         <label for="email">Email:</label>
         <input type="email" th:field="*{email}" required /><br/>
 
-        <label for="course">Course:</label>
-        <input type="text" th:field="*{course}" required /><br/>
+        <label for="course">Address:</label>
+        <input type="text" th:field="*{address}" required /><br/>
+        
+        <label for="course">Year:</label>
+         <select th:field="*{year}">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+        </select><br/>
 
         <button type="submit">Update Student</button>
     </form>
 
     <a th:href="@{/students}">Back to List</a>
+    </div>
 </body>
 </html>
