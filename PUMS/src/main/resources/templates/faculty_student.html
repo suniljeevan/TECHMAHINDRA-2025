@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students Assigned to Faculty</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #e9f5ff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2 class="mb-0">Students Assigned to Faculty: <span th:text="${faculty.name}"></span></h2>
+        </div>
+        <div class="card-body">
+            <div th:if="${error}">
+                <p style="color:red;" th:text="${error}"></p>
+            </div>
+
+            <!-- Loop through each course -->
+            <div th:each="courseView : ${courseStudentViews}">
+                <h3 th:text="${courseView.course.cname}">Course Name</h3> <!-- Course Name -->
+                <ul>
+                    <!-- Loop through each student in this course -->
+                    <li th:each="student : ${courseView.students}">
+                        <span th:text="${student.name}"></span> - <span th:text="${student.email}"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div th:if="${#lists.isEmpty(courseStudentViews)}">
+                <p>No students found for this faculty.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

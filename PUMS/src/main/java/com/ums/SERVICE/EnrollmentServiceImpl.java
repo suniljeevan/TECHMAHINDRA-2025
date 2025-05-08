@@ -2,15 +2,18 @@ package com.ums.SERVICE;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ums.MODEL.Enrollment;
+import com.ums.MODEL.Student;
 import com.ums.REPOSITORY.EnrollmentRepository;
 
 @Service
 public class EnrollmentServiceImpl implements EnrollmentService {
 	private final EnrollmentRepository repo;
-
+	@Autowired
+	private EnrollmentRepository enrollmentRepository;
     public EnrollmentServiceImpl(EnrollmentRepository repo) {
         this.repo = repo;
     }
@@ -29,6 +32,9 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
     public void deleteEnrollment(long id) {
         repo.deleteById(id);
+    }
+    public List<Student> getEnrolledStudents(Long courseId){
+    	return enrollmentRepository.findStudentsByCourseId(courseId);
     }
 
 }

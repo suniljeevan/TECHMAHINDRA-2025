@@ -1,6 +1,7 @@
 package com.ums.CONTROLLER;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ums.MODEL.Student;
 import com.ums.SERVICE.StudentService;
-
-
-
 @Controller
 public class StudentController {
     private final StudentService service;
@@ -26,7 +24,31 @@ public class StudentController {
         model.addAttribute("students", service.getAllStudents());
         return "students";
     }
+    @GetMapping("/student/dashboard")
+    public String studentHome(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        if (userDetails != null) {
+            model.addAttribute("name", userDetails.getUsername()); // Add student name
+        }
+        return "student-dashboard"; // returns student-dashboard.html
+    }
 
+    @GetMapping("/student/courses")
+    public String viewCourses() {
+        // Logic to display courses
+        return "student-courses"; // A page for listing courses
+    }
+
+    @GetMapping("/student/grades")
+    public String viewGrades() {
+        // Logic to display grades
+        return "student-grades"; // A page for displaying grades
+    }
+
+    @GetMapping("/student/resources")
+    public String viewResources() {
+        // Logic to display resources
+        return "student-resources"; // A page for accessing resources
+    }
     @GetMapping("/students/new")
     public String addForm(Model model) {
         model.addAttribute("student", new Student());

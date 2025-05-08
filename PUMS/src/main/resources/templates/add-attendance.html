@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Attendance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h3 th:text="'Add Attendance for ' + ${course.cname}"></h3>
+    <form th:action="@{/attendances/save}" method="post">
+        <input type="hidden" name="courseId" th:value="${course.cid}" />
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.name}"></td>
+                <td>
+                    <input type="hidden" name="studentIds" th:value="${student.sid}" />
+                    <select name="statuses" class="form-select">
+                        <option value="Present">Present</option>
+                        <option value="Absent">Absent</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit Attendance</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Course</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 30px;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const name = document.querySelector("[name='name']").value.trim();
+            const credit = document.querySelector("[name='credit']").value.trim();
+            if (name === "" || credit === "") {
+                alert("Name and Credit fields cannot be empty.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Course</h1>
+
+        <form th:action="@{/courses/{cid}/update(cid=${course.cid})}" th:object="${course}" method="post" onsubmit="return validateForm()">
+            <input type="hidden" th:field="*{cid}" />
+
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{cname}" required /><br/>
+
+            <label for="credit">Credit:</label>
+            <input type="text" th:field="*{credit}" required /><br/>
+
+            <label for="ctype">Course Type:</label>
+            <input type="text" th:field="*{ctype}" required /><br/>
+
+            <label for="faculty">Faculty:</label>
+            <select th:field="*{faculty}" required>
+                <option value="">-- Select Faculty --</option>
+                <option th:each="f : ${faculties}" th:value="${f.facultyId}" th:text="${f.name}"></option>
+            </select><br/>
+
+            <button type="submit">Update Course</button>
+        </form>
+
+        <a th:href="@{/courses}" class="back-link">Back to List</a>
+    </div>
+</body>
+</html>

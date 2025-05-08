@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Attendance</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 30px;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Attendance</h1>
+
+        <form th:action="@{/attendances/{id}/update(id=${attendance.id})}" th:object="${attendance}" method="post" >
+            <input type="hidden" th:field="*{id}" />
+            <label for="student">Student:</label>
+            <select th:field="*{student}" required>
+                <option value="">-- Select Student --</option>
+                <option th:each="s : ${students}" th:value="${s.sid}" th:text="${s.name}"></option>
+            </select><br/>
+			<label for="course">Course:</label>
+            <select th:field="*{course}" required>
+                <option value="">-- Select Course --</option>
+                <option th:each="c : ${courses}" th:value="${c.cid}" th:text="${c.cname}"></option>
+            </select><br/>
+            <label for="date" class="form-label">Date</label>
+             <input type="text" th:field="*{date}"  required />
+             
+             <label for="status" class="form-label">Status</label>
+             <input type="text" th:field="*{status}" required/>
+             
+            <button type="submit">Update Attendance</button>
+        </form>
+
+        <a th:href="@{/attendances}" class="back-link">Back to List</a>
+    </div>
+</body>
+</html>
