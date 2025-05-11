@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Exam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/heroicons@2.0.16/outline/esm/index.js" type="module"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .nav-item.active {
+            background-color: #f0f7ff;
+            color: #1a73e8;
+            font-weight: 500;
+            border-radius: 0 25px 25px 0;
+        }
+        .nav-item.active:hover {
+            background-color: #e8f0fe;
+        }
+        .form-card {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 500: '#1a73e8' },
+                        accent: {
+                            500: '#1a73e8',
+                            600: '#1967d2',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-65 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
+        <div>
+            <div class="pl-2 pt-2 flex pr-2 gap-2 ">
+                <div class="w-10 h-10">
+                    <svg fill="#1a73e8" viewBox="0 0 481.882 481.882" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <polygon points="134.711,64.632 125.75,85.304 143.571,85.304" />
+                            <polygon points="336.5,417.618 85.757,481.882 414.212,481.882" />
+                            <path d="M416.926,0H64.956v466.069l279.051-71.517c2.338-0.581,4.809-0.044,6.669,1.492
+                            l81.309,67.236V7.529C424.456,3.368,421.088,0,416.926,0z M177.497,72.673h17.821V54.346h14.057v18.327h17.821v12.531
+                            h-17.821v18.336h-14.057V85.204h-17.821V72.673z M126.976,43.447h15.377l30.759,71.191h-16.91l-6.622-15.375h-29.84
+                            l-6.623,15.375H96.217L126.976,43.447z" />
+                        </g>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold mb-5 text-blue-600">Exam Master</h1>
+            </div>
+            <div class="border-b border-gray-200 mt-2 mb-2"></div>
+            <nav class="space-y-1">
+                <a th:href="@{/exammaster/dashboard}" class="nav-item flex items-center px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors">
+                    Dashboard
+                </a>
+                <a th:href="@{/exam/add}" class="nav-item font-bold active flex items-center px-4 py-2 transition-colors">
+                    Add Exams
+                </a>
+                <a th:href="@{/exam/getExams}" class="nav-item flex items-center text-sm px-4 py-2 hover:bg-gray-100 rounded-md transition-colors">
+                     View Exams
+                </a>
+                <a th:href="@{/hallAllocation/select-course}" class="nav-item flex text-sm items-center px-4 py-2 hover:bg-gray-100 rounded-md transition-colors">
+                    Hall Arrangements
+                </a>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-gmail-200">
+            <a th:href="@{/logout}"
+               class=" w-1/2 flex items-center justify-center rounded-full font-bold bg-green-500 px-4 py-2 text-sm text-white hover:bg-gmail-100 rounded transition-colors">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8 bg-[#f1f3f4] overflow-y-auto">
+        <div class="max-w-2xl mx-auto animate-fade-in">
+            <div class="mb-4">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Welcome to Exam Management System</h2>
+                <p class="text-green-500">Please fill up the form carefully with to add exam!</p>
+            </div>
+            <div class="form-card rounded-lg overflow-hidden bg-white animate-slide-up">
+                <!-- Header -->
+                <div class="bg-primary-500 px-6 py-4">
+                    <h2 class="text-xl font-semibold text-white">Add New Exam</h2>
+                </div>
+
+                <!-- Form -->
+                <div class="p-6">
+                    <div th:if="${error}" class="mb-4 p-3 bg-red-50 text-red-600 rounded-md text-sm animate-fade-in" th:text="${error}"></div>
+                    <div th:if="${success}" class="mb-4 p-3 bg-green-50 text-green-600 rounded-md text-sm animate-fade-in" th:text="${success}"></div>
+
+                    <form th:action="@{/exam/add}" th:object="${exam}" method="post" class="space-y-4">
+                        <div class="flex items-center">
+                            <label class="w-1/3 text-sm font-medium text-gray-900">Exam ID:</label>
+                            <input type="text" th:field="*{examId}" required
+                                   class="w-2/3 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 transition-all"
+                                   disabled />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-1/3 text-sm font-medium text-gray-900">Course:</label>
+                            <select th:field="*{courseId}" required
+                                    class="w-2/3 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 transition-all">
+                                <option th:each="c : ${courses}" th:value="${c}" th:text="${c}">Course</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-1/3 text-sm font-medium text-gray-900">Hall:</label>
+                            <select th:field="*{hallId}" required
+                                    class="w-2/3 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 transition-all">
+                                <option th:each="h : ${halls}" th:value="${h}" th:text="${h}">Hall</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-1/3 text-sm font-medium text-gray-900">Shift:</label>
+                            <select th:field="*{shift}" required
+                                    class="w-2/3 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 transition-all">
+                                <option th:each="s : ${shifts}" th:value="${s}" th:text="${s}">Shift</option>
+                            </select>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label class="w-1/3 text-sm font-medium text-gray-900">Date:</label>
+                            <input type="date" th:field="*{date}" required
+                                   class="w-2/3 px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:ring-offset-1 transition-all"/>
+                        </div>
+
+                        <div class="pt-4 flex justify-center">
+                            <button type="submit"
+                                    class=" bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2 px-6 rounded-full shadow transition-colors duration-200">
+                                Add Exam
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

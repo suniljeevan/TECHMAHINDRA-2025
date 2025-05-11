@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exam Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gmail: {
+                            50: '#ffffff',    // base background
+                            100: '#f1f3f4',   // light gray
+                            200: '#e0e0e0',   // borders
+                            300: '#dadce0',   // muted text
+                            400: '#5f6368',   // regular text
+                            500: '#202124',   // bold text
+                            600: '#1a73e8',   // blue primary
+                            700: '#185abc',   // blue hover
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gmail-50 text-gmail-500 min-h-screen font-sans">
+<div class="max-w-6xl mx-auto px-4 py-12">
+    <!-- Header -->
+    <header class="animate-fade-in">
+        <div class="flex justify-between items-center mb-16">
+            <a href="/" class="group flex items-center space-x-3">
+                <!-- SVG Icon -->
+                <div class="w-10 h-10">
+                    <svg fill="#1a73e8" viewBox="0 0 481.882 481.882" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <polygon points="134.711,64.632 125.75,85.304 143.571,85.304" />
+                            <polygon points="336.5,417.618 85.757,481.882 414.212,481.882" />
+                            <path d="M416.926,0H64.956v466.069l279.051-71.517c2.338-0.581,4.809-0.044,6.669,1.492
+                            l81.309,67.236V7.529C424.456,3.368,421.088,0,416.926,0z M177.497,72.673h17.821V54.346h14.057v18.327h17.821v12.531
+                            h-17.821v18.336h-14.057V85.204h-17.821V72.673z M126.976,43.447h15.377l30.759,71.191h-16.91l-6.622-15.375h-29.84
+                            l-6.623,15.375H96.217L126.976,43.447z" />
+                        </g>
+                    </svg>
+                </div>
+                <span class="text-3xl font-bold text-gmail-600 group-hover:text-gmail-700 transition">
+                    Exam Master
+                </span>
+            </a>
+
+            <a th:href="@{/login}" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-gmail-700 transition">
+                Sign In
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="animate-slide-up mb-20">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold text-gmail-600 mb-6">Streamline Your Exam Administration</h2>
+            <p class="text-xl text-gmail-400 max-w-3xl mx-auto mb-8">
+                Automated hall allocation, student management, and exam scheduling for educational institutions
+            </p>
+            <a th:href="@{/exammaster/dashboard}" class="inline-block px-8 py-3 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 transition shadow-md hover:scale-105 duration-200">
+                Let's Start
+            </a>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="animate-fade-in mb-20">
+        <div class="bg-gmail-100 rounded-xl shadow-md p-8">
+            <h3 class="text-2xl font-bold text-gmail-600 mb-6 border-b border-gmail-200 pb-2">PROJECT OVERVIEW</h3>
+            <p class="text-gmail-400 mb-6">
+                The Exam Management System is a Spring Boot-based application tailored to simplify and automate the process of managing student exams along with hall-wise seating arrangements.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-gmail-500 mb-4">User Roles</h4>
+                    <ul class="space-y-3 text-gmail-400">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-gmail-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Admin:</strong> Schedule exams, manage students, and oversee hall allocations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-gmail-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span><strong>Student:</strong> View exam schedules and seating arrangements</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xl font-semibold text-gmail-500 mb-4">Key Features</h4>
+                    <ul class="space-y-3 text-gmail-400">
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-gmail-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Automated hall and seat allocation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-gmail-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Role-based access: Admin and Student</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-5 w-5 text-gmail-600 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Modern UI with intuitive dashboard</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

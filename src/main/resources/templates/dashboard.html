@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gmail: {
+                            50: '#ffffff',
+                            100: '#f1f3f4',
+                            200: '#e0e0e0',
+                            300: '#dadce0',
+                            400: '#5f6368',
+                            500: '#202124',
+                            600: '#1a73e8',
+                            700: '#185abc'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gmail-50 text-gmail-500 min-h-screen font-sans">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-65 bg-white border-r border-gmail-200 p-2 flex flex-col justify-between animate-fade-in">
+        <div>
+            <div class="pl-2 pt-2 flex  gap-1 pr-2 ">
+                <div class="w-10 h-10">
+                    <svg fill="#1a73e8" viewBox="0 0 481.882 481.882" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <polygon points="134.711,64.632 125.75,85.304 143.571,85.304" />
+                            <polygon points="336.5,417.618 85.757,481.882 414.212,481.882" />
+                            <path d="M416.926,0H64.956v466.069l279.051-71.517c2.338-0.581,4.809-0.044,6.669,1.492
+                            l81.309,67.236V7.529C424.456,3.368,421.088,0,416.926,0z M177.497,72.673h17.821V54.346h14.057v18.327h17.821v12.531
+                            h-17.821v18.336h-14.057V85.204h-17.821V72.673z M126.976,43.447h15.377l30.759,71.191h-16.91l-6.622-15.375h-29.84
+                            l-6.623,15.375H96.217L126.976,43.447z" />
+                        </g>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold mb-5 text-blue-600">Exam Master</h1>
+            </div>
+            <div class="border-b border-gray-200 mt-2 mb-2"></div>
+            <nav class="space-y-1 px-2">
+                <a th:href="@{/dashboard}"
+                   class="nav-item active block px-4 py-2 text-sm text-gmail-600 bg-gmail-100 font-medium rounded-r-full hover:bg-gmail-200 transition">
+                    Dashboard
+                </a>
+                <a th:href="@{/exam/add}"
+                   class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
+                    Add Exams
+                </a>
+                <a th:href="@{/exam/getExams}"
+                   class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
+                    View Exams
+                </a>
+                <a th:href="@{/hallAllocation/select-course}"
+                   class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
+                    View Hall Allocations
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-gmail-200">
+            <a th:href="@{/logout}"
+               class=" w-1/2 flex justify-center items-center border rounded-full bg-green-500 font-bold px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 rounded transition-colors">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 p-10 bg-[#f1f3f4] animate-slide-up">
+        <div class="max-w-1xl mx-auto">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-blue-600 mb-2">Welcome to Exam Management System</h2>
+                <p class="text-gray-600">Streamline your exam administration with our comprehensive management platform</p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-lg p-8 flex flex-col items-center justify-center">
+                <div class="grid md:grid-cols-2 gap-8 w-full">
+                    <!-- Feature 1 -->
+                    <div class="bg-blue-50 p-6 rounded-lg flex items-start">
+                        <div class="mr-4 text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Exam Scheduling</h3>
+                            <p class="text-gray-600">Create and manage exam schedules with automatic conflict detection across halls and courses.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-green-50 p-6 rounded-lg flex items-start">
+                        <div class="mr-4 text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Seat Allocation</h3>
+                            <p class="text-gray-600">Automated student seating arrangements with optimized hall capacity utilization.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-purple-50 p-6 rounded-lg flex items-start">
+                        <div class="mr-4 text-purple-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Secure Access</h3>
+                            <p class="text-gray-600">Role-based authentication ensures data security for admins, faculty, and students.</p>
+                        </div>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-yellow-50 p-6 rounded-lg flex items-start">
+                        <div class="mr-4 text-yellow-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Reports & Analytics</h3>
+                            <p class="text-gray-600">Generate comprehensive reports on exam attendance, hall utilization, and more.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Upcoming Exams</p>
+                                <p class="text-xl font-semibold">12</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Students Registered</p>
+                                <p class="text-xl font-semibold">1,248</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                        <div class="flex items-center">
+                            <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Exam Halls</p>
+                                <p class="text-xl font-semibold">8</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
