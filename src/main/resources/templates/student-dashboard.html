@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gmail: {
+                            50: '#ffffff',
+                            100: '#f1f3f4',
+                            200: '#e0e0e0',
+                            300: '#dadce0',
+                            400: '#5f6368',
+                            500: '#202124',
+                            600: '#1a73e8',
+                            700: '#185abc'
+                        }
+                    },
+                   animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gmail-50 text-gmail-500 min-h-screen font-sans">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div class="w-65 bg-white border-r border-gmail-200 p-4 flex flex-col justify-between">
+        <div>
+            <div class="pl-2 pt-2 flex  gap-1 pr-2 ">
+                <div class="w-10 h-10">
+                    <svg fill="#1a73e8" viewBox="0 0 481.882 481.882" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <polygon points="134.711,64.632 125.75,85.304 143.571,85.304" />
+                            <polygon points="336.5,417.618 85.757,481.882 414.212,481.882" />
+                            <path d="M416.926,0H64.956v466.069l279.051-71.517c2.338-0.581,4.809-0.044,6.669,1.492
+                            l81.309,67.236V7.529C424.456,3.368,421.088,0,416.926,0z M177.497,72.673h17.821V54.346h14.057v18.327h17.821v12.531
+                            h-17.821v18.336h-14.057V85.204h-17.821V72.673z M126.976,43.447h15.377l30.759,71.191h-16.91l-6.622-15.375h-29.84
+                            l-6.623,15.375H96.217L126.976,43.447z" />
+                        </g>
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold mb-5 text-blue-600">Exam Master</h1>
+            </div>
+            <div class="border-b border-gray-200 mt-2 mb-2"></div>
+            <nav class="space-y-1 px-2">
+                <a th:href="@{/exammaster/home}"
+                   class="nav-item active block px-4 py-2 text-gmail-600 bg-gmail-100 font-medium rounded-r-full hover:bg-gmail-200 transition">
+                    Home
+                </a>
+                <a th:href="@{/exammaster/student-select-course}"
+                   class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
+                    View Seating Arrangement
+                </a>
+            </nav>
+        </div>
+        <div class="p-4 border-t border-gmail-200">
+            <a th:href="@{/logout}"
+               class=" w-1/2 flex justify-center items-center border rounded-full bg-green-500 font-bold px-4 py-2 text-sm text-white hover:bg-gmail-100 rounded transition-colors">
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content - Student Perspective -->
+    <div class="flex-1 p-6 md:p-10 bg-[#f1f3f4] animate-slide-up">
+        <div class="max-w-6xl mx-auto">
+            <!-- Student Welcome Section -->
+            <div class="mb-8 text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-600 mb-2">Welcome Back, Student!</h2>
+                <p class="text-green-600 text-lg">Access all your exam information in one place</p>
+            </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>
