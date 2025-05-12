@@ -26,9 +26,16 @@
                             700: '#185abc'
                         }
                     },
-                    animation: {
-                        'fade-in': 'fadeIn 1s ease-in-out',
-                        'slide-up': 'slideUp 0.5s ease-out'
+                   animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out'
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: {
+                            '0%': { transform: 'translateY(10px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
                     }
                 }
             }
@@ -38,7 +45,7 @@
 <body class="bg-gmail-50 text-gmail-500 min-h-screen font-sans">
 <div class="flex h-screen">
     <!-- Sidebar -->
-    <div class="w-65 bg-white border-r border-gmail-200 p-2 flex flex-col justify-between animate-fade-in">
+    <div class="w-65 bg-white border-r border-gmail-200 p-4 flex flex-col justify-between">
         <div>
             <div class="pl-2 pt-2 flex  gap-1 pr-2 ">
                 <div class="w-10 h-10">
@@ -57,27 +64,27 @@
             </div>
             <div class="border-b border-gray-200 mt-2 mb-2"></div>
             <nav class="space-y-1 px-2">
-                <a th:href="@{/dashboard}"
-                   class="nav-item active block px-4 py-2 text-sm text-gmail-600 bg-gmail-100 font-medium rounded-r-full hover:bg-gmail-200 transition">
-                    Dashboard
+                <a th:href="@{/exammaster/home}"
+                   class="nav-item active block px-4 py-2 text-gmail-600 bg-gmail-100 font-medium rounded-r-full hover:bg-gmail-200 transition">
+                    Home
                 </a>
                 <a th:href="@{/exam/add}"
                    class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
-                    Add Exams
+                    Add Exam
                 </a>
-                <a th:href="@{/exam/getExams}"
+                <a th:href="@{/exam/get}"
                    class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
-                    View Exams
+                    View Exam
                 </a>
                 <a th:href="@{/hallAllocation/select-course}"
                    class="nav-item block px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 transition rounded-r-full">
-                    View Hall Allocations
+                    View Hall Arrangement
                 </a>
             </nav>
         </div>
         <div class="p-4 border-t border-gmail-200">
             <a th:href="@{/logout}"
-               class=" w-1/2 flex justify-center items-center border rounded-full bg-green-500 font-bold px-4 py-2 text-sm text-gmail-400 hover:bg-gmail-100 rounded transition-colors">
+               class=" w-1/2 flex justify-center items-center border rounded-full bg-green-500 font-bold px-4 py-2 text-sm text-white hover:bg-gmail-100 rounded transition-colors">
                 Logout
             </a>
         </div>
@@ -88,7 +95,7 @@
         <div class="max-w-1xl mx-auto">
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-blue-600 mb-2">Welcome to Exam Management System</h2>
-                <p class="text-gray-600">Streamline your exam administration with our comprehensive management platform</p>
+                <p class="text-green-600">Streamline your exam administration with our comprehensive management platform</p>
             </div>
             <div class="bg-white border border-gray-200 rounded-lg p-8 flex flex-col items-center justify-center">
                 <div class="grid md:grid-cols-2 gap-8 w-full">
@@ -113,7 +120,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Seat Allocation</h3>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">Hall-wise Seating Arrangement</h3>
                             <p class="text-gray-600">Automated student seating arrangements with optimized hall capacity utilization.</p>
                         </div>
                     </div>
@@ -147,20 +154,20 @@
 
                 <!-- Quick Stats -->
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <div class="bg-green-400 border border-gray-200 rounded-lg p-4 shadow-sm">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M7 18h10v2H7zm0-4h10v2H7zm2-4h6v2H9zm0-4h6v2H9zm-4 8h2v2H5zm12 0h2v2h-2zM5 8h2v2H5zm12 0h2v2h-2z"/>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Upcoming Exams</p>
-                                <p class="text-xl font-semibold">12</p>
+                                <p class="text-white font-bold">Seats available</p>
+                                <p class="text-white font-semibold">100</p>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <div class="bg-green-400 border border-gray-200 rounded-lg p-4 shadow-sm">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -168,12 +175,12 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Students Registered</p>
-                                <p class="text-xl font-semibold">1,248</p>
+                                <p class="text-white font-bold">Registered Students</p>
+                                <p class="text-white">50</p>
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                    <div class="bg-green-400 border border-gray-200 rounded-lg p-4 shadow-sm">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,8 +188,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Exam Halls</p>
-                                <p class="text-xl font-semibold">8</p>
+                                <p class="text-white font-bold">Halls Available</p>
+                                <p class="text-white">8</p>
                             </div>
                         </div>
                     </div>

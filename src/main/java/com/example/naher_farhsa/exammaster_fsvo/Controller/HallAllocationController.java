@@ -27,17 +27,17 @@ public class HallAllocationController {
     public String selectCourseForAllocation(@RequestParam(value = "courseCode", required = false) String courseCode, Model model) {
         if (courseCode != null && !courseCode.isEmpty()) {
             // Redirect to the view with the selected course code
-            return "redirect:/hallAllocation/view?courseCode=" + courseCode;
+            return "redirect:/hallAllocation/get?courseCode=" + courseCode;
         }
 
         // Fetch available courses from the enum and pass it to the view
         model.addAttribute("courses", hallAllocationService.getAvailableCourses());
-        return "select-courses";  // Thymeleaf template for selecting course
+        return "select-hall-course";
     }
 
 
     // View Hall Allocation by Course
-    @GetMapping("/view")
+    @GetMapping("/get")
     public String viewHallAllocations(@RequestParam(required = true) String courseCode, Model model) {
         if (courseCode != null && !courseCode.isEmpty()) {
             // Fetch hall allocation and summary for the given course code
@@ -49,7 +49,7 @@ public class HallAllocationController {
             model.addAttribute("summary", summary);
             model.addAttribute("courseCode", courseCode);
         }
-        return "view-hall-allocations";  // Thymeleaf template for viewing allocations
+        return "view-hall";  // Thymeleaf template for viewing allocations
     }
 
 

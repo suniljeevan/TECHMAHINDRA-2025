@@ -55,12 +55,13 @@ public class ExamService {
     }
 
     public List<Exam> getAllExams() {
-        List<Exam> exams = examRepository.findAll();
-        if (exams.isEmpty())
-            throw new RuntimeException("No Exam found");
-        return exams;
+        return examRepository.findAll();
     }
 
+    @Transactional
+    public void deleteByCourse(Course courseId) {
+        examRepository.deleteByCourseId(courseId);
+    }
 
    /* @Transactional
     public Exam updateExam(Exam exam) {
@@ -99,18 +100,18 @@ public class ExamService {
         }
 
         return savedExam;
-    }
+    } */
 
-    @Transactional
-    public void deleteExam(String examId) {
+ /*   @Transactional
+    public void deleteExamByCourse( examId) {
         Exam exam = examRepository.findById(examId)
                 .orElseThrow(() -> new RuntimeException("Exam not found with ID: " + examId));
 
-        hallAllocationService.deleteByExamId(examId);
+        hallAllocationService.deleteByExamCourseId(examId);
         examRepository.deleteById(examId);
-    }
+    }*/
 
-    public void deleteAllExams() {
+   /* public void deleteAllExams() {
         if (examRepository.findAll().isEmpty())
             throw new RuntimeException("No Exam Found");
         hallAllocationService.deleteAllHallAllocation();

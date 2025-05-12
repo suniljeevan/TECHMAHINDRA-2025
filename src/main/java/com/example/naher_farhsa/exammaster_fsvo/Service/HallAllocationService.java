@@ -20,7 +20,6 @@ import java.util.*;
 @Service
 public class HallAllocationService {
 
-
     @Autowired
     ExamRepository examRepository;
 
@@ -114,15 +113,12 @@ public class HallAllocationService {
     }
 */
 
-   /* @Transactional
-    public void deleteByExamId(String examId) {
-        hallAllocationRepository.deleteByExam_ExamId(examId);
-    }
 
     @Transactional
-    public void deleteAllHallAllocation() {
-        hallAllocationRepository.deleteAll();
-    }*/
+    public void deleteHallAllocationByExamCourse(Course courseId) {
+        Exam exam = examRepository.findByCourseId(courseId);
+            hallAllocationRepository.deleteByExam(exam);
+    }
 
 
 

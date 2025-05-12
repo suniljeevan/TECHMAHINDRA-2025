@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Exam List</title>
+    <title>Select Course for Hall Allocation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
         body {
@@ -24,13 +23,15 @@
             border: 1px solid #e2e8f0;
         }
     </style>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: { 500: '#1a73e8' },
+                        primary: {
+                            500: '#1a73e8',
+                            700: '#0d47a1'
+                        },
                         accent: {
                             500: '#1a73e8',
                             600: '#1967d2',
@@ -52,9 +53,10 @@
         }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-50 min-h-screen font-sans">
+
 <div class="flex h-screen">
-    <!-- Sidebar -->
+    <!-- Left Navigation Panel -->
     <div class="w-65 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
         <div>
             <div class="pl-2 pt-2 flex pr-2 gap-2 ">
@@ -77,64 +79,63 @@
                 <a th:href="@{/exammaster/dashboard}" class="nav-item flex items-center px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors">
                     Dashboard
                 </a>
-                <a th:href="@{/exam/add}" class="nav-item flex items-center px-4 py-2 text-sm hover:bg-gray-100 rounded-md transition-colors">
-                    Add Exams
+                <a th:href="@{/exam/add}" class="nav-item flex text-sm items-center px-4 py-2 hover:bg-gray-100 rounded-md transition-colors">
+                    Add Exam
                 </a>
-                <a th:href="@{/exam/getExams}" class="nav-item font-bold active flex items-center px-4 py-2 transition-colors">
-                    View Exams
+                <a th:href="@{/exam/get}" class="nav-item flex items-center text-sm px-4 py-2 hover:bg-gray-100 rounded-md transition-colors">
+                    View Exam
                 </a>
-                <a th:href="@{/hallAllocation/select-course}" class="nav-item flex text-sm items-center px-4 py-2 hover:bg-gray-100 rounded-md transition-colors">
-                    Hall Arrangements
+                <a th:href="@{/hallAllocation/select-course}" class="nav-item active flex items-center px-4 py-2  rounded-md transition-colors">
+                    View Hall Arrangement
                 </a>
             </nav>
         </div>
 
         <div class="p-4 border-t border-gmail-200">
             <a th:href="@{/logout}"
-               class=" w-1/2 flex justify-center items-center rounded-full bg-green-500 font-bold px-3 py-2 text-sm text-white hover:bg-gmail-100 rounded transition-colors">
+               class=" w-1/2 flex  justify-center items-center rounded-full font-bold bg-green-500 px-4 py-2 text-sm text-white hover:bg-gmail-100 rounded transition-colors">
                 Logout
             </a>
         </div>
-
     </div>
 
     <!-- Main Content -->
     <div class="flex-1 p-8 bg-[#f1f3f4] overflow-y-auto">
-        <div class="max-w-6xl mx-auto animate-fade-in">
+        <div class="max-w-md mx-auto animate-fade-in">
             <div class="mb-4">
                 <h2 class="text-2xl font-bold text-blue-600 mb-2">Welcome to Exam Management System</h2>
-                <p class="text-green-500">Please check and verify added exams carefully!</p>
+                <p class="text-green-500">Please select the course to check hall arrangement!</p>
             </div>
-            <div class="form-card bg-white rounded-xl shadow-lg overflow-hidden animate-slide-up">
+
+            <div class="form-card rounded-lg overflow-hidden animate-slide-up">
                 <!-- Header -->
                 <div class="bg-primary-500 px-6 py-4">
-                    <h2 class="text-xl font-semibold text-white">All Exams</h2>
+                    <h2 class="text-xl font-semibold text-white">Check Hall Allocations</h2>
                 </div>
 
-                <!-- Grid Table -->
-                <div class="overflow-x-auto">
-                    <div class="grid grid-cols-7 gap-0 whitespace-nowrap bg-gray-100 text-primary-800 text-sm font-medium uppercase tracking-wider border-b">
-                        <div class="p-3 text-center border-r border-gray-200">Exam Code</div>
-                        <div class="p-3 text-center border-r border-gray-200">Course Code</div>
-                        <div class="p-3 text-center border-r border-gray-200">Course Name</div>
-                        <div class="p-3 text-center border-r border-gray-200">Hall No.</div>
-                        <div class="p-3 text-center border-r border-gray-200">Shift</div>
-                        <div class="p-3 text-center border-r border-gray-200">Date</div>
-                        <div class="p-3 text-center">Actions</div>
-                    </div>
-
-                    <!-- Table Body -->
-                    <div th:each="exam : ${exams}" class="grid grid-cols-7 gap-0 text-sm text-gray-800 hover:bg-primary-50 transition-colors duration-150 border-t border-gray-200">
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${exam.examId}"></div>
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${exam.courseId.name()}"></div>
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${exam.courseId.courseName}"></div>
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${exam.hallId}"></div>
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${exam.shift}"></div>
-                        <div class="p-3 text-center border-r border-gray-200" th:text="${#temporals.format(exam.date, 'yyyy-MM-dd')}"></div>
-                        <div class="p-3 text-center flex justify-center space-x-2">
-                            <!-- Add action buttons if needed -->
+                <!-- Form Content -->
+                <div class="p-6 bg-white">
+                    <form th:action="@{/hallAllocation/select-course}" method="get" class="space-y-6">
+                        <div>
+                            <label for="courseCode" class="block text-sm font-medium text-gray-700 mb-1">
+                                Select Course
+                            </label>
+                            <select id="courseCode" name="courseCode"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                                <option value="" disabled selected>Select a course</option>
+                                <th:block th:each="course : ${courses}">
+                                    <option th:value="${course}" th:text="${course}"></option>
+                                </th:block>
+                            </select>
                         </div>
-                    </div>
+
+                        <div class="pt-2 flex justify-center">
+                            <button type="submit"
+                                    class=" bg-green-500 hover:bg-green-600 text-white text-sm font-medium py-2 px-6 rounded-full shadow transition-colors duration-200">
+                                View Hall Arrangment
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

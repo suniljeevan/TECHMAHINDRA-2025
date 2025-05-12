@@ -5,17 +5,15 @@ import com.example.naher_farhsa.exammaster_fsvo.Enum.Course;
 import com.example.naher_farhsa.exammaster_fsvo.Enum.Hall;
 import com.example.naher_farhsa.exammaster_fsvo.Enum.Shift;
 import com.example.naher_farhsa.exammaster_fsvo.Service.ExamService;
+import com.example.naher_farhsa.exammaster_fsvo.Service.HallAllocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Controller
@@ -24,6 +22,9 @@ public class ExamController {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    private HallAllocationService hallAllocationService;
 
     // 1. Show Add Exam Form
     @GetMapping("/add")
@@ -54,7 +55,7 @@ public class ExamController {
         model.addAttribute("halls", availableHalls);
         model.addAttribute("shifts", Shift.values());
 
-        return "exam-add-form";
+        return "add-exam";
     }
 
 
@@ -67,14 +68,28 @@ public class ExamController {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/exam/add";  // Redirect back to the add exam form with the error
         }
-        return "redirect:/exam/getExams";  // Redirect to the exam list after success
+        return "redirect:/exam/get";  // Redirect to the exam list after success
     }
 
-    @GetMapping("/getExams")
+    @GetMapping("/get")
     public String listExams(Model model) {
         List<Exam> exams = examService.getAllExams();
         model.addAttribute("exams", exams);
-        return "exam-list";  // Thymeleaf template for exam list
+        return "view-exam";
+    }
+
+    @PostMapping("/select-course")
+    public String showDeleteConfirmation(@RequestParam("courseId") Course courseId, Model model) {
+        model.addAttribute("courses", List.of(courseId));  // Only selected course shown
+        return "select-exam-course";  // Show confirmation form
+    }
+
+
+    @PostMapping("/delete")
+    public String deleteExamByCourse(@RequestParam Course courseId) {
+        hallAllocationService.deleteHallAllocationByExamCourse(courseId);
+        examService.deleteByCourse(courseId);
+        return "redirect:/exam/get";
     }
 
 }
