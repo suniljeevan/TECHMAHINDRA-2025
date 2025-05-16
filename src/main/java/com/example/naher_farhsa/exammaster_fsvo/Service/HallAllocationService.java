@@ -48,7 +48,6 @@ public class HallAllocationService {
     private void assignSets(Exam exam, List<Student> students) {
         int studentIndex = 0;
 
-
         for (int row = 0; row < ROWS && studentIndex < students.size(); row++) {
             boolean startWithA = row % 2 == 0;
 
@@ -69,15 +68,8 @@ public class HallAllocationService {
         }
     }
 
-
-
     public List<HallAllocationDTO> getHallAllocationByExamCourse(String courseId) {
-        Course course;
-        try {
-            course = Course.valueOf(courseId);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid course code: " + courseId);
-        }
+        Course course = getCourseByCode(courseId);
 
         List<HallAllocation> allocations = hallAllocationRepository.findByExam_CourseId(course);
         List<HallAllocationDTO> result = new ArrayList<>();
@@ -102,24 +94,50 @@ public class HallAllocationService {
         return result;
     }
 
-
-
-
-  /*  @Transactional
-    public void updateHallAllocation(Exam exam) {
-        hallAllocationRepository.deleteByExam_ExamId(exam.getExamId());
-        List<Student> enrolledStudents = filterStudentsByCourse(exam.getCourseId());
-        assignSets(exam, enrolledStudents);
+    public List<HallAllocation> getHallSeatAllocationsByCourse(Course course) {
+        return hallAllocationRepository.findByExam_CourseId(course);
     }
-*/
+
+
+    public List<List<String>> getSeatMatrix(String courseCode) {
+        Course course;
+        try {
+            course = Course.valueOf(courseCode);  // Convert courseCode to Course enum
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid course code: " + courseCode);  // Handle invalid course code
+        }
+
+        List<HallAllocation> allocations = getHallSeatAllocationsByCourse(course);  // Fetch seat allocations for the course
+        if (allocations.isEmpty()) return Collections.emptyList();  // Return empty list if no allocations
+
+        // Initialize an empty seat matrix with ROWS and COLS
+        List<List<String>> seatMatrix = new ArrayList<>();
+        for (int i = 0; i < ROWS; i++) {
+            List<String> row = new ArrayList<>(Collections.nCopies(COLS, ""));  // Initialize each row with empty values
+            seatMatrix.add(row);
+        }
+
+        // Fill matrix with student roll numbers or placeholders ("X")
+        int index = 0;
+        for (HallAllocation alloc : allocations) {
+            if (index < ROWS * COLS) {
+                int row = index / COLS;  // Determine the row index
+                int col = index % COLS;  // Determine the column index
+                String student = alloc.getStudent() != null ? alloc.getStudent().getStudentId() : "X";  // Get student ID or "X" if null
+                seatMatrix.get(row).set(col, student);  // Set the value in the seat matrix
+                index++;
+            }
+        }
+
+        return seatMatrix;  // Return the filled seat matrix
+    }
 
 
     @Transactional
     public void deleteHallAllocationByExamCourse(Course courseId) {
         Exam exam = examRepository.findByCourseId(courseId);
-            hallAllocationRepository.deleteByExam(exam);
+        hallAllocationRepository.deleteByExam(exam);
     }
-
 
 
     public AllocationSummaryDTO getAllocationSummary(String courseId) {
@@ -145,8 +163,6 @@ public class HallAllocationService {
         return summary;
     }
 
-
-
     private Course getCourseByCode(String courseId) {
         for (Course c : Course.values()) {
             if (c.getCourseCode().equals(courseId)) {
@@ -166,13 +182,11 @@ public class HallAllocationService {
         return list;
     }
 
-
     public List<Course> getAvailableCourses() {
         List<Course> assignedCourses = examRepository.findAllAssignedCourses();
         List<Course> courses = new ArrayList<>();
 
         for (Course course : Course.values()) {
-
             if (assignedCourses.contains(course)) {
                 courses.add(course);
             }
@@ -180,15 +194,4 @@ public class HallAllocationService {
 
         return courses;
     }
-
-
-
-
-
-
-
-
-
-
-
 }

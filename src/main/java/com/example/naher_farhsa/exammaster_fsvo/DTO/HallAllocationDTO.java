@@ -33,5 +33,15 @@ public class HallAllocationDTO {
         private String studentId;
         private String studentName;
     }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class SeatInfo {
+        private String seatId;
+        private String studentName;
+        private String studentId;
+
+    }
 }
 

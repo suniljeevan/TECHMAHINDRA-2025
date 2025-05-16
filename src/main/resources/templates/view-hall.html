@@ -151,7 +151,7 @@
                 <div class="overflow-x-auto">
                     <div class="grid grid-cols-4 gap-0 whitespace-nowrap bg-gray-50 text-gray-700 text-sm font-medium uppercase tracking-wider border-b">
                         <div class="p-3 text-center border-r border-gray-200">Exam ID</div>
-                        <div class="p-3 text-center border-r border-gray-200">Seat No.</div>
+                        <div class="p-3 text-center border-r border-gray-200">Hall ID</div>
                         <div class="p-3 text-center border-r border-gray-200">Student ID</div>
                         <div class="p-3 text-center">Student Name</div>
                     </div>
@@ -176,6 +176,10 @@
                             Back to Exams
                         </a>
                     </div>
+                    <a th:href="@{/hallAllocation/select-exam-course}"
+                       class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
+                        View Hall Seats
+                    </a>
                     <a th:href="@{/hallAllocation/select-course}"
                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200">
                         Select Different Course

@@ -58,10 +58,13 @@ public class ExamService {
         return examRepository.findAll();
     }
 
+
     @Transactional
     public void deleteByCourse(Course courseId) {
         examRepository.deleteByCourseId(courseId);
     }
+
+
 
    /* @Transactional
     public Exam updateExam(Exam exam) {

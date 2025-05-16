@@ -18,4 +18,5 @@ public interface HallAllocationRepository extends JpaRepository<HallAllocation, 
 
     List<HallAllocation> findByExam_CourseId(Course courseId);
 
+
 }
