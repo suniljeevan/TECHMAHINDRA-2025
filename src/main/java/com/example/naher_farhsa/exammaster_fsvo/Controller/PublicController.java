@@ -3,6 +3,8 @@ package com.example.naher_farhsa.exammaster_fsvo.Controller;
 import com.example.naher_farhsa.exammaster_fsvo.DTO.AllocationSummaryDTO;
 import com.example.naher_farhsa.exammaster_fsvo.DTO.HallAllocationDTO;
 import com.example.naher_farhsa.exammaster_fsvo.Service.HallAllocationService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -60,5 +63,29 @@ public class PublicController {
         }
         return "student-view-hall";  // Thymeleaf template for viewing allocations
     }
+
+
+        @GetMapping("/login")
+        public String showLoginPage() {
+            return "login";
+        }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletResponse response) throws IOException {
+        // Invalidate the JWT cookie by setting maxAge to 0
+        Cookie cookie = new Cookie("jwt", "");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Delete cookie
+
+        response.addCookie(cookie);
+        response.sendRedirect("home");
+
+
+    }
+
+
+
+
 
 }

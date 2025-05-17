@@ -2,8 +2,11 @@ package com.example.naher_farhsa.exammaster_fsvo.Enum;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+
+
 @AllArgsConstructor
 public enum Course {
     CS101("CS101", "Data Structures"), //
@@ -16,4 +19,6 @@ public enum Course {
     CS108("CS108", "Internet of Things");
     private final String courseCode;
     private final String courseName;
+
+
 }
