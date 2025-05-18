@@ -1,6 +1,11 @@
 package com.example.naher_farhsa.exammaster_fsvo.Controller;
 
 import ch.qos.logback.classic.encoder.JsonEncoder;
+import com.example.naher_farhsa.exammaster_fsvo.Repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.ui.Model;
+
+import com.example.naher_farhsa.exammaster_fsvo.Entity.User;
 import com.example.naher_farhsa.exammaster_fsvo.Service.JwtService;
 import com.example.naher_farhsa.exammaster_fsvo.config.PasswordEncoderConfig;
 import jakarta.servlet.http.Cookie;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.Collection;
 
 @Controller
 @RequestMapping("/auth")
@@ -24,11 +30,13 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService ,PasswordEncoder passwordEncoder) {
+    public AuthController(AuthenticationManager authenticationManager, JwtService jwtService ,PasswordEncoder passwordEncoder,UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
         this.passwordEncoder=passwordEncoder;
+        this.userRepository=userRepository;
     }
 
     @PostMapping("/login")
@@ -40,7 +48,7 @@ public class AuthController {
     ) {
         System.out.println(username+"      "+password+" Entered here ");
 
-        System.out.println(passwordEncoder.encode("admin123"));
+
 
         try {
             // 1. Authenticate user
@@ -64,8 +72,22 @@ public class AuthController {
 
             System.out.println("correct password entered ");
 
-            // 4. Check role of user and redirect to /exammaster/dashboard and /exammaster/student-dashboard
-            return "redirect:/exammaster/dashboard";
+            /*// 4. Check role of user and redirect to /exammaster/dashboard and /exammaster/student-dashboard
+            return "redirect:/exammaster/dashboard";*/
+
+            Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+
+            for (GrantedAuthority authority : authorities) {
+                String role = authority.getAuthority();
+                if (role.equals("ROLE_ADMIN")) {
+                    return "redirect:/exammaster/dashboard";
+                } else if (role.equals("ROLE_USER")) {
+                    return "redirect:/exammaster/studentDashboard";
+                }
+            }
+
+            // Default redirect if role not matched
+            return "redirect:/exammaster/login";
 
         } catch (AuthenticationException e) {
             // If login fails, redirect back with error message
@@ -74,6 +96,29 @@ public class AuthController {
             return "redirect:/exammaster/login";
         }
     }
+
+    @PostMapping("/signup")
+    public String registerUser(@ModelAttribute User user, Model model) {
+        try {
+            // Add user registration logic here, e.g., password encoding, saving to DB
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return "redirect:/auth/login";
+        } catch (Exception e) {
+            model.addAttribute("error", "Username already exists or error occurred.");
+            return "signup";
+        }
+    }
+
+    @GetMapping("/signup")
+    public String showSignupForm(Model model) {
+        model.addAttribute("user", new User());  // prepare empty User object for the form
+        return "signup";  // return the view name for the signup page (e.g., signup.html or signup.jsp)
+    }
+
+
+
+
 
 
 

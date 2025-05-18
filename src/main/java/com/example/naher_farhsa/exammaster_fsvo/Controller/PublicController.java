@@ -65,10 +65,7 @@ public class PublicController {
     }
 
 
-        @GetMapping("/login")
-        public String showLoginPage() {
-            return "login";
-        }
+
 
     @GetMapping("/logout")
     public void logout(HttpServletResponse response) throws IOException {
@@ -84,7 +81,10 @@ public class PublicController {
 
     }
 
-
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
 
 
 

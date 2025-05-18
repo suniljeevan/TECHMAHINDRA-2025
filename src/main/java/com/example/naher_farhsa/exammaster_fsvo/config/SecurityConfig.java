@@ -4,6 +4,7 @@ package com.example.naher_farhsa.exammaster_fsvo.config;
 import com.example.naher_farhsa.exammaster_fsvo.Service.CustomUserDetailsService;
 import com.example.naher_farhsa.exammaster_fsvo.Service.JwtService;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -66,8 +67,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/auth/signup").permitAll() // <- ADD THIS
+                        .requestMatchers(HttpMethod.GET, "/auth/signup").permitAll()
                         .requestMatchers("/hallAllocation/**","/exam", "/exammaster/dashboard").hasRole("ADMIN")
+                        .requestMatchers("/exammaster/studentDashboard").hasRole("USER")
                         .requestMatchers("/exammaster/login", "/css/**", "/exammaster/home", "/auth/**","/js/**","/logout").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
