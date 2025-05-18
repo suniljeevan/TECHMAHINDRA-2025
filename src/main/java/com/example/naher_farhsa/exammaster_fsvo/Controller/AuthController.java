@@ -103,7 +103,7 @@ public class AuthController {
             // Add user registration logic here, e.g., password encoding, saving to DB
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            return "redirect:/auth/login";
+            return "redirect:/exammaster/login";
         } catch (Exception e) {
             model.addAttribute("error", "Username already exists or error occurred.");
             return "signup";
@@ -115,12 +115,6 @@ public class AuthController {
         model.addAttribute("user", new User());  // prepare empty User object for the form
         return "signup";  // return the view name for the signup page (e.g., signup.html or signup.jsp)
     }
-
-
-
-
-
-
 
 }
 

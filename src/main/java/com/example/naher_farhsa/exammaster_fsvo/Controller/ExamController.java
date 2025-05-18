@@ -26,16 +26,16 @@ public class ExamController {
     @Autowired
     private HallAllocationService hallAllocationService;
 
-    // 1. Show Add Exam Form
+    // Show Add Exam Form
     @GetMapping("/add")
     public String showAddExamForm(Model model) {
         model.addAttribute("exam", new Exam());
 
-        // 1. Fetch already used course and hall IDs
+        //Fetch already used course and hall IDs
         List<Course> usedCourses = examService.getAssignedCourses();
         List<Hall> usedHalls = examService.getAssignedHalls();
 
-        // 2. Filter unused courses and halls
+        //  Filter unused courses and halls
         List<Course> availableCourses = new ArrayList<>();
         for (Course c : Course.values()) {
             if (!usedCourses.contains(c)) {
@@ -50,7 +50,7 @@ public class ExamController {
             }
         }
 
-        // 3. Add data to model
+        //Add data to model
         model.addAttribute("courses", availableCourses);
         model.addAttribute("halls", availableHalls);
         model.addAttribute("shifts", Shift.values());
@@ -91,5 +91,6 @@ public class ExamController {
         examService.deleteByCourse(courseId);
         return "redirect:/exam/get";
     }
+
 
 }

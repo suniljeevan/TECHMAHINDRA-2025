@@ -27,15 +27,43 @@ public class PublicController {
         return "home";
     }
 
+    @GetMapping("/logout")
+    public void logout(HttpServletResponse response) throws IOException {
+        // Invalidate the JWT cookie by setting maxAge to 0
+        Cookie cookie = new Cookie("jwt", "");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Delete cookie
+
+        response.addCookie(cookie);
+        response.sendRedirect("home");
+
+
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login";
+    }
+
+
+
+    // admin dashboard
+
     @GetMapping("/dashboard")
     public String showDashboardPage() {
         return "dashboard";
     }
+
+
+
+
+    // student dashboard
+
     @GetMapping("/studentDashboard")
     public String showStudentDashboardPage() {
         return "student-dashboard";
     }
-
 
     @GetMapping("/student-select-course")
     public String selectCourseForAllocation(@RequestParam(value = "courseCode", required = false) String courseCode, Model model) {
@@ -67,24 +95,7 @@ public class PublicController {
 
 
 
-    @GetMapping("/logout")
-    public void logout(HttpServletResponse response) throws IOException {
-        // Invalidate the JWT cookie by setting maxAge to 0
-        Cookie cookie = new Cookie("jwt", "");
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0); // Delete cookie
 
-        response.addCookie(cookie);
-        response.sendRedirect("home");
-
-
-    }
-
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login";
-    }
 
 
 

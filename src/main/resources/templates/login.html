@@ -3,14 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto',Arial,sans-serif;
       background: #f2f2f2;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      letter-spacing: 0.8px;
+    }
+
+    /* Animations */
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out both;
+    }
+
+    .slide-up {
+      animation: slideUp 0.6s ease-out both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .login-container {
@@ -19,16 +50,19 @@
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
       width: 300px;
+      position: relative;
+      z-index: 1;
+      margin: auto;
     }
 
     h2 {
       text-align: center;
-      color: #333;
+      color: #1a73e8;
       margin-bottom: 20px;
     }
 
     label {
-      font-weight: bold;
+      font-weight: 500;
       display: block;
       margin: 10px 0 5px;
     }
@@ -62,10 +96,27 @@
       text-align: center;
       margin-top: 10px;
     }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://img.freepik.com/free-vector/realistic-test-paper-composition-with-pencil-stack-students-paperwork-with-marks-correct-answers_1284-54249.jpg');
+      background-size: cover;
+      background-position: top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      opacity: 0.2;
+      z-index: -1;
+    }
   </style>
 </head>
-<body>
-<div class="login-container">
+
+<body class="fade-in">
+<div class="login-container slide-up">
   <h2>Login</h2>
 
   <form th:action="@{/auth/login}" method="post">

@@ -67,8 +67,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/auth/signup").permitAll() // <- ADD THIS
-                        .requestMatchers(HttpMethod.GET, "/auth/signup").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/auth/signup","/auth/login").permitAll()
                         .requestMatchers("/hallAllocation/**","/exam", "/exammaster/dashboard").hasRole("ADMIN")
                         .requestMatchers("/exammaster/studentDashboard").hasRole("USER")
                         .requestMatchers("/exammaster/login", "/css/**", "/exammaster/home", "/auth/**","/js/**","/logout").permitAll()
