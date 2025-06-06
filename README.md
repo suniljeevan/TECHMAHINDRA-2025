@@ -38,3 +38,19 @@ This project is modularized and each student has been assigned a specific module
 ```bash
 git clone https://github.com/<your-username>/Techmahindra-2025.git
 cd Techmahindra-2025
+Step 2: Switch to Your Assigned Branch
+git checkout your-assigned-branch-name
+Step 3: Add Your Module Code
+Write your code inside the respective folder structure (if any), or feel free to create files logically under your branch.
+Step 4: Commit and Push
+git add .
+git commit -m "Added my module implementation"
+git push origin your-assigned-branch-name
+Important:
+Always pull the latest before pushing:
+Do not work on main branch.
+
+Do not delete or modify code in others' modules.
+
+Final Merge
+After completion, you may raise a Pull Request (PR) to merge your branch into main. The instructor will review and merge after validation.
