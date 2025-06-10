@@ -1,0 +1,120 @@
+.add-student-container {
+    max-width: -webkit-fill-available;
+    margin: 50px auto;
+    padding: 40px;
+    background: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-left: 15.4rem;
+    transition: all 0.3s ease;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.student-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.submit-btn {
+    padding: 12px 18px;
+    background-color: #4a90e2;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3b78c7;
+}
+
+/* ------------------- */
+/* 📱 Responsive Media Queries */
+/* ------------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .add-student-container {
+        margin-left: 15rem;
+        padding: 30px;
+        
+    }
+}
+
+/* Small Tablets / Large Phones */
+@media (max-width: 768px) {
+    .add-student-container {
+        margin-left: 0;
+        margin-right: 1rem;
+        margin-left: 5rem;
+        padding: 20px;
+    }
+
+    .form-title {
+        font-size: 24px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+    .add-student-container {
+        padding: 15px;
+        margin: 20px 10px;
+        margin-left: 4.5rem;
+    
+    }
+
+    .form-title {
+        font-size: 22px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        font-size: 16px;
+    }
+}

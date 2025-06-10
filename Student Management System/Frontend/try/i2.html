@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar Navigation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #495057;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .wrapper {
+            display: flex;
+            position: absolute;
+            left: 0%;
+            height: -webkit-fill-available;
+        }
+
+        .main {
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.35s ease-in-out;
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        #sidebar {
+            width: 70px;
+            min-width: 70px;
+            z-index: 1000;
+            transition: all .25s ease-in-out;
+            background-color: #343a40;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        #sidebar.expand {
+            width: 260px;
+            min-width: 260px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #343a40;
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+        }
+
+        .toggle-btn i {
+            font-size: 1.5rem;
+            color: #343a40;
+        }
+
+        .sidebar-logo {
+            margin: auto 0;
+        }
+
+        .sidebar-logo a {
+            color: #343a40;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        #sidebar:not(.expand) .sidebar-logo,
+        #sidebar:not(.expand) a.sidebar-link span {
+            display: none;
+        }
+
+        .sidebar-nav {
+            padding: 2rem 0;
+            flex: 1 1 auto;
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+        a.sidebar-link {
+            padding: 12px 20px;
+            color: #adb5bd;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border-left: 3px solid transparent;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar-link i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        a.sidebar-link:hover,
+        a.sidebar-link:focus {
+            background-color: #495057;
+            color: #ffffff;
+            border-left: 3px solid #3b7ddd;
+        }
+
+        .sidebar-item {
+            position: relative;
+            margin: 0;
+        }
+
+        #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            background-color: #3e444a;
+            padding: 0;
+            min-width: 15rem;
+            display: none;
+        }
+
+        #sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+            display: block;
+            max-height: 15em;
+            width: 100%;
+            opacity: 1;
+        }
+
+        #sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+            border: solid;
+            border-width: 0 .075rem .075rem 0;
+            content: "";
+            display: inline-block;
+            padding: 2px;
+            position: absolute;
+            right: 1.5rem;
+            top: 1.4rem;
+            transform: rotate(-135deg);
+            transition: all .2s ease-out;
+        }
+
+        #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+            transform: rotate(45deg);
+        }
+
+        .wrapper .sidebar-item .bi {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .wrapper .sidebar-nav .sidebar-item ul .sidebar-item .bi {
+            width: 1.2rem;
+            height: 1.2rem;
+            margin-left: 1rem;
+        }
+
+        .wrapper .sidebar-nav .sidebar-item ul .sidebar-link {
+            font-size: 0.8rem;
+        }
+
+        .sidebar-dropdown {
+            padding-left: 20px;
+            background-color: #3e444a;
+        }
+
+        .sidebar-dropdown .sidebar-link {
+            padding: 10px 20px;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #212529;
+        }
+
+        .sidebar-footer .sidebar-link {
+            display: flex;
+            justify-content: center;
+            padding: 12px 20px;
+            color: #adb5bd;
+        }
+
+        .sidebar-footer .sidebar-link:hover {
+            background-color: #495057;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="sidebar-logo">
+                <a href="#">MyApp</a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-house"></i><span>Home</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="bi bi-person"></i><span>Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link has-dropdown">
+                        <i class="bi bi-gear"></i><span>Settings</span>
+                    </a>
+                    <ul class="sidebar-dropdown">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Account</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Security</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-box-arrow-right"></i>
+                </a>
+            </div>
+        </aside>
+        <main class="main">
+            <button class="toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('expand')">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="content">
+                <h1>Welcome!</h1>
+                <p>This is your updated sidebar layout with modern fonts and colors.</p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

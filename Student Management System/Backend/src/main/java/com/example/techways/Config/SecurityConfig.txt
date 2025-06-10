@@ -1,0 +1,110 @@
+package com.example.techways.Config;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    // Creating custom security configuration here, which is obtained from the
+    // inbuilt classes
+    @Bean
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests((request) -> request
+                .requestMatchers("/contact").permitAll() // this will make the contact page to be accessible without
+                                                         // authentication
+                .requestMatchers("/public/**").permitAll() // this will make the all public page to be accessible
+                                                           // without authentication
+                .requestMatchers("/dashboard").denyAll() // this will reject all the request comming for /admin, (use
+                                                         // this when the some part of the webite is under maintenance)
+                                                         // this will give 403 forbidden when try to access the deny
+                                                         // page
+
+                .anyRequest().authenticated());// this will make all the requests to be authenticated
+
+        http.csrf(csrf -> csrf.disable()); // this will disable the csrf protection, which is used to protect against
+                                           // cross site request forgery attacks
+
+        // http.formLogin(withDefaults()); // we get popup to login, because we desable
+        // the default login page
+
+        // http.sessionManagement(session ->
+        // session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // we are
+        // using stateless session management policy, where no cookie or JSESSIONID is
+        // stored in browser
+        http.httpBasic(withDefaults());
+        return http.build();
+    }
+
+    /*
+     * // This is used to create the user and password for the authentication, we
+     * are
+     * // using in memory authentication, which is used to store the user and
+     * password
+     * 
+     * @Bean
+     * public UserDetailsService userDetailsService() {
+     * // We are using in memory authentication, which is used to store the user and
+     * password
+     * // not in the database, but in the memory of the application server
+     * InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+     * 
+     * UserDetails user1 = User.withUsername("user1")
+     * .password("{noop}password1") // {noop} is used to indicate that the password
+     * is stored in plain text
+     * .roles("USER")
+     * .build();
+     * 
+     * if (!manager.userExists("user1")) {
+     * manager.createUser(user1);
+     * }
+     * UserDetails admin = User.withUsername("admin")
+     * .password("{noop}adminPassword") // {noop} is used to indicate that the
+     * password is stored in plain text
+     * .roles("ADMIN")
+     * .build();
+     * if (!manager.userExists("admin")) {
+     * manager.createUser(admin);
+     * }
+     * return manager;
+     * }
+     */
+
+    // know accessing the user and password from the database, we need to create a
+    // userDetailsService bean, which is used to load the user details from the
+    // database
+
+    // @Bean
+    // public UserDetailsService userDetailsService(DataSource dataSource) {
+    // JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
+
+    // UserDetails user1 = User.withUsername("user1")
+    // .password("{noop}password1")
+    // .roles("USER")
+    // .build();
+
+    // if (!manager.userExists("user1")) {
+    // manager.createUser(user1);
+    // }
+    // UserDetails admin = User.withUsername("admin")
+    // .password("{noop}adminPassword")
+    // .roles("ADMIN")
+    // .build();
+    // if (!manager.userExists("admin")) {
+    // manager.createUser(admin);
+    // }
+    // return manager;
+    // }
+
+}

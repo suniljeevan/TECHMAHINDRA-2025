@@ -1,0 +1,17 @@
+.manage-course-container h2{
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.manage-course-container {
+    margin-left: 16.9rem;
+
+}
+
+.manage-course-container .cards{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 20px;
+
+}

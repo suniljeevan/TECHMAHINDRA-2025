@@ -1,0 +1,36 @@
+.view-result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-left: 15.4rem;
+}
+
+.view-result-container .student-form-grid{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.view-result-container .student-form-grid button{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 20px;
+}
+
+.view-result-container .iframe{
+    width: 90%;
+    border: none;
+    height: 100vh;
+    margin-top: 20px;
+    padding: 20px;
+}
