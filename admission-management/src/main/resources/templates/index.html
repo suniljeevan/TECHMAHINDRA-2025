@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Presidency University, Bengaluru - 560064</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">  <style>
+    body {
+      background: linear-gradient(145deg, #f0f4ff, #e2ecfb);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Banner */
+    .banner-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+    }
+
+    .banner-text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 25px 40px;      border-radius: 16px;
+      text-align: center;
+      max-width: 90%;
+      animation: fadeInDown 0.8s ease-in-out;
+    }
+
+    .banner-text-overlay h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-section {
+      background-color: white;
+      padding: 50px 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      margin-top: -10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+      color: #007bff;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .marquee span {
+      display: inline-block;
+      animation: scroll 15s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .stats-box {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      color: white;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
+    }
+
+    .stats-box:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-custom {
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 10px;      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      transform: scale(1.05);
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .recruiting-partners {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+    }
+
+    .recruiting-partners .section-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #003366;
+      margin-bottom: 40px;
+    }
+
+    .recruiting-partners img {
+      max-height: 60px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .recruiting-partners img:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 768px) {
+      .banner-text-overlay h2 {
+        font-size: 1.4rem;
+        padding: 0 10px;
+      }
+    }
+
+    .banner-img-alt {
+      background-image: url('https://d1idiaqkpcnv43.cloudfront.net/assets/webimages/Presidency-university-logo.png');
+      background-size: contain;
+      background-position: center top;
+      background-repeat: no-repeat;
+      height: 120px; /* Scaled down logo height */
+      width: 100%;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+      .banner-img-alt {
+        height: 100px;
+        padding-bottom: 15px;
+      }
+    }
+
+    .admissions-message {
+      text-align: center;      color: #0d47a1;
+      animation: fadeInDown 0.8s ease-in-out;
+    }
+
+    .admissions-message h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .admissions-message .highlight {
+      color: #007bff;
+    }
+
+    .admissions-message p {
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+	.logo-marquee {
+	  overflow: hidden;
+	  position: relative;
+	  width: 100%;
+	  background: #f8f9fa;
+	  padding: 20px 0;
+	}
+
+	.logo-track {
+	  display: flex;
+	  width: max-content;
+	  animation: scroll-left 30s linear infinite;
+	}
+
+	.logo-track img {
+	  height: 60px;
+	  margin: 0 40px;
+	  object-fit: contain;
+	  transition: transform 0.3s ease;
+	}
+
+	.logo-track img:hover {
+	  transform: scale(1.1);
+	}
+
+	@keyframes scroll-left {
+	  0% {
+	    transform: translateX(0);
+	  }
+	  100% {
+	    transform: translateX(-50%); /* Adjust this if logos don't loop smoothly */
+	  }
+	}
+
+	.logo-marquee-wrapper {
+	  white-space: nowrap;
+	  display: flex;
+	  flex-direction: column;
+	  gap: 30px;
+	}
+	
+	.object-fit-cover {
+	  object-fit: cover;
+	}
+
+    /* Program Section Styles */
+    .programs-section {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      margin-top: 40px;
+    }
+
+    .programs-section .section-title {        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .school-tabs .nav-link {
+      color: #003366;
+      font-weight: 500;
+      border: none;
+      border-radius: 8px !important; /* Ensure Bootstrap override */
+      margin-bottom: 5px;
+      text-align: left;
+      background-color: #e9ecef; /* Light background for non-active tabs */
+    }
+
+    .school-tabs .nav-link.active {
+      background-color: #003366 !important; /* Dark blue for active tab */
+      color: white !important;
+      box-shadow: 0 4px 8px rgba(0, 51, 102, 0.3);
+    }
+     .school-tabs .nav-link:hover {
+        background-color: #d1d9e2; /* Slightly darker on hover */
+     }
+
+    .program-list-container {
+      background-color: #f8f9fa; /* Light grey background for program list area */
+      padding: 20px;
+      border-radius: 8px;
+      min-height: 300px; /* Ensure it has some height */
+    }
+    .program-list-container h5 {
+        color: #003366;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+     .program-list-container ul {
+        list-style-type: none;
+        padding-left: 0;
+     }
+      .program-list-container ul li {
+        padding: 5px 0;
+        color: #333;
+        font-size: 0.95rem;
+      }
+       .program-list-container ul li::before {
+        content: "\f058"; /* FontAwesome check circle for example */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: #007bff;        margin-right: 10px;
+       }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Banner -->
+  <div class="banner-container banner-img-alt"></div>
+
+  <!-- Info Section -->
+  <div class="container info-section text-center">
+    <h1 class="section-title mb-4">Welcome to Presidency University, Bengaluru - 560064</h1>
+    <div class="marquee mb-4"><span>Your pathway to excellence starts here. Admissions for 2025–2026 are now open. Apply now!</span></div>
+	<section class="about-section container my-5">
+	  <div class="row stats-box align-items-stretch w-100 mx-auto">
+	    <div class="col-md-6 d-flex flex-column justify-content-center">
+			<p><strong>Presidency University, accredited with NAAC ‘A’ Grade, is dedicated to shaping students into skilled professionals and responsible citizens. With a focus on excellence in teaching, innovative learning methods, impactful research, and community engagement, we provide a transformative educational experience.</strong></p>
+			<p><strong>Our programs are designed to prepare students for successful careers, supported by experienced faculty and a modern 110-acre campus equipped with world-class facilities.</strong></p>
+			<p><strong>We emphasize practical learning and holistic development, ensuring students are ready to excel in their future endeavors. The university’s green and vibrant campus fosters both academic growth and personal development in an inspiring environment.</strong></p>
+	    </div>
+	    <div class="col-md-6 p-0">
+	      <img src="https://presidencyuniversity.in/assets/images/university-right-img-2.webp"
+	           alt="University Life - Presidency University"
+	           class="img-fluid rounded h-100 w-100 object-fit-cover">
+	    </div>
+	  </div>
+	</section>
+    <div class="row g-4 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="stats-box">
+          <h4 class="counter" data-count="19000">0</h4>
+          <p>Students</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stats-box">
+          <h4 class="counter" data-count="15700">0</h4>
+          <p>Alumni</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stats-box">
+          <h4 class="counter" data-count="55">0</h4>
+          <p>Programs</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stats-box">
+          <h4 class="counter" data-count="8">0</h4>
+          <p>Schools</p>        </div>
+      </div>
+    </div>
+
+    <!-- Admissions Message -->
+    <div class="admissions-message mb-4">
+      <h2 class="mb-1">Step into <span class="highlight">Excellence</span></h2>
+      <p class="mb-0">Admissions Open for Academic Year 2025</p>
+    </div>
+
+    <!-- Login Buttons -->
+    <div class="d-flex justify-content-center gap-3">
+      <a href="/login" class="btn btn-success btn-custom">LOGIN</a> <!-- Updated to simple href if not using Thymeleaf here -->
+    </div>
+  </div>
+
+  <!-- Programs Section -->
+  <div class="container programs-section">
+    <h2 class="section-title">Explore Our Programs</h2>
+    <div class="row">
+      <!-- School Tabs -->
+      <div class="col-md-4">
+        <div class="nav flex-column nav-pills school-tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <!-- School tabs will be generated by JavaScript -->
+        </div>
+      </div>
+      <!-- Program Display -->
+      <div class="col-md-8">
+        <div class="program-list-container" id="programDisplayArea">
+          <p class="text-muted">Select a school to view its programs.</p>
+          <!-- Program details will be generated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Counter Script -->
+  <script>
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+      const update = () => {
+        const target = +counter.getAttribute('data-count');
+        const count = +counter.innerText;
+        const speed = 10;
+        const increment = Math.ceil(target / 100);
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(update, speed);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      update();
+    });
+
+    // --- JavaScript for Schools and Programs ---
+    const schoolsData = [
+      {
+        name: "School of Computer Science & Engineering",
+        undergraduate: [
+          "B.Tech in Computer Science and Engineering",          "B.Tech in Computer Science and Engineering (Artificial Intelligence and Machine Learning)",
+          "B.Tech in Computer Science and Engineering (Data Science)",
+          "B.Tech in Computer Science and Engineering (Cyber Security)",          "B.Tech in Computer Science and Engineering (Blockchain)",
+          "B.Tech in Computer Science and Engineering (Internet of Things)",
+          "B.Tech in Computer Science and Technology (Big Data)",
+          "B.Tech in Computer Science and Technology (DevOps)",
+          "B.Tech in Information Science and Engineering",          "B.Tech in Information Science and Technology",
+          "B.Tech in Artificial Intelligence and Data Science",
+          "B.Tech in Robotics and Artificial Intelligence"
+        ],
+        postgraduate: [
+          "M.Tech in Artificial Intelligence",
+          "M.Tech in Data Science"
+        ]
+      },      {
+        name: "School of Information Science",
+        undergraduate: [
+          "BCA (Data Science)",
+          "Bachelor of Computer Applications (BCA)",
+          "BCA (Artificial Intelligence & Machine Learning)"
+        ],        postgraduate: [
+          "MCA – Master of Computer Applications"
+        ]
+      },
+      {
+        name: "School of Engineering",
+        undergraduate: [
+          "B.Tech in Civil Engineering",
+          "B.Tech in Electrical and Electronics Engineering",
+          "B.Tech in Electronics and Communication Engineering",
+          "B.Tech in Mechanical Engineering",
+          "B.Tech in Petroleum Engineering",
+          "B.Tech in VLSI"
+        ],
+        postgraduate: [
+          "M.Tech in Embedded System and VLSI",
+          "M.Tech in Building and Construction Technology"
+        ]
+      },      {
+        name: "School of Commerce and Economics",
+        undergraduate: [
+          "B.Com (Banking and Finance)",
+          "B.Com (ACCA)",
+          "B.Com (Corporate Accounting and Taxation)",
+          "B.Com (Business Analytics)",
+          "B.Com (Corporate Accounting Integrated with CMA-US)"
+        ],
+        postgraduate: []
+      },
+      {
+        name: "School of Law",
+        undergraduate: [
+          "BA LL.B (Hons.)",
+          "BBA LL.B (Hons.)"
+        ],
+        postgraduate: [
+          "L.L.M (Master of Laws)"
+        ]
+      },
+      {
+        name: "School of Management",
+        undergraduate: [
+          "BBA (Aviation Management)",
+          "BBA (Business Analytics)",
+          "Bachelor of Business Administration (BBA)",
+          "BBA (Digital Marketing)"
+        ],
+        postgraduate: [
+          "MBA Program [Dual Major Specialization]",
+          "MBA in Business Analytics",
+          "MBA in Digital Marketing",
+          "MBA in Banking and Finance Management",
+          "MBA in Marketing and Finance"        ]
+      },
+      { // Added from screenshot
+        name: "School of Design",
+        undergraduate: ["B.Des in Product Design", "B.Des in Communication Design"], // Example programs
+        postgraduate: ["M.Des in Interaction Design"] // Example programs
+      },
+      { // Added from screenshot
+        name: "School of Media Studies",
+        undergraduate: ["B.A. in Journalism & Mass Communication"], // Example programs
+        postgraduate: ["M.A. in Digital Media & Communication"] // Example programs
+      }
+    ];
+
+    const schoolTabsContainer = document.getElementById('v-pills-tab');
+    const programDisplayArea = document.getElementById('programDisplayArea');
+
+    function displayPrograms(schoolIndex) {
+      const school = schoolsData[schoolIndex];
+      let content = `<h4>${school.name}</h4>`;
+
+      if (school.undergraduate && school.undergraduate.length > 0) {
+        content += '<h5>Undergraduate Programs</h5><ul>';
+        school.undergraduate.forEach(program => {
+          content += `<li>${program}</li>`;
+        });
+        content += '</ul>';
+      }
+
+      if (school.postgraduate && school.postgraduate.length > 0) {
+        content += '<h5>Postgraduate Programs</h5><ul>';
+        school.postgraduate.forEach(program => {
+          content += `<li>${program}</li>`;
+        });
+        content += '</ul>';
+      }
+      
+      if ((!school.undergraduate || school.undergraduate.length === 0) && (!school.postgraduate || school.postgraduate.length === 0)) {
+        content += '<p class="text-muted">No programs listed for this school yet.</p>';
+      }
+
+      programDisplayArea.innerHTML = content;
+
+      // Update active tab
+      document.querySelectorAll('.school-tabs .nav-link').forEach(tab => tab.classList.remove('active'));
+      document.querySelector(`.school-tabs .nav-link[data-index="${schoolIndex}"]`).classList.add('active');
+    }
+
+    schoolsData.forEach((school, index) => {
+      const tabButton = document.createElement('button');
+      tabButton.className = `nav-link ${index === 0 ? 'active' : ''}`;
+      tabButton.id = `v-pills-${index}-tab`;
+      tabButton.setAttribute('data-bs-toggle', 'pill'); // Not strictly needed for this JS approach but good for Bootstrap context
+      tabButton.setAttribute('role', 'tab');
+      tabButton.setAttribute('aria-controls', `v-pills-${index}`);
+      tabButton.setAttribute('aria-selected', index === 0);
+      tabButton.textContent = school.name;
+      tabButton.setAttribute('data-index', index); // Store index for easy access
+      tabButton.onclick = () => displayPrograms(index);
+      schoolTabsContainer.appendChild(tabButton);    });
+
+    // Display programs for the first school initially
+    if (schoolsData.length > 0) {
+      displayPrograms(0);
+    }
+
+  </script>
+  <!-- Animated Recruiting Partners Marquee -->
+  <section class="recruiting-partners text-center">
+    <h2 class="section-title">Few of our Recruiting Partners</h2>
+    <div class="logo-marquee-wrapper">
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <!-- First row logos repeated twice for smooth looping -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2560px-Accenture.svg.png" alt="Accenture">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Deloitte.svg/2560px-Deloitte.svg.png" alt="Deloitte">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/1280px-Infosys_logo.svg.png" alt="Infosys">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Tech_Mahindra_New_Logo.svg/1024px-Tech_Mahindra_New_Logo.svg.png" alt="Tech Mahindra">
+          <img src="https://www.cdnlogo.com/logos/c/78/capgemini-201x.svg" alt="Capgemini">
+          <img src="https://companieslogo.com/img/orig/WIT-1453b096.png?t=1739861069" alt="Wipro">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/1200px-Oracle_logo.svg.png" alt="Oracle">
+          <img src="https://marvel-b1-cdn.bc0a.com/f00000000004333/www.zuora.com/wp-content/uploads/2024/03/tcs-p-c.png" alt="TCS">
+          <!-- Repeat for infinite scroll effect -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/2560px-Accenture.svg.png" alt="Accenture">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Deloitte.svg/2560px-Deloitte.svg.png" alt="Deloitte">
+        </div>
+      </div>
+
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <!-- Second row logos, same structure -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Tech_Mahindra_New_Logo.svg/1024px-Tech_Mahindra_New_Logo.svg.png" alt="Tech Mahindra">
+          <img src="https://www.cdnlogo.com/logos/c/78/capgemini-201x.svg" alt="Capgemini">
+          <img src="https://companieslogo.com/img/orig/WIT-1453b096.png?t=1739861069" alt="Wipro">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/1200px-Oracle_logo.svg.png" alt="Oracle">
+          <img src="https://marvel-b1-cdn.bc0a.com/f00000000004333/www.zuora.com/wp-content/uploads/2024/03/tcs-p-c.png" alt="TCS">
+          <!-- Repeat -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Tech_Mahindra_New_Logo.svg/1024px-Tech_Mahindra_New_Logo.svg.png" alt="Tech Mahindra">
+          <img src="https://www.cdnlogo.com/logos/c/78/capgemini-201x.svg" alt="Capgemini">
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
