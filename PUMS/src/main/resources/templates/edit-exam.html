@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Examination</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 30px;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const date = document.querySelector("[name='date']").value.trim();
+            const max_marks = document.querySelector("[name='totalMarks']").value.trim();
+            if (date === "" || max_marks === "") {
+                alert("Date and Marks fields cannot be empty.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Edit Exam</h1>
+
+        <form th:action="@{/exams/{examId}/update(examId=${exam.examId})}" th:object="${exam}" method="post" onsubmit="return validateForm()">
+            <input type="hidden" th:field="*{examId}" />
+            
+			<label for="examName">Exam Name:</label>
+            <input type="text" th:field="*{examName}" required /><br/>
+            
+            <label for="date">Date:</label>
+            <input type="text" th:field="*{date}" required /><br/>
+
+            <label for="totalMarks">Maximum Marks:</label>
+            <input type="text" th:field="*{totalMarks}" required /><br/>
+
+            <label for="course">Course:</label>
+            <select th:field="*{course}" required>
+                <option value="">-- Select Course --</option>
+                <option th:each="c : ${courses}" th:value="${c.cid}" th:text="${c.cname}"></option>
+            </select><br/>
+
+            <button type="submit">Update Exam</button>
+        </form>
+
+        <a th:href="@{/exams}" class="back-link">Back to List</a>
+    </div>
+</body>
+</html>

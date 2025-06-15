@@ -1,0 +1,4 @@
+50 mcq,
+1 project based - 30 , code template - mvc, to fill controller, servlet, controller
+
+1 normal coding question from corejava
