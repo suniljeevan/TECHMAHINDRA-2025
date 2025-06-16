@@ -1,0 +1,148 @@
+:root {
+    --dashboard-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --card-border: rgba(0, 0, 0, 0.05);
+    --text-primary: #2b2d42;
+    --icon-bg: rgba(37, 117, 252, 0.1);
+    --icon-color: #2575fc;
+    --course-item-bg: rgba(37, 117, 252, 0.05);
+}
+
+[data-theme='dark'] {
+    --dashboard-bg: #212429;
+    --card-bg: #1e1e1e;
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #e0e0e0;
+    --icon-bg: rgba(37, 117, 252, 0.2);
+    --icon-color: #6e8efb;
+    --course-item-bg: rgba(37, 117, 252, 0.1);
+}
+
+.student-dashboard {
+    min-height: 100vh;
+    background: var(--dashboard-bg);
+}
+
+.welcome-section {
+    padding-bottom: clamp(1.5rem, 4vw, 2rem);
+    border-bottom: none;
+    margin-bottom: clamp(1.5rem, 4vw, 2rem);
+}
+
+.page-title {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+}
+
+.dashboard-card {
+    background: var(--card-bg);
+    border-radius: clamp(12px, 2vw, 15px);
+    padding: clamp(1.5rem, 4vw, 2rem);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border: 1px solid var(--card-border);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    color: var(--icon-color);
+    height: clamp(60px, 15vw, 80px);
+    width: clamp(60px, 15vw, 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--icon-bg);
+    border-radius: 50%;
+    margin: 0 auto clamp(1rem, 3vw, 1.5rem);
+}
+
+.dashboard-card h3 {
+    color: var(--text-primary);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: clamp(0.8rem, 2vw, 1rem);
+}
+
+.enrolled-courses {
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+    text-align: left;
+}
+
+.enrolled-course-item {
+    background: var(--course-item-bg);
+    border-radius: clamp(8px, 1.5vw, 10px);
+    padding: clamp(0.8rem, 2vw, 1rem);
+    margin-bottom: clamp(0.8rem, 2vw, 1rem);
+}
+
+.enrolled-course-item:last-child {
+    margin-bottom: 0;
+}
+
+.enrolled-course-item h4 {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+    word-break: break-word;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.4em 0.8em;
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+@media (max-width: 768px) {
+    .dashboard-card {
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .enrolled-courses {
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .student-dashboard {
+        padding: 0.5rem;
+    }
+
+    .welcome-section {
+        text-align: center;
+    }
+
+    .dashboard-card {
+        padding: 1.2rem;
+    }
+
+    .enrolled-course-item {
+        padding: 0.8rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .dashboard-card {
+        margin-bottom: 0;
+    }
+}

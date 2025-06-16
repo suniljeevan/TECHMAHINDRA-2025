@@ -1,0 +1,110 @@
+:root {
+  /* Light theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #2b2d42;
+  --text-secondary: #6c757d;
+  --navbar-bg: linear-gradient(90deg, #1a1c1e 0%, #2b2d42 100%);
+  --card-bg: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #2575fc;
+}
+
+[data-theme='dark'] {
+  /* Dark theme colors */
+  --bg-primary: #1a1c1e;
+  --bg-secondary: #2b2d42;
+  --text-primary: #ffffff;
+  --text-secondary: #d1d1d1;
+  --navbar-bg: linear-gradient(90deg, #000000 0%, #1a1c1e 100%);
+  --card-bg: #2b2d42;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --accent-color: #4facfe;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  /* Enable Inter font features */
+}
+
+body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Added padding for fixed navbar */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Fix iOS tap highlight */
+@media (hover: none) {
+
+  a:active,
+  button:active {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

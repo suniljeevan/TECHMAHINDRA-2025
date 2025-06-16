@@ -1,0 +1,160 @@
+:root {
+    --page-bg-gradient: l#fff;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --text-primary: #333;
+    --btn-primary-bg: #2575fc;
+    --btn-primary-hover-bg: #1a60d5;
+    --link-color: #2575fc;
+}
+
+[data-theme='dark'] {
+    --page-bg-gradient: #212429 !important;
+    --card-bg: #1e1e1e;
+    --card-shadow: rgba(255, 255, 255, 0.1);
+    --text-primary: #e0e0e0;
+    --btn-primary-bg: #6e8efb;
+    --btn-primary-hover-bg: #5a7ed5;
+    --link-color: #6e8efb;
+}
+
+.register-page {
+    background: var(--page-bg-gradient);
+    min-height: 100vh;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: clamp(12px, 2vw, 15px);
+    overflow: hidden;
+    margin: 0 auto;
+    width: min(100%, 500px);
+    box-shadow: 0 4px 20px var(--card-shadow);
+}
+
+.card-body {
+    padding: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+h4 {
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: clamp(0.8rem, 2vw, 1rem);
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    margin-bottom: 0.3rem;
+}
+
+.form-control {
+    border-radius: clamp(6px, 1.5vw, 8px);
+    padding: clamp(0.4rem, 1.5vw, 0.5rem) clamp(0.6rem, 2vw, 0.8rem);
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    height: auto;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--btn-primary-bg);
+    border-color: var(--btn-primary-bg);
+    border-radius: clamp(6px, 1.5vw, 8px);
+    padding: clamp(0.5rem, 1.5vw, 0.6rem);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    width: 100%;
+    margin-top: clamp(0.8rem, 2vw, 1rem);
+}
+
+.btn-primary:hover {
+    background-color: var(--btn-primary-hover-bg);
+    border-color: var(--btn-primary-hover-bg);
+}
+
+a {
+    color: var(--link-color);
+    font-weight: 500;
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+}
+
+.mb-3 {
+    margin-bottom: clamp(0.6rem, 2vw, 0.8rem) !important;
+}
+
+.text-center.mt-4 {
+    font-size: clamp(0.8rem, 2vw, 0.85rem);
+    margin-top: clamp(0.8rem, 2vw, 1rem) !important;
+}
+
+.col-lg-6 {
+    max-width: 500px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - clamp(60px, 10vw, 76px));
+    width: 100%;
+}
+
+.w-75 {
+    width: min(85%, 450px) !important;
+}
+
+.row.mb-3 {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    row-gap: 0.8rem;
+}
+
+.row.mb-3 > .col-md-6 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .register-page {
+        padding: 0.5rem;
+    }
+
+    .card {
+        box-shadow: none;
+    }
+
+    .w-75 {
+        width: 95% !important;
+    }
+
+    .row.mb-3 {
+        margin-left: -0.3rem;
+        margin-right: -0.3rem;
+    }
+
+    .row.mb-3 > .col-md-6 {
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .register-page {
+        background: white;
+    }
+
+    .card {
+        border-radius: 0;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+@media (max-height: 600px) {
+    .d-flex {
+        padding: 1rem 0;
+    }
+}

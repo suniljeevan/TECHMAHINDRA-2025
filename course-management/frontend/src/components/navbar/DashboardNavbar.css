@@ -1,0 +1,110 @@
+:root {
+    --navbar-bg: rgba(255, 255, 255, 0.8);
+    --text-primary: #fff;
+    --accent-color: #2575fc;
+}
+
+.custom-navbar {
+    background: var(--navbar-bg);
+    padding: clamp(0.6rem, 2vw, 0.8rem) clamp(0.8rem, 3vw, 1rem);
+    font-weight: 500;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    border: none;
+    color: var(--text-primary) !important;
+}
+
+.custom-navbar .navbar-brand {
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--text-primary) !important;
+    padding: 0.3rem 0;
+}
+
+.custom-navbar .nav-link {
+    color: var(--text-primary) !important;
+    margin: 0.2rem clamp(0.3rem, 2vw, 1rem);
+    padding: 0.5rem clamp(0.6rem, 2vw, 1rem);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.custom-navbar .nav-link:hover {
+    color: var(--text-primary) !important;
+    background-color: var(--hover-bg);
+    transform: translateY(-1px);
+}
+
+.custom-navbar .navbar-toggler {
+    border: none;
+    padding: clamp(0.3rem, 1.5vw, 0.5rem);
+    transition: all 0.2s ease;
+}
+
+.custom-navbar .navbar-toggler:hover {
+    border-color: var(--accent-color);
+    background-color: var(--hover-bg);
+}
+
+.custom-navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: clamp(1.2rem, 3vw, 1.5rem);
+    height: clamp(1.2rem, 3vw, 1.5rem);
+}
+
+.btn-danger {
+    font-size: 0.8rem !important;
+    font-weight: 400;
+}
+
+@media (max-width: 991px) {
+    .custom-navbar .navbar-collapse {
+        background: var(--navbar-bg);
+        margin: 0.5rem -1rem -0.6rem;
+        padding: 0.5rem 1rem 1rem;
+        border: none;
+    }
+
+    .custom-navbar .nav-link {
+        margin: 0.3rem 0;
+        padding: 0.5rem 1rem;
+    }
+
+    .custom-navbar .btn-outline-light {
+        margin: 0.3rem 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-navbar {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .custom-navbar .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .custom-navbar .navbar-collapse {
+        margin: 0.5rem -0.8rem -0.5rem;
+        padding: 0.5rem 0.8rem 0.8rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .custom-navbar .navbar-collapse {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.theme-toggle {
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}

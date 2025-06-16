@@ -1,0 +1,108 @@
+:root {
+    --page-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --btn-hover-bg: #e2e6ea;
+    --text-secondary: rgba(255, 255, 255, 0.8);
+}
+
+[data-theme='dark'] {
+    --page-bg: #121212;
+    --card-bg: #1e1e1e;
+    --card-shadow: rgba(255, 255, 255, 0.1);
+    --btn-hover-bg: #3a3a3a;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+}
+
+.course-details-page {
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    padding: 0;
+}
+
+.course-details-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0.5rem;
+}
+
+.course-details-card .card-header {
+    border-bottom: none;
+    padding: clamp(1rem, 4vw, 1.5rem);
+}
+
+.card-header h2 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+}
+
+.course-info-card {
+    background: var(--card-bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;
+    box-shadow: 0 4px 12px var(--card-shadow);
+}
+
+.course-info-card:hover {
+    transform: translateY(-2px);
+}
+
+.course-description {
+    line-height: 1.6;
+}
+
+.btn-light {
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.btn-light:hover:not(:disabled) {
+    background-color: var(--btn-hover-bg);
+    transform: translateY(-1px);
+}
+
+.text-white-50 {
+    color: var(--text-secondary);
+    font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.bi {
+    font-size: 1.1em;
+}
+
+.card-body {
+    padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+    .course-details-card {
+        margin: 0;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start !important;
+    }
+
+    .course-info-card {
+        margin-bottom: 1rem !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-details-page {
+        padding: 0;
+    }
+
+    .course-details-card {
+        border-radius: 0;
+    }
+}

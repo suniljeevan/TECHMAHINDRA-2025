@@ -1,0 +1,118 @@
+:root {
+    --page-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-primary: #2b2d42;
+    --text-secondary: #6c757d;
+    --badge-bg: rgba(37, 117, 252, 0.1);
+    --badge-color: #2575fc;
+    --icon-color: #ffd700;
+}
+
+[data-theme='dark'] {
+    --page-bg: #121212;
+    --card-bg: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #adb5bd;
+    --badge-bg: rgba(37, 117, 252, 0.2);
+    --badge-color: #6e8efb;
+    --icon-color: #ffcc00;
+}
+
+.enrolled-courses-page {
+    min-height: 100vh;
+    background: var(--page-bg);
+    padding: clamp(2rem, 6vw, 4rem) 0;
+}
+
+.page-title {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.course-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    border: none;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.course-type-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: clamp(0.75rem, 2vw, 0.8rem);
+    font-weight: 600;
+    background: var(--badge-bg);
+    color: var(--badge-color);
+    margin-bottom: 1rem;
+}
+
+.course-title {
+    color: var(--text-primary);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    word-break: break-word;
+}
+
+.course-description {
+    color: var(--text-secondary);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.course-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.course-credits {
+    color: var(--text-secondary);
+    font-size: clamp(0.85rem, 2vw, 0.9rem);
+    display: flex;
+    align-items: center;
+}
+
+.course-credits i {
+    color: var(--icon-color);
+}
+
+@media (max-width: 768px) {
+    .enrolled-courses-page {
+        padding: 0.5rem;
+    }
+
+    .course-card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .course-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .course-footer .btn {
+        width: 100%;
+    }
+}
