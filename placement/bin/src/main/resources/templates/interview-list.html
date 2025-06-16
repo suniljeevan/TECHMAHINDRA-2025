@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Interviews</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px auto;
+            background-color: #f4f8fc;
+            color: #333;
+            max-width: 1000px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Scheduled Interviews</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Job Title</th>
+                <th>Company</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="interview : ${interviews}">
+                <td th:text="${interview.interviewDate}">2025-05-10 10:00</td>
+                <td th:text="${interview.interviewStatus}">Scheduled</td>
+                <td th:text="${interview.application.job.title}">Software Engineer</td>
+                <td th:text="${interview.application.job.company}">ABC Corp</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/student-dashboard">Back to Dashboard</a>
+</body>
+</html>

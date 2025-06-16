@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Placement Management System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: #1f2937;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      padding-top: 72px; /* for fixed navbar */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #ffffff;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: linear-gradient(to right, #4f46e5, #667eea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links, .auth-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      color: #374151;
+      transition: color 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 12px;
+    }
+
+    .nav-links a:hover {
+      background-color: #e0e7ff;
+      color: #4f46e5;
+    }
+
+    .auth-btn {
+      background: linear-gradient(to right, #4f46e5, #667eea);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+    }
+
+    .auth-btn:hover {
+      background: linear-gradient(to right, #3c37cc, #5464cc);
+      box-shadow: 0 8px 16px rgba(59, 55, 204, 0.6);
+    }
+
+    .section {
+      background: white;
+      border-radius: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 60px 40px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .home img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+    }
+
+    .section h2 {
+      font-size: 2.4rem;
+      color: #4f46e5;
+      margin-bottom: 24px;
+    }
+
+    .section h3 {
+      margin: 40px 0 20px;
+      color: #4f46e5;
+      font-weight: 600;
+    }
+
+    .section p {
+      font-size: 1.15rem;
+      color: #4b5563;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .companies {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .company {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 140px;
+      color: #374151;
+      font-weight: 600;
+    }
+
+    .company img {
+      width: 100px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));
+      transition: transform 0.3s ease;
+      border-radius: 12px;
+      background: white;
+      padding: 10px;
+    }
+    .company img:hover {
+      transform: scale(1.05);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stat-card {
+      background: #f3f4f6;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(79, 70, 229, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(79, 70, 229, 0.25);
+    }
+
+    .stat-card h3 {
+      color: #4f46e5;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .contact {
+      background-image: url('https://www.w3schools.com/w3images/contact.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px;
+      border-radius: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      text-align: left;
+    }
+
+    .contact-box {
+      background-color: rgba(0, 0, 0, 0.65);
+      padding: 40px;
+      border-radius: 20px;
+      width: 100%;
+    }
+
+    .contact-box h2 {
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+
+    .contact-box p {
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .contact-box a {
+      color: #60a5fa;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .nav-links, .auth-links {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .home img {
+        height: 250px;
+      }
+
+      .section {
+        padding: 40px 20px;
+        margin: 20px 10px;
+      }
+
+      .contact {
+        padding: 60px 20px;
+        margin: 20px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="logo"><h1>Placement Portal</h1></div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#stats">Statistics</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="auth-links">
+      <a href="/login" class="auth-btn">Login</a>
+      <a href="/signup" class="auth-btn">Sign Up</a>
+    </div>
+  </div>
+
+  <!-- Home Section -->
+  <section id="home" class="home section" style="padding: 0;">
+    <img src="https://kahedu.edu.in/n/wp-content/uploads/2021/11/7-suggestions-for-getting-a-good-job-during-campus-placements-990x500-1-990x500.jpg" alt="Placement Image" />
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <h2>About Placement Portal</h2>
+    <p><strong>Vision:</strong> Bridging the gap between academic excellence and industry readiness.<br><br>
+    <strong>Mission:</strong> Empowering students with career opportunities through transparent and inclusive placement processes.<br><br>
+    <strong>Overview:</strong> Partnered with <strong>120+ companies</strong>, placing <strong>450+ students</strong> in IT, finance, consulting, and engineering.</p>
+    
+    <h3>Top Recruiting Companies</h3>
+    <div class="companies">
+      <div class="company">
+        <img src="https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png" alt="Google" />
+        <p>Google</p>
+      </div>
+      <div class="company">
+        <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-microsoft-logo-icon-png-image_3588808.jpg" alt="Microsoft" />
+        <p>Microsoft</p>
+      </div>
+      <div class="company">
+        <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_376011e4845bec8a28b7711b4f95fdd2/juspay.png" alt="Juspay" />
+        <p>Juspay</p>
+      </div>
+      <div class="company">
+        <img src="https://1000logos.net/wp-content/uploads/2022/08/Myntra-Logo.png" alt="Myntra" />
+        <p>Myntra</p>
+      </div>
+      <div class="company">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon" />
+        <p>Amazon</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section id="stats" class="section">
+    <h2>Placement Statistics & Analytics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>120+ Companies</h3>
+        <p>Partnered with leading companies across diverse sectors.</p>
+      </div>
+      <div class="stat-card">
+        <h3>450+ Students</h3>
+        <p>Successfully placed students in their dream careers.</p>
+      </div>
+      <div class="stat-card">
+        <h3>₹8 LPA Avg Salary</h3>
+        <p>Average package offered to our students last year.</p>
+      </div>
+      <div class="stat-card">
+        <h3>Top Domains</h3>
+        <p>IT, Finance, Consulting, and Engineering.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <p>Need help or have questions? Reach out to us!</p>
+      <p><strong>Email:</strong> <a href="mailto:support@placementportal.com">support@placementportal.com</a></p>
+      <p><strong>Phone:</strong> +91 987-456-7890</p>
+      <p><strong>Address:</strong> 1234 Placement Blvd, Tech City, India</p>
+    </div>
+  </section>
+
+</body>
+</html>

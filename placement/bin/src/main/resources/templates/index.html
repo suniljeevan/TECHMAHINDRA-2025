@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Placement Management System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: #f2f2f2;
+      color: #333;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .logo h1 {
+      font-size: 26px;
+      font-weight: bold;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: #0072ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff7e5f;
+    }
+
+    .auth-links {
+      display: flex;
+      gap: 12px;
+      margin-left: 30px;
+    }
+
+    .auth-btn {
+      background-color: #ff7e5f;
+      color: white;
+      padding: 10px 18px;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .auth-btn:hover {
+      background-color: #eb5e3b;
+    }
+
+    .container {
+      margin-top: 70px; /* Matches navbar height */
+      width: 100%;
+      text-align: center;
+    }
+
+    .main-image img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* About Section */
+    .about-section {
+      min-height: 100vh;
+      padding: 80px 40px;
+      background: linear-gradient(to bottom, #e6f0ff, #ffffff);
+      text-align: center;
+    }
+
+    .about-content h2 {
+      font-size: 36px;
+      color: #0072ff;
+      margin-bottom: 20px;
+    }
+
+    .about-content .intro {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .companies-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .company {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 150px;
+    }
+
+    .company img {
+      width: 100px;
+      height: auto;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .company p {
+      font-weight: 500;
+      color: #333;
+    }
+
+	/* Placement Statistics Section */
+	#statistics {
+	  padding: 80px 40px;
+	  background: linear-gradient(to bottom, #ffffff, #e6f0ff);
+	  text-align: center;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100vh; /* Ensure the section takes full height of the viewport */
+	  width: 100%; /* Ensure it takes full width */
+	  box-sizing: border-box; /* Ensures padding doesn't affect width and height */
+	}
+
+	#statistics h2 {
+	  font-size: 36px;
+	  color: #0072ff; /* Blue color */
+	  margin: 0; /* Remove any default margin */
+	  padding-bottom: 40px; /* Add bottom padding */
+	  text-align: center; /* Ensure the heading is centered */
+	  width: 100%; /* Ensure it takes the full width */
+	  display: inline-block; /* Make the heading an inline block */
+	}
+
+	.stat-card {
+	  background: #ffffff;
+	  border-radius: 10px;
+	  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+	  padding: 20px;
+	  text-align: center;
+	  width: 100%;
+	  transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.stat-card h3 {
+	  font-size: 24px;
+	  margin-bottom: 10px;
+	  color: #0072ff;
+	}
+
+	.stat-card p {
+	  font-size: 16px;
+	  margin-bottom: 15px;
+	  color: #555;
+	}
+
+	.stat-card:hover {
+	  transform: translateY(-10px);
+	  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+	}
+
+
+
+	/* Contact Section */
+	    .contact-container {
+	      display: flex;
+	      flex-direction: column;
+	      align-items: center;
+	      justify-content: center;
+	      height: 100vh;
+	      background-image: url('https://www.w3schools.com/w3images/contact.jpg'); /* Add a contact-related image */
+	      background-size: cover;
+	      background-position: center;
+	      color: white;
+	      text-align: center;
+	    }
+
+	    .contact-info {
+	      background-color: rgb(0, 128, 192); /* Semi-transparent background for better readability */
+	      padding: 40px;
+	      border-radius: 10px;
+	      width: 80%;
+	      max-width: 600px;
+	    }
+
+	    .contact-info h2 {
+	      font-size: 36px;
+	      color: #fff;
+	      margin-bottom: 20px;
+	    }
+
+	    .contact-info p {
+	      font-size: 18px;
+	      color: #fff;
+	      margin-bottom: 15px;
+	      line-height: 1.6;
+	    }
+
+	    .contact-info a {
+	      color: #ff7e5f;
+	      font-weight: 600;
+	      text-decoration: none;
+	      transition: color 0.3s;
+	    }
+
+	    .contact-info a:hover {
+	      color: #ffffff;
+	    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">
+      <h1>Placement Portal</h1>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#statistics">Statictics</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="auth-links">
+        <a href="/login" class="auth-btn">Login</a>
+        <a href="/signup" class="auth-btn">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Section -->
+  <div class="container" id="home">
+    <div class="main-image">
+      <img src="https://kahedu.edu.in/n/wp-content/uploads/2021/11/7-suggestions-for-getting-a-good-job-during-campus-placements-990x500-1-990x500.jpg" alt="Placement Image">
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="about-content">
+      <h2>About Placement Portal</h2>
+
+      <div class="intro">
+        <p><strong>Vision:</strong> To bridge the gap between academic excellence and industry readiness by connecting students with top-tier companies worldwide.</p>
+        <br>
+        <p><strong>Mission:</strong> To provide a transparent, seamless, and inclusive placement ecosystem that empowers every student to achieve their career goals.</p>
+        <br>
+        <p><strong>Overview:</strong> In the last academic year, our portal partnered with <strong>120+ companies</strong> and facilitated placements for over <strong>450 students</strong> across various domains including IT, finance, consulting, and core engineering.</p>
+      </div>
+
+      <h3 style="margin-top: 40px; color: #0072ff;">Top Recruiting Companies</h3>
+      <div class="companies-grid" style="margin-top: 20px;">
+        <div class="company">
+          <img src="https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png" alt="Google Logo">
+          <p>Google</p>
+        </div>
+        <div class="company">
+          <img src="https://png.pngtree.com/png-clipart/20190516/original/pngtree-microsoft-logo-icon-png-image_3588808.jpg" alt="Microsoft Logo">
+          <p>Microsoft</p>
+        </div>
+        <div class="company">
+          <img src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_376011e4845bec8a28b7711b4f95fdd2/juspay.png" alt="Juspay Logo">
+          <p>Juspay</p>
+        </div>
+        <div class="company">
+          <img src="https://1000logos.net/wp-content/uploads/2022/08/Myntra-Logo.png" alt="Myntra Logo">
+          <p>Myntra</p>
+        </div>
+        <div class="company">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1200px-Amazon_logo.svg.png" alt="Amazon Logo">
+          <p>Amazon</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Placement Statistics Section -->
+    <section id="statistics" class="statistics-section">
+      <h2>Placement Statistics & Analytics</h2>
+      <div class="stat-card">
+        <h3>120+ Companies</h3>
+        <p>We partnered with over 120 companies across diverse industries.</p>
+      </div>
+      <div class="stat-card">
+        <h3>450+ Students Placed</h3>
+        <p>Over 450 students were successfully placed last year.</p>
+      </div>
+      <div class="stat-card">
+        <h3>Average Salary</h3>
+        <p>The average salary package offered was ₹8 LPA.</p>
+      </div>
+      <div class="stat-card">
+        <h3>Top Domains</h3>
+        <p>IT, Finance, Marketing, and Consulting were the top recruiting domains.</p>
+      </div>
+    </section>
+	
+	<!-- Contact Section -->
+	  <section id="contact" class="contact-section">
+		<!-- Contact Section -->
+		  <div class="contact-container">
+		    <div class="contact-info">
+		      <h2>Contact Us</h2>
+		      <p>If you have any questions or need assistance, feel free to get in touch with us.</p>
+		      <p><strong>Email:</strong> <a href="mailto:support@placementportal.com">support@placementportal.com</a></p>
+		      <p><strong>Phone:</strong> +91 987-456-7890</p>
+		      <p><strong>Address:</strong> 1234 Placement Blvd, Tech City, India</p>
+		    </div>
+		  </div>
+	  </section>
+
+
+</body>
+</html>

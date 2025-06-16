@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+    }
+
+    .dashboard-container {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 1100px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      color: #0072ff;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .quick-link {
+      flex: 1;
+      min-width: 200px;
+      background-color: #0072ff;
+      color: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    .quick-link:hover {
+      background-color: #005ecb;
+    }
+
+    .logout-btn {
+      align-self: flex-start;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      background-color: #ff5e5e;
+      padding: 15px 35px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #e04343;
+    }
+
+    @media (max-width: 768px) {
+      .quick-links {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <h1>Welcome, Student!</h1>
+    <p>You are logged in to your student dashboard.</p>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+      <a href="/job-listings" class="quick-link">Job Listings</a>
+      <a href="/my-applications" class="quick-link">My Applications</a>
+      <a href="/interviews" class="quick-link">Interviews</a>
+      <a href="/profiles" class="quick-link">Profile</a>
+    </div>
+
+    <!-- Logout Button -->
+    <a href="/logout" class="logout-btn">Logout</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Listings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 20px;
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            color: #3b82f6;
+            margin-bottom: 40px;
+        }
+
+        .jobs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .job-company {
+            font-size: 16px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+
+        .job-description {
+            font-size: 15px;
+            color: #4b5563;
+            margin-bottom: 12px;
+        }
+
+        .job-location {
+            font-size: 15px;
+            color: #10b981;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .job-status {
+            font-size: 14px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background-color: #e0f2fe;
+            color: #0284c7;
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-apply {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+        }
+
+        .btn-apply:hover {
+            background-color: #2563eb;
+        }
+
+        .btn-disabled {
+            background-color: #d1d5db;
+            color: #6b7280;
+            cursor: not-allowed;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .job-card {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Explore Job Listings</h2>
+
+    <div th:if="${jobs.isEmpty()}" style="text-align: center;">
+        <p>No job postings are available at the moment. Please check again later.</p>
+    </div>
+
+    <div class="jobs-container" th:if="${!jobs.isEmpty()}">
+        <div class="job-card" th:each="job : ${jobs}">
+            <div>
+                <div class="job-title" th:text="${job.title}">Job Title</div>
+                <div class="job-company" th:text="${job.company}">Company Name</div>
+                <div class="job-description" th:text="${job.description}">Short job description goes here.</div>
+                <div class="job-location">📍 <span th:text="${job.location}">Location</span></div>
+                <div class="job-status" th:text="'Status: ' + ${job.applicationStatus}">Status</div>
+            </div>
+
+            <div>
+                <a th:href="@{/apply/{jobId}(jobId=${job.id})}"
+                   th:if="${job.applicationStatus.name() == 'NOT_APPLIED'}"
+                   class="btn btn-apply">Apply Now</a>
+
+                <span th:if="${job.applicationStatus.name() != 'NOT_APPLIED'}"
+                      class="btn btn-disabled">Already Applied</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

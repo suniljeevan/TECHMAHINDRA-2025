@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Applications List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 30px 15px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 40px;
+            font-weight: bold;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            transition: box-shadow 0.25s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #388e3c;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 6px;
+            user-select: none;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #4a4a4a;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            user-select: none;
+        }
+
+        .value {
+            max-width: 65%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: right;
+            font-weight: 500;
+            color: #222;
+        }
+
+        .status {
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 20px;
+            color: white;
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .status.ACCEPTED {
+            background-color: #4CAF50;
+            box-shadow: 0 2px 6px rgba(76, 175, 80, 0.4);
+        }
+
+        .status.REJECTED {
+            background-color: #e53935;
+            box-shadow: 0 2px 6px rgba(229, 57, 53, 0.4);
+        }
+
+        .status.UNDER_REVIEW {
+            background-color: #fbc02d;
+            color: #5d4037;
+            box-shadow: 0 2px 6px rgba(251, 192, 45, 0.4);
+        }
+
+        form {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        select.status-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1.5px solid #4CAF50;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #4CAF50;
+            background: #e8f5e9;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            min-width: 130px;
+        }
+
+        select.status-select:hover,
+        select.status-select:focus {
+            border-color: #388e3c;
+            outline: none;
+            background: #c8e6c9;
+        }
+
+        button.update-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.35);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        button.update-btn:hover {
+            background-color: #388e3c;
+            box-shadow: 0 6px 14px rgba(56, 142, 60, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .card-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .value {
+                max-width: 100%;
+                text-align: left;
+                white-space: normal;
+            }
+            .cards-container {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Applications List</h1>
+
+<div class="cards-container">
+    <div class="card" th:each="app : ${applications}">
+        <div class="card-header" th:text="${app.student.name} + ' (' + ${app.student.email} + ')'">Student Name (Email)</div>
+
+        <div class="card-row">
+            <div class="label">College</div>
+            <div class="value" th:text="${app.collegeName}">College Name</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">CGPA</div>
+            <div class="value" th:text="${app.cgpa}">CGPA</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Skills</div>
+            <div class="value" th:text="${app.skills}">Skills</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Why Hire Me</div>
+            <div class="value" th:text="${app.whyHireMe}">Reason</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Address</div>
+            <div class="value" th:text="${app.address}">Address</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Joining Date</div>
+            <div class="value" th:text="${app.joiningDate}">Date</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Location</div>
+            <div class="value" th:text="${app.location}">Location</div>
+        </div>
+
+        <div class="card-row">
+            <div class="label">Company</div>
+            <div class="value" th:text="${app.job.company}">Company</div>
+        </div>
+
+        <div>
+            <span class="status" th:text="${app.status}" th:classappend="' ' + app.status">Status</span>
+        </div>
+
+        <form th:action="@{/admin/applications/{id}/update-status(id=${app.id})}" method="post">
+            <select name="status" class="status-select">
+                <option value="ACCEPTED" th:selected="${app.status == 'ACCEPTED'}">Accepted</option>
+                <option value="REJECTED" th:selected="${app.status == 'REJECTED'}">Rejected</option>
+                <option value="UNDER_REVIEW" th:selected="${app.status == 'UNDER_REVIEW'}">Under Review</option>
+            </select>
+            <button type="submit" class="update-btn">Update</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

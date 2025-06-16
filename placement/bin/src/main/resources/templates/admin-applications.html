@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Applications</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c6a32; /* Green Color */
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50; /* Green Header */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd; /* Hover Effect */
+        }
+
+        /* Styling for buttons and forms */
+        select {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 16px;
+            background-color: #4CAF50; /* Green Button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        a {
+            text-decoration: none;
+            color: #4CAF50; /* Green Links */
+            margin-right: 15px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Applications List</h1>
+    <table>
+        <thead>
+			<tr>
+			    <th>ID</th>
+			    <th>Student Name</th>
+			    <th>Email</th>
+			    <th>College Name</th>
+			    <th>CGPA</th>
+			    <th>Skills</th>
+			    <th>Why Hire Me</th>
+			    <th>Address</th>
+			    <th>Joining Date</th>
+			    <th>Location</th>
+			    <th>Company</th> <!-- New -->
+			    <th>Status</th>
+			    <th>Updation</th>
+			</tr>
+
+        </thead>
+        <tbody>
+            <tr th:each="app : ${applications}">
+                <td th:text="${app.student.id}"></td>
+                <td th:text="${app.student.name}"></td> <!-- Student's name -->
+                <td th:text="${app.student.email}"></td> <!-- Student's email -->
+                <td th:text="${app.collegeName}"></td> <!-- College Name -->
+                <td th:text="${app.cgpa}"></td> <!-- CGPA -->
+                <td th:text="${app.skills}"></td> <!-- Skills -->
+                <td th:text="${app.whyHireMe}"></td> <!-- Why Hire Me -->
+                <td th:text="${app.address}"></td> <!-- Address -->
+                <td th:text="${app.joiningDate}"></td> <!-- Joining Date -->
+                <td th:text="${app.location}"></td> <!-- Location -->
+				<td th:text="${app.job.company}"></td> <!-- New -->
+
+                <td th:text="${app.status}"></td> <!-- Current application status -->
+                <td>
+                    <form th:action="@{/admin/applications/{id}/update-status(id=${app.id})}" method="post">
+                        <select name="status">
+                            <option value="ACCEPTED" th:selected="${app.status == 'ACCEPTED'}">Accepted</option>
+                            <option value="REJECTED" th:selected="${app.status == 'REJECTED'}">Rejected</option>
+                            <option value="UNDER_REVIEW" th:selected="${app.status == 'UNDER_REVIEW'}">Under Review</option>
+                        </select>
+                        <button type="submit">Update</button> <!-- Update button in Updation column -->
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to the Placement Management System</h1>
+
+    <div>
+        <h2>Available Jobs</h2>
+        <div th:each="job : ${jobs}">
+            <p th:text="${job.title}">Job Title</p>
+            <p th:text="${job.description}">Job Description</p>
+        </div>
+    </div>
+    
+    <div>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+    </div>
+</body>
+</html>

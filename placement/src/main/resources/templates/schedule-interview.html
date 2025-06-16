@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Interview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* Pop-up Modal Style */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .popup-content {
+            position: relative;
+            margin: 15% auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            width: 300px;
+        }
+        .popup button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Schedule Interview</h1>
+    <form action="#" th:action="@{/admin/schedule-interview}" th:object="${interview}" method="post">
+        <label for="applicationId">Application:</label>
+        <select th:field="*{application.id}" id="applicationId" required>
+            <option th:each="app : ${applications}" th:value="${app.id}"
+                    th:text="${app.job.title + ' - ' + app.student.name}"></option>
+        </select>
+
+        <label for="interviewDate">Interview Date:</label>
+        <input type="datetime-local" th:field="*{interviewDate}" id="interviewDate" required>
+
+        <label for="interviewStatus">Interview Status:</label>
+        <select th:field="*{interviewStatus}" id="interviewStatus" required>
+            <option value="Scheduled">Scheduled</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+
+        <button type="submit">Schedule Interview</button>
+    </form>
+</div>
+
+<!-- Pop-up Modal -->
+<div id="popup" class="popup" th:if="${message != null}">
+    <div class="popup-content">
+        <h2 th:text="${message}"></h2>
+        <button onclick="window.location.href='/admin-dashboard'">Go Back to Dashboard</button>
+    </div>
+</div>
+
+<script>
+    // Show pop-up message when interview is scheduled
+    if (document.getElementById("popup")) {
+        document.getElementById("popup").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

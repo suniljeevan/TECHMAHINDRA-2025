@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Profile</title>
+    <style>
+        /* Reset some basic styles for consistency across browsers */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #444;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        strong {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .profile-info {
+            background-color: #fafafa;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-info p {
+            font-size: 1.1rem;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #5c6bc0;
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3f4b96;
+        }
+
+        .error-message {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+
+        .back-btn {
+            background-color: #ccc;
+            color: #333;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Student Profile</h2>
+
+        <!-- Show error if profile is null -->
+        <div th:if="${profile == null}" class="error-message">
+            <p>Error: Profile data is not available.</p>
+        </div>
+
+        <!-- Show profile details -->
+        <div th:if="${profile != null}" class="profile-info">
+            <p><strong>Name:</strong> <span th:text="${profile.student?.name}">Name</span></p>
+            <p><strong>Email:</strong> <span th:text="${profile.student?.email}">Email</span></p>
+            <p><strong>Phone:</strong> <span th:text="${profile.phone}">Phone</span></p>
+            <p><strong>Address:</strong> <span th:text="${profile.address}">Address</span></p>
+            <p><strong>College:</strong> <span th:text="${profile.collegeName}">College</span></p>
+            <p><strong>Date of Birth:</strong> <span th:text="${profile.dob}">DOB</span></p>
+            <p><strong>Skills:</strong> <span th:text="${profile.skills}">Skills</span></p>
+
+            <a href="/profiles/edit">Edit Profile</a>
+        </div>
+
+        <!-- Go Back Button -->
+        <a class="back-btn" href="/student-dashboard">Go Back</a>
+    </div>
+
+</body>
+</html>

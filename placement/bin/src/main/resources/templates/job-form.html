@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${job.id} != null ? 'Edit Job' : 'Add Job'">Job Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            padding: 30px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 30px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px 14px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h2 th:text="${job.id} != null ? 'Edit Job' : 'Add Job'">Job Form</h2>
+
+    <form th:action="@{/admin/jobs/save}" th:object="${job}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="title">Job Title</label>
+        <input type="text" id="title" th:field="*{title}" required />
+
+        <label for="company">Company</label>
+        <input type="text" id="company" th:field="*{company}" required />
+
+        <label for="description">Description</label>
+        <textarea id="description" th:field="*{description}" rows="4" required></textarea>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" th:field="*{location}" required />
+
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-submit">Save Job</button>
+            <a th:href="@{/admin/jobs}" class="btn btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

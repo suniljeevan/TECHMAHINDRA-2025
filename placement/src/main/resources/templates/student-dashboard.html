@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: #1f2937;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .dashboard-container {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 28px;
+      color: #4f46e5;
+    }
+
+    .logout-btn {
+      text-decoration: none;
+      font-size: 16px;
+      background-color: #ef4444;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+      font-weight: 600;
+    }
+
+    .logout-btn:hover {
+      background-color: #dc2626;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+
+    .quick-link {
+      background-color: #f3f4f6;
+      padding: 30px 20px;
+      border-radius: 16px;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: #111827;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .quick-link:hover {
+      background-color: #e0e7ff;
+      transform: translateY(-5px);
+    }
+
+    .quick-link i {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #4f46e5;
+    }
+
+    .quick-link span {
+      display: block;
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .logout-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Welcome, Student 👋</h1>
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <div class="quick-links">
+      <a href="/job-listings" class="quick-link">
+        <i class="ph ph-briefcase"></i>
+        <span>Job Listings</span>
+      </a>
+      <a href="/my-applications" class="quick-link">
+        <i class="ph ph-check-square-offset"></i>
+        <span>My Applications</span>
+      </a>
+      <a href="/interviews" class="quick-link">
+        <i class="ph ph-calendar-check"></i>
+        <span>Interviews</span>
+      </a>
+      <a href="/profiles" class="quick-link">
+        <i class="ph ph-user-circle"></i>
+        <span>My Profile</span>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

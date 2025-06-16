@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .no-applications {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+        }
+        .accepted {
+            color: green;
+        }
+        .rejected {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Submitted Applications</h1>
+
+    <div th:if="${applications.isEmpty()}" class="no-applications">
+        <p>You have not submitted any applications yet.</p>
+    </div>
+
+    <div th:if="${!applications.isEmpty()}" class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="app : ${applications}">
+                    <td th:text="${app.job.title}">Job Title</td>
+                    <td th:text="${app.job.company}">Company</td>
+                    <td>
+                        <span th:if="${app.status == 'accepted'}" class="accepted">✔</span>
+                        <span th:if="${app.status == 'rejected'}" class="rejected">✘</span>
+                        <span th:if="${app.status != 'accepted' && app.status != 'rejected'}" th:text="${app.status}">Status</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

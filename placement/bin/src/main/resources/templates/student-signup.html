@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Sign Up - Placement Management</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f2f2f2;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .signup-box {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .signup-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .signup-btn:hover {
+      background-color: #0057cc;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
+      color: #555;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sign Up as a Student</h1>
+
+  <div class="signup-box">
+    <h2>Student Registration</h2>
+	<form action="/student-signup" method="POST">
+	  <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
+	  <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+	  <input type="text" name="phone" class="form-control" placeholder="Enter Phone" required>
+	  <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+	  <button type="submit" class="signup-btn">Sign Up</button>
+	</form>
+
+
+    <a href="/signup" class="back-link">← Back to Role Selection</a>
+  </div>
+
+</body>
+</html>

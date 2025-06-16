@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Job Listings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .btn {
+            padding: 8px 16px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .btn-disabled {
+            background-color: gray;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Available Job Listings</h2>
+
+    <div th:if="${jobs.isEmpty()}">
+        <p>No jobs available right now. Please check back later.</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Description</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="job : ${jobs}">
+                <td th:text="${job.title}"></td>
+                <td th:text="${job.description}"></td>
+                <td th:text="${job.company}"></td>
+                <td th:text="${job.location}"></td>
+                <td th:text="'Status: ' + ${job.applicationStatus}"></td>
+                <td>
+                    <!-- Show Apply Now only if NOT_APPLIED -->
+                    <a th:href="@{/apply/{jobId}(jobId=${job.id})}"
+                       th:if="${job.applicationStatus.name() == 'NOT_APPLIED'}"
+                       class="btn">Apply Now</a>
+
+                    <!-- Show disabled Applied button otherwise -->
+                    <a th:if="${job.applicationStatus.name() != 'NOT_APPLIED'}"
+                       class="btn btn-disabled">Applied</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

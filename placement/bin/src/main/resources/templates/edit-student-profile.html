@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Profile</title>
+    <style>
+        /* Reset some basic styles for consistency across browsers */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #444;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3f4b96;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .readonly-input {
+            background-color: #f1f1f1;
+            border-color: #ddd;
+        }
+
+        .form-action {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        a {
+            color: #5c6bc0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Edit Profile</h2>
+
+        <form th:action="@{/profiles/edit}" th:object="${profile}" method="post">
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Name (from Student) -->
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" th:value="*{student.name}" class="readonly-input" readonly="true" />
+            </div>
+
+            <!-- Email (from Student) -->
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" th:value="*{student.email}" class="readonly-input" readonly="true" />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" th:field="*{phone}" placeholder="Enter your phone number" />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" th:field="*{address}" placeholder="Enter your address" />
+            </div>
+
+            <!-- College Name -->
+            <div class="form-group">
+                <label for="collegeName">College Name:</label>
+                <input type="text" th:field="*{collegeName}" placeholder="Enter your college name" />
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" th:field="*{dob}" placeholder="Enter your date of birth" />
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group">
+                <label for="skills">Skills:</label>
+                <textarea th:field="*{skills}" placeholder="e.g. Java, Python, SQL"></textarea>
+            </div>
+
+            <div class="form-action">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

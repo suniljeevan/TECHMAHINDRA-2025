@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Apply for Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"], input[type="email"], input[type="date"], input[type="number"], textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Application Form for Job: <span th:text="${applicationForm.job != null ? applicationForm.job.title : 'N/A'}"></span></h1>
+    
+    <div class="container">
+        <form th:action="@{/apply}" method="post" th:object="${applicationForm}">
+            <!-- Student Name -->
+            <label for="name">Name:</label>
+            <input type="text" th:field="*{name}" placeholder="Enter your name" required /><br/><br/>
+
+            <!-- Student Email -->
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" placeholder="Enter your email" required /><br/><br/>
+
+            <!-- College Name -->
+            <label for="collegeName">College Name:</label>
+            <input type="text" th:field="*{collegeName}" placeholder="Enter your college name" required /><br/><br/>
+
+            <!-- Phone Number -->
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" th:field="*{phoneNumber}" placeholder="Enter your phone number" required /><br/><br/>
+
+            <!-- Address -->
+            <label for="address">Address:</label>
+            <textarea th:field="*{address}" placeholder="Enter your address" required></textarea><br/><br/>
+
+            <!-- Skills -->
+            <label for="skills">Skills:</label>
+            <textarea th:field="*{skills}" placeholder="Enter your skills" required></textarea><br/><br/>
+
+            <!-- Location -->
+            <label for="location">Location:</label>
+            <input type="text" th:field="*{location}" placeholder="Enter your location" required /><br/><br/>
+
+            <!-- Joining Date -->
+            <label for="joiningDate">Joining Date:</label>
+            <input type="date" th:field="*{joiningDate}" required /><br/><br/>
+
+            <!-- CGPA (Editable field for students to enter) -->
+			<label for="cgpa">CGPA:</label>
+			<input type="number" th:field="*{cgpa}" placeholder="Enter your CGPA" step="0.01" min="1" max="10" required />
+
+            <!-- Why Hire Me -->
+            <label for="whyHireMe">Why should we hire you?</label>
+            <textarea th:field="*{whyHireMe}" placeholder="Explain why you should be hired" required></textarea><br/><br/>
+
+            <!-- Hidden Job ID (passing the job details) -->
+            <input type="hidden" th:field="*{job.id}" />
+            
+            <!-- Submit Button -->
+            <button type="submit">Submit Application</button>
+        </form>
+
+        <div class="back-link">
+            <p><a href="/job-listings">Back to Job Listings</a></p>
+        </div>
+    </div>
+</body>
+</html>
