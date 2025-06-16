@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Presidency University</title>
+	<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=0" name="viewport" />
+	<link rel="icon" th:href="@{/newassets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script th:src="@{/newassets/js/plugin/webfont/webfont.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/newassets/css/fonts.min.css}" />
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" th:href="@{/newassets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/plugins.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/kaiadmin.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/demo.css}" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar" data-background-color="dark">
+			<div class="sidebar-logo">
+				<div class="logo-header" data-background-color="dark">
+					<a th:href="@{/index.html}" class="logo">
+						<img th:src="@{/newassets/img/Presidency-University-Logo.png}" alt="navbar brand"
+							class="navbar-brand" height="50" />
+					</a>
+					<div class="nav-toggle">
+						<button class="btn btn-toggle toggle-sidebar">
+							<i class="gg-menu-right"></i>
+						</button>
+						<button class="btn btn-toggle sidenav-toggler">
+							<i class="gg-menu-left"></i>
+						</button>
+					</div>
+					<button class="topbar-toggler more">
+						<i class="gg-more-vertical-alt"></i>
+					</button>
+				</div>
+			</div>
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<ul class="nav nav-secondary">
+						<li class="nav-item">
+							<a
+								th:href="${admin != null} ? '/admin-dashboard' : (faculty != null ? '/faculty-dashboard' : '/guest/dashboard')">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						<li class="nav-item active">
+							<a
+								th:href="${admin != null} ? '/admin-project-list' : (faculty != null ? '/faculty-project-list' : '/guest/dashboard')">
+								<i class="fas fa-project-diagram"></i>
+								<p>Project Management</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+			<div class="main-header">
+				<div class="main-header-logo">
+					<div class="logo-header" data-background-color="dark">
+						<a th:href="@{/index.html}" class="logo">
+							<img th:src="@{/newassets/img/kaiadmin/logo_light.svg}" alt="navbar brand"
+								class="navbar-brand" height="20" />
+						</a>
+						<div class="nav-toggle">
+							<button class="btn btn-toggle toggle-sidebar">
+								<i class="gg-menu-right"></i>
+							</button>
+							<button class="btn btn-toggle sidenav-toggler">
+								<i class="gg-menu-left"></i>
+							</button>
+						</div>
+						<button class="topbar-toggler more">
+							<i class="gg-more-vertical-alt"></i>
+						</button>
+					</div>
+				</div>
+
+				<nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+					<div class="container-fluid">
+						<nav
+							class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pe-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Search ..." class="form-control" />
+							</div>
+						</nav>
+
+						<ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+							<li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false" aria-haspopup="true">
+									<i class="fa fa-search"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-search animated fadeIn">
+									<form class="navbar-left navbar-form nav-search">
+										<div class="input-group">
+											<input type="text" placeholder="Search ..." class="form-control" />
+										</div>
+									</form>
+								</ul>
+							</li>
+
+							<li class="nav-item topbar-user dropdown hidden-caret">
+								<a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+									aria-expanded="false">
+									<div class="avatar-sm">
+										<img th:src="@{/newassets/img/profile.jpg}" alt="..."
+											class="avatar-img rounded-circle" />
+									</div>
+									<span class="profile-username">
+										<span class="op-7">Hi,</span>
+										<span
+											th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}"></span>
+									</span>
+								</a>
+								<ul class="dropdown-menu dropdown-user animated fadeIn">
+									<div class="dropdown-user-scroll scrollbar-outer">
+										<li>
+											<div class="user-box">
+												<div class="avatar-lg">
+													<img th:src="@{/newassets/img/profile.jpg}" alt="image profile"
+														class="avatar-img rounded" />
+												</div>
+												<div class="u-text">
+													<h4
+														th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}">
+													</h4>
+													<p class="text-muted"
+														th:text="${admin != null ? admin.adminEmail : (faculty != null ? faculty.facultyEmail : 'Guest')}">
+													</p>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" th:href="@{/logout}">Logout</a>
+										</li>
+									</div>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+
+			<div class="container">
+				<div class="page-inner">
+					<div class="row">
+						<div class="card">
+							<div class="card-header">
+								<div class="card-title">New Project Details</div>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<form th:action="@{/addproject}" th:object="${project}" method="post">
+										<div class="form-group">
+											<label for="largeInput">Project ID</label>
+											<input type="text" th:field="*{projectId}" class="form-control form-control"
+												id="projectId" placeholder="Project ID" />
+										</div>
+										<div class="form-group">
+											<label for="largeInput">Title</label>
+											<input type="text" class="form-control form-control" th:field="*{title}"
+												id="title" placeholder="Title" />
+										</div>
+										<div class="form-group">
+											<label for="comment">Description</label>
+											<textarea class="form-control" id="description" th:field="*{description}"
+												rows="5">
+												</textarea>
+										</div>
+										<div class="form-group">
+											<label for="defaultSelect">Status</label>
+											<select th:field="*{status}" class="form-select form-control" id="status">
+												<option value="">-- Select Type --</option>
+												<option value="Proposed">Proposed</option>
+												<option value="Ongoing">Ongoing</option>
+												<option value="Paused">Paused</option>
+												<option value="Cancelled">Cancelled</option>
+												<option value="Completed">Completed</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="date" class="form-label">Start Date</label>
+											<input type="date" th:field="*{startDate}" class="form-control"
+												id="startdate" name="startdate" required>
+										</div>
+										<div class="form-group">
+											<label for="date" class="form-label">End Date</label>
+											<input type="date" th:field="*{endDate}" class="form-control" id="enddate"
+												name="enddate" required>
+										</div>
+										<div class="form-group">
+											<label for="largeInput">Faculty ID</label>
+											<input type="number" th:field="*{faculty.facultyId}"
+												class="form-control form-control" id="facultyId"
+												placeholder="Faculty ID" />
+										</div>
+										<div class="form-group">
+											<label for="defaultSelect">Department</label>
+											<select th:field="*{department}" class="form-select form-control"
+												id="department">
+												<option value="">-- Select Department --</option>
+												<option value="CSE">CSE</option>
+												<option value="ECE">ECE</option>
+												<option value="EE">EE</option>
+												<option value="ME">ME</option>
+												<option value="CE">CE</option>
+
+											</select>
+											</div>
+											<div class="form-group">
+												<label for="defaultSelect">Project Type</label>
+												<select th:field="*{projectType}" class="form-select form-control"
+													id="projectType">
+													<option value="">-- Select Type --</option>
+													<option value="Inhouse">Inhouse</option>
+													<option value="Funded">Funded</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="largeInput">Funding Agency</label>
+												<input type="text" th:field="*{fundingAgency}"
+													class="form-control form-control" id="fundingAgency"
+													placeholder="Funding Agency" />
+											</div>
+											<div class="form-group">
+												<label for="largeInput">Funded Amount</label>
+												<input type="number" th:field="*{fundedAmount}"
+													class="form-control form-control" id="fundedAmount"
+													placeholder="Funding Agency" />
+											</div>
+										</div>
+								</div>
+								<div class="card-action">
+									<button type="submit" class="btn btn-success">Submit</button>
+									<a th:href="${admin != null} ? '/admin-project-list' : (faculty != null ? '/faculty-project-list' : '/guest/dashboard')"
+										type="button" class="btn btn-danger">Cancel</a>
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Core JS Files -->
+	<script th:src="@{/newassets/js/core/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/newassets/js/core/popper.min.js}"></script>
+	<script th:src="@{/newassets/js/core/bootstrap.min.js}"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script th:src="@{/newassets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+	<!-- Chart JS -->
+	<script th:src="@{/newassets/js/plugin/chart.js/chart.min.js}"></script>
+
+	<!-- Kaiadmin JS -->
+	<script th:src="@{/newassets/js/kaiadmin.min.js}"></script>
+
+	<!-- Datatables -->
+	<script th:src="@{/newassets/js/plugin/datatables/datatables.min.js}"></script>
+
+	<!-- Demo JS (remove for production) -->
+	<script th:src="@{/newassets/js/setting-demo2.js}"></script>
+</body>
+
+</html>

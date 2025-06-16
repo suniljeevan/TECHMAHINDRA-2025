@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+
+<head>
+	<title>Student List</title>
+	<script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+		<!-- Google fonts-->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+			type="text/css" />
+		<link rel="stylesheet" href="css/navbar_css.css">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+		<!-- Core theme CSS (includes Bootstrap)-->
+		<link href="css/index-styles.css" rel="stylesheet" />
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			background-color: #f8f9fa;
+		}
+
+		.card {
+			border: none;
+			border-radius: 1rem;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+		}
+
+		.card-header {
+			background: linear-gradient(to right, #007bff, #00c6ff);
+			color: white;
+			border-top-left-radius: 1rem;
+			border-top-right-radius: 1rem;
+		}
+
+		.table-hover tbody tr:hover {
+			background-color: #e9f5ff;
+		}
+
+		.btn {
+			transition: all 0.2s ease;
+		}
+
+		.btn:hover {
+			transform: scale(1.05);
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+			<img alt="" class="logo" src="images/presidencylogo.png">
+			<div class="nav-container">
+				<div class="nav-left">
+					<a href="home.jsp" class="Presidency University">Presidency
+						University</a> <a href="index.jsp" class="Home">Home</a>
+				</div>
+				<div class="nav-right">
+				</div>
+			</div>
+		</header>
+
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header text-center">
+				<h2 class="mb-0">📋 Projects List</h2>
+			</div>
+			<div class="card-body">
+				<div class="d-flex justify-content-end mb-3">
+					<a th:href="@{/project/new}" class="btn btn-success">➕ Add Project</a>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover text-center">
+						<thead class="table-dark">
+							<tr>
+								<th>Project ID</th>
+								<th>Title</th>
+								<th>Description</th>
+								<th>Status</th>
+								<th>Start Date</th>
+								<th>End Date</th>
+								<th>Faculty ID</th>
+								<th>Department</th>
+								<th>Project Type</th>
+								<th>Funded Amount</th>
+								<th>Funding Agency</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="project : ${projects}">
+								<td th:text="${project.projectId}"></td>
+								<td th:text="${project.title}"></td>
+								<td th:text="${project.description}"></td>
+								<td th:text="${project.status}"></td>
+								<td th:text="${project.startDate}"></td>
+								<td th:text="${project.endDate}"></td>
+								<td th:text="${project.faculty.facultyId}"></td>
+								<td th:text="${project.department}"></td>
+								<td th:text="${project.projectType}"></td>
+								<td th:text="${project.fundedAmount}"></td>
+								<td th:text="${project.fundingAgency}"></td>
+								<td>
+								    <a th:href="@{/project/edit/{id}(id=${project.projectId})}" class="btn btn-sm btn-primary me-1">✏️ Edit</a>
+								    <a th:href="@{/project/delete/{id}(id=${project.projectId})}" class="btn btn-sm btn-danger">🗑️ Delete</a>
+								</td>
+
+							</tr>
+							<tr th:if="${#lists.isEmpty(projects)}">
+								<td colspan="11">No projects found.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

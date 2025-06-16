@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Presidency University</title>
+	<link rel="icon" type="image/png" th:href="@{/images/presidencylogo.png}">
+	<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=0" name="viewport" />
+	<link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon">
+	<!-- Fonts and icons -->
+	<script th:src="@{/newassets/js/plugin/webfont/webfont.min.js}"></script>
+
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" th:href="@{/newassets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/plugins.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/kaiadmin.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/fonts.min.css}" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar" data-background-color="dark">
+			<div class="sidebar-logo">
+				<!-- Logo Header -->
+				<div class="logo-header" data-background-color="dark">
+					<a href="index.html" class="logo">
+						<img th:src="@{/newassets/img/Presidency-University-Logo.png}" alt="navbar brand"
+							class="navbar-brand" height="50" />
+					</a>
+					<div class="nav-toggle">
+						<button class="btn btn-toggle toggle-sidebar">
+							<i class="gg-menu-right"></i>
+						</button>
+						<button class="btn btn-toggle sidenav-toggler">
+							<i class="gg-menu-left"></i>
+						</button>
+					</div>
+					<button class="topbar-toggler more">
+						<i class="gg-more-vertical-alt"></i>
+					</button>
+				</div>
+				<!-- End Logo Header -->
+			</div>
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<ul class="nav nav-secondary">
+						<li class="nav-item active">
+							<a
+								th:href="${admin != null} ? '/admin-dashboard' : (faculty != null ? '/faculty-dashboard' : '/guest/dashboard')">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a
+								th:href="${admin != null} ? '/admin-project-list' : (faculty != null ? '/faculty-project-list' : '/guest/dashboard')">
+								<i class="fas fa-project-diagram"></i>
+								<p>Project Management</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+			<div class="main-header">
+				<div class="main-header-logo">
+					<!-- Logo Header -->
+					<div class="logo-header" data-background-color="dark">
+						<a href="index.html" class="logo">
+							<img th:src="@{/newassets/img/kaiadmin/logo_light.svg}" alt="navbar brand"
+								class="navbar-brand" height="20" /> alt="navbar brand" class="navbar-brand"
+							height="20" />
+						</a>
+						<div class="nav-toggle">
+							<button class="btn btn-toggle toggle-sidebar">
+								<i class="gg-menu-right"></i>
+							</button>
+							<button class="btn btn-toggle sidenav-toggler">
+								<i class="gg-menu-left"></i>
+							</button>
+						</div>
+						<button class="topbar-toggler more">
+							<i class="gg-more-vertical-alt"></i>
+						</button>
+					</div>
+					<!-- End Logo Header -->
+				</div>
+				<!-- Navbar Header -->
+				<nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+					<div class="container-fluid">
+						<nav
+							class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pe-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Search ..." class="form-control" />
+							</div>
+						</nav>
+
+						<ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+							<li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+									aria-expanded="false" aria-haspopup="true">
+									<i class="fa fa-search"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-search animated fadeIn">
+									<form class="navbar-left navbar-form nav-search">
+										<div class="input-group">
+											<input type="text" placeholder="Search ..." class="form-control" />
+										</div>
+									</form>
+								</ul>
+							</li>
+
+							<li class="nav-item topbar-user dropdown hidden-caret">
+								<a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
+									aria-expanded="false">
+									<div class="avatar-sm">
+										<img th:src="@{/newassets/img/profile.jpg}" alt="..."
+											class="avatar-img rounded-circle" />
+									</div>
+									<span class="profile-username">
+										<span class="op-7">Hi,</span>
+										<span
+											th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}"></span>
+									</span>
+								</a>
+								<ul class="dropdown-menu dropdown-user animated fadeIn">
+									<div class="dropdown-user-scroll scrollbar-outer">
+										<li>
+											<div class="user-box">
+												<div class="avatar-lg">
+													<img th:src="@{/newassets/img/profile.jpg}" alt="image profile"
+														class="avatar-img rounded" />
+												</div>
+												<div class="u-text">
+													<h4
+														th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}">
+													</h4>
+													<p class="text-muted"
+														th:text="${admin != null ? admin.adminEmail : (faculty != null ? faculty.facultyEmail : 'Guest')}">
+													</p>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item" th:href="@{/logout}">Logout</a>
+										</li>
+									</div>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+				<!-- End Navbar -->
+			</div>
+
+			<div class="container">
+				<div class="page-inner">
+					<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+						<div>
+							<h3 class="fw-bold mb-3">
+								<span
+									th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}"></span>
+								- Project Dashboard
+							</h3>
+							<h6 class="op-7 mb-2">Research Project Details</h6>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-primary card-round">
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="numbers">
+												<p class="card-category">Total Projects</p>
+												<h4>Total Projects: <span th:text="${totalProjects}"></span></h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-success card-round">
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="numbers">
+												<p class="card-category">Completed</p>
+												<h4>Completed Projects: <span th:text="${completedProjects}"></span>
+												</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-info card-round">
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="numbers">
+												<p class="card-category">Funded</p>
+												<h4>Funded Projects: <span th:text="${fundedProjects}"></span></h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats card-secondary card-round">
+								<div class="card-body">
+									<div class="row align-items-center">
+										<div class="col-sm-12">
+											<div class="numbers">
+												<p class="card-category">Total Funding Amount</p>
+												<h4>Total Funded Amount: <span th:text="${totalFundedAmount}"></span></h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Department-wise Project Distribution</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="barChart"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-title">Distribution of In-House vs Funded Projects</div>
+								</div>
+								<div class="card-body">
+									<div class="chart-container">
+										<canvas id="pieChart" style="width: 50%; height: 50%"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+
+
+					<!-- Custom template | don't include it in your project! -->
+					<div class="custom-template">
+						<!-- ... (custom template content remains unchanged) ... -->
+					</div>
+				</div>
+
+				<!--   Core JS Files   -->
+				<script th:src="@{/newassets/js/core/jquery-3.7.1.min.js}"></script>
+				<script th:src="@{/newassets/js/core/popper.min.js}"></script>
+				<script th:src="@{/newassets/js/core/bootstrap.min.js}"></script>
+
+				<!-- Other JS Files -->
+				<script th:src="@{/newassets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+				<script th:src="@{/newassets/js/plugin/chart.js/chart.min.js}"></script>
+				<script th:src="@{/newassets/js/kaiadmin.min.js}"></script>
+				<script th:src="@{/newassets/js/plugin/datatables/datatables.min.js}"></script>
+				<script th:src="@{/newassets/js/setting-demo2.js}"></script>
+
+
+				<script th:inline="javascript">
+					let inhouse = [[${countInhouseProjects}]];
+					let funded = [[${fundedProjects}]];
+					let cse = [[${countCseProjects}]];
+					let ece = [[${countEceProjects}]];
+					let me = [[${countMeProjects}]];
+					let ce = [[${countCeProjects}]];
+					let ee = [[${countEeProjects}]];
+
+
+
+					var barChart = document.getElementById("barChart").getContext("2d"),
+						pieChart = document.getElementById("pieChart").getContext("2d");
+
+
+
+					var myBarChart = new Chart(barChart, {
+						type: "bar",
+						data: {
+							labels: ["CSE", "ME", "CE", "EE", "ECE"],
+							datasets: [{
+								label: "Projects",
+								backgroundColor: [
+									"#007bff", // CSE - Blue
+									"#28a745", // ME - Green
+									"#ffc107", // CE - Yellow
+									"#dc3545", // EE - Red
+									"#6610f2"  // ECE - Purple
+								],
+								borderColor: "#ffffff",
+								borderWidth: 1,
+								data: [cse, me, ce, ee, ece] // example data values for each department
+							}]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							scales: {
+								yAxes: [{
+									ticks: {beginAtZero: true}
+								}]
+							}
+						}
+					});
+
+
+					var myPieChart = new Chart(pieChart, {
+						type: "pie",
+						data: {
+							datasets: [{
+								data: [inhouse, funded], // Replace with your actual data
+								backgroundColor: ["#1572e8", "#31ce36"], // blue and green
+								borderWidth: 0
+							}],
+							labels: ["Inhouse Projects", "Funded Projects"]
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							legend: {
+								position: "bottom",
+								labels: {
+									fontColor: "rgb(154, 154, 154)",
+									fontSize: 11,
+									usePointStyle: true,
+									padding: 20
+								}
+							},
+							pieceLabel: {
+								render: "percentage",
+								fontColor: "white",
+								fontSize: 14
+							},
+							tooltips: false,
+							layout: {
+								padding: {
+									left: 20,
+									right: 20,
+									top: 20,
+									bottom: 20
+								}
+							}
+						}
+					});
+
+				</script>
+				
+</body>
+
+</html>

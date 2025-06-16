@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Presidency University</title>
+    <meta
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=0"
+      name="viewport"
+    />
+    <link
+      rel="icon"
+      th:href="@{/newassets/img/kaiadmin/favicon.ico}"
+      type="image/x-icon"
+    />
+
+    <!-- Fonts and icons -->
+    <script th:src="@{/newassets/js/plugin/webfont/webfont.min.js}"></script>
+
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" th:href="@{/newassets/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/newassets/css/plugins.min.css}" />
+    <link rel="stylesheet" th:href="@{/newassets/css/kaiadmin.min.css}" />
+	<link rel="stylesheet" th:href="@{/newassets/css/fonts.min.css}" />
+
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+				<img th:src="@{/newassets/img/Presidency-University-Logo.png}" alt="navbar brand" class="navbar-brand"
+											height="50" />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+                <li class="nav-item ">
+					<a th:href="${admin != null} ? '/admin-dashboard' : (faculty != null ? '/faculty-dashboard' : '/guest/dashboard')">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item active">
+					<a th:href="${admin != null} ? '/admin-project-list' : (faculty != null ? '/faculty-project-list' : '/guest/dashboard')">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>Project Management</p>
+                    </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="main-header">
+          <div class="main-header-logo">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="dark">
+              <a href="index.html" class="logo">
+                <img
+                  th:src="@{/newassets/img/kaiadmin/logo_light.svg}"
+                  alt="navbar brand"
+                  class="navbar-brand"
+                  height="20"
+                />
+              </a>
+              <div class="nav-toggle">
+                <button class="btn btn-toggle toggle-sidebar">
+                  <i class="gg-menu-right"></i>
+                </button>
+                <button class="btn btn-toggle sidenav-toggler">
+                  <i class="gg-menu-left"></i>
+                </button>
+              </div>
+              <button class="topbar-toggler more">
+                <i class="gg-more-vertical-alt"></i>
+              </button>
+            </div>
+            <!-- End Logo Header -->
+          </div>
+          <!-- Navbar Header -->
+          <nav
+            class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+          >
+            <div class="container-fluid">
+              <nav
+                class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
+              >
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <button type="submit" class="btn btn-search pe-1">
+                      <i class="fa fa-search search-icon"></i>
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Search ..."
+                    class="form-control"
+                  />
+                </div>
+              </nav>
+
+              <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                <li
+                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+                >
+                  <a
+                    class="nav-link dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    role="button"
+                    aria-expanded="false"
+                    aria-haspopup="true"
+                  >
+                    <i class="fas fa-search"></i>
+                  </a>
+                  <ul class="dropdown-menu dropdown-search animated fadeIn">
+                    <form class="navbar-left navbar-form nav-search">
+                      <div class="input-group">
+                        <input
+                          type="text"
+                          placeholder="Search ..."
+                          class="form-control"
+                        />
+                      </div>
+                    </form>
+                  </ul>
+                </li>
+
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                  <a
+                    class="dropdown-toggle profile-pic"
+                    data-bs-toggle="dropdown"
+                    href="#"
+                    aria-expanded="false"
+                  >
+                    <div class="avatar-sm">
+                      <img
+                        th:src="@{/newassets/img/profile.jpg}"
+                        alt="..."
+                        class="avatar-img rounded-circle"
+                      />
+                    </div>
+                    <span class="profile-username">
+                      <span class="op-7">Hi,</span>
+					  <span th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}"></span>
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-user animated fadeIn">
+                    <div class="dropdown-user-scroll scrollbar-outer">
+                      <li>
+                        <div class="user-box">
+                          <div class="avatar-lg">
+                            <img
+                              th:src="@{/newassets/img/profile.jpg}"
+                              alt="image profile"
+                              class="avatar-img rounded"
+                            />
+                          </div>
+                          <div class="u-text">
+							<h4 th:text="${admin != null ? admin.adminName : (faculty != null ? faculty.facultyName : 'Guest')}"></h4>
+							<p class="text-muted" th:text="${admin != null ? admin.adminEmail : (faculty != null ? faculty.facultyEmail : 'Guest')}"></p>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/logout}">Logout</a>
+                      </li>
+                    </div>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <!-- End Navbar -->
+        </div>
+
+        <div class="container">
+    <div class="page-inner">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+            <div>
+                <h3 class="fw-bold mb-3">Project Management</h3>
+                <h6 class="op-7 mb-2">Add, Update or Delete Projects</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Research Projects</h4>
+                            <a
+                                class="btn btn-primary btn-round ms-auto"
+                                th:href="@{/project/new}"
+                            >
+                                <i class="fa fa-plus"></i>
+                                Add Project
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Project ID</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Faculty ID</th>
+                                        <th>Department</th>
+                                        <th>Project Type</th>
+                                        <th>Funded Amount</th>
+                                        <th>Funding Agency</th>
+                                        <th style=>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="project : ${projects}">
+                                        <td th:text="${project.projectId}"></td>
+                                        <td th:text="${project.title}"></td>
+                                        <td th:text="${project.description}"></td>
+                                        <td th:text="${project.status}"></td>
+                                        <td th:text="${project.startDate}"></td>
+                                        <td th:text="${project.endDate}"></td>
+                                        <td th:text="${project.faculty.facultyId}"></td>
+                                        <td th:text="${project.department}"></td>
+                                        <td th:text="${project.projectType}"></td>
+                                        <td th:text="${project.fundedAmount}"></td>
+                                        <td th:text="${project.fundingAgency}"></td>
+                                        <td>
+                                            <div class="form-button-action">
+                                                <a
+                                                    th:href="@{/project/edit/{id}(id=${project.projectId})}"
+                                                    class="btn btn-link btn-primary btn-lg"
+                                                    data-bs-toggle="tooltip"
+                                                    title="Edit Task"
+                                                >
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+												<a href="javascript:void(0);"
+												   class="btn btn-link btn-danger delete-btn"
+												   th:data-project-id="${project.projectId}"
+												   th:data-project-title="${project.title}"
+												   data-bs-toggle="tooltip"
+												   title="Remove">
+												   <i class="fa fa-times"></i>
+												</a>
+                                        
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr th:if="${#lists.isEmpty(projects)}">
+                                        <td colspan="11">No projects found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+							<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title" id="deleteConfirmModalLabel">Confirm Deletion</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        Are you sure you want to delete the project:
+							        <strong><span id="modalProjectTitle"></span></strong> (ID: <strong><span id="modalProjectId"></span></strong>)?
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							        <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
+							      </div>
+							    </div>
+							  </div>
+							</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--   Core JS Files   -->
+    <script th:src="@{/newassets/js/core/jquery-3.7.1.min.js}"></script>
+    <script th:src="@{/newassets/js/core/popper.min.js}"></script>
+    <script th:src="@{/newassets/js/core/bootstrap.min.js}"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script th:src="@{/newassets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+    <!-- Chart JS -->
+    <script th:src="@{/newassets/js/plugin/chart.js/chart.min.js}"></script>
+
+    <!-- Kaiadmin JS -->
+    <script th:src="@{/newassets/js/kaiadmin.min.js}"></script>
+
+    <!-- Datatables -->
+    <script th:src="@{/newassets/js/plugin/datatables/datatables.min.js}"></script>
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script th:src="@{/newassets/js/setting-demo2.js}"></script>
+	<script>
+	  $(document).ready(function () {
+	    // Handle delete icon click
+	    $('.delete-btn').on('click', function () {
+	      const projectId = $(this).data('project-id');
+	      const projectTitle = $(this).data('project-title');
+
+	      $('#modalProjectId').text(projectId);
+	      $('#modalProjectTitle').text(projectTitle);
+
+	      // Set confirm delete button link
+	      $('#confirmDeleteBtn').attr('href', '/project/delete/' + projectId);
+
+	      // Show modal
+	      $('#deleteConfirmModal').modal('show');
+	    });
+	  });
+	</script>
+
+    <script>
+      $(document).ready(function () {
+         $("#add-row").DataTable({
+          pageLength: 5,
+        });
+
+        var action =
+          '<td> <div class="form-button-action"> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+
+        $("#addRowButton").click(function () {
+          $("#add-row")
+            .dataTable()
+            .fnAddData([
+              $("#addName").val(),
+              $("#addPosition").val(),
+              $("#addOffice").val(),
+              action,
+            ]);
+          $("#addRowModal").modal("hide");
+        });
+      });
+    </script>
+    
+  </body>
+</html>

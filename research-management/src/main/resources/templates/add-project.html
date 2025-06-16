@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Create Project</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="css/navbar_css.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+	<header>
+		<img alt="" class="logo" src="images/presidencylogo.png">
+		<div class="nav-container">
+			<div class="nav-left">
+				<a href="home.jsp" class="Presidency University">Presidency
+					University</a> <a href="index.jsp" class="Home">Home</a>
+			</div>
+			<div class="nav-right">
+			</div>
+		</div>
+	</header>
+
+	<div class="container mt-5">
+		<h2 class="mb-4">Add New Project</h2>
+		<form th:action="@{/addproject}" th:object="${project}" method="post">
+			<div class="mb-3">
+				<label for="name" class="form-label">Project Id</label>
+				<input type="text" th:field="*{projectId}" class="form-control" id="projectid" name="projectid"
+					required>
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Title</label>
+				<input type="text" th:field="*{title}" class="form-control" id="title" name="title" required>
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Description</label>
+				<input type="text" th:field="*{description}" class="form-control" id="description" name="description"
+					required>
+			</div>
+			<div class="mb-3">
+				<label for="name" class="form-label">Status</label>
+				<select th:field="*{status}" class="form-select" id="projectType" required>
+					<option value="">-- Select Type --</option>
+					<option value="Proposed">Proposed</option>
+					<option value="Ongoing">Ongoing</option>
+					<option value="Paused">Paused</option>
+					<option value="Cancelled">Cancelled</option>
+					<option value="Completed">Completed</option>
+				</select>
+				<div class="mb-3">
+					<div class="mb-3">
+						<label for="date" class="form-label">Start Date</label>
+						<input type="date" th:field="*{startDate}" class="form-control" id="startdate" name="startdate"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="date" class="form-label">End Date</label>
+						<input type="date" th:field="*{endDate}" class="form-control" id="enddate" name="enddate"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="facultyid" class="form-label">Faculty Id</label>
+						<input type="number" th:field="*{faculty.facultyId}" class="form-control" id="faculty" required>
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Department</label>
+						<input type="text" th:field="*{department}" class="form-control" id="department" name="status"
+							required>
+					</div>
+					<div class="mb-3">
+						<label for="name" class="form-label">Project Type</label>
+						<select th:field="*{projectType}" class="form-select" id="projectType" required>
+							<option value="">-- Select Type --</option>
+							<option value="Inhouse">Inhouse</option>
+							<option value="Funded">Funded</option>
+						</select>
+						<div class="mb-3">
+							<label for="name" class="form-label">Funded Amount</label>
+							<input type="number" th:field="*{fundedAmount}" class="form-control" id="fundedAmount"
+								name="status" required>
+						</div>
+						<div class="mb-3">
+							<label for="name" class="form-label">Funding Agency</label>
+							<input type="text" th:field="*{fundingAgency}" class="form-control" id="fundingAgency"
+								name="title">
+						</div>
+
+						<button type="submit" class="btn btn-success">Add Project</button>
+						<a href="/projectlist" class="btn btn-secondary">Cancel</a>
+		</form>
+	</div>
+</body>
+
+</html>
