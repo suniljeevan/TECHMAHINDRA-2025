@@ -1,0 +1,217 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #fff;
+  }
+  
+  /* Navbar Styles */
+  .menu-item {
+    color: #fff;
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: capitalize;
+    padding: 15px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  .menu-item:hover {
+    background-color: #0288d1; /* Lighter blue shade */
+    cursor: pointer;
+    transform: translateX(5px);
+  }
+  
+  .menu-item.active {
+    background-color: #1976d2; /* Blue shade for active item */
+    font-weight: 600;
+  }
+  
+  .menu-item .MuiListItemIcon-root {
+    color: #fff;
+    margin-right: 15px;
+  }
+  
+  .menu-item .MuiListItemText-root {
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .drawer-paper {
+    background-color: #1D2B64; /* Dark background for drawer */
+    padding: 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .drawer-paper .MuiList-root {
+    padding-top: 20px;
+  }
+  
+  .drawer-paper .MuiDivider-root {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* AppBar */
+  .MuiAppBar-root {
+    background-color: #1976d2;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1100; /* Ensure the AppBar sits above content */
+  }
+  
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .MuiTypography-root {
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+  
+  .MuiIconButton-root {
+    color: #fff;
+  }
+  
+  .MuiMenuItem-root {
+    background-color: #2c3e50;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .MuiMenuItem-root:hover {
+    background-color: #1abc9c;
+  }
+  
+  .MuiMenuItem-root.Mui-disabled {
+    color: #bdc3c7;
+    font-style: italic;
+  }
+  
+  /* Profile Menu */
+  .MuiMenu-root {
+    background-color: #34495e;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  
+  .MuiMenuItem-root {
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+  
+  .MuiMenuItem-root:hover {
+    background-color: #2980b9;
+  }
+  
+  .MuiDivider-root {
+    margin: 5px 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .MuiAppBar-root {
+      position: fixed;
+    }
+  
+    .MuiToolbar-root {
+      padding: 10px;
+    }
+  
+    .MuiTypography-root {
+      font-size: 18px;
+    }
+  
+    .menu-item {
+      padding: 12px;
+      font-size: 14px;
+    }
+  
+    .MuiList-root {
+      padding-top: 0;
+    }
+  
+    .MuiIconButton-root {
+      font-size: 28px;
+    }
+  
+    .drawer-paper {
+      width: 250px;
+    }
+  }
+  
+  /* Drawer toggle button */
+  .MuiIconButton-root {
+    color: #fff;
+    transition: transform 0.3s ease;
+  }
+  
+  .MuiIconButton-root:hover {
+    transform: rotate(90deg);
+  }
+  
+  /* Content Area */
+  .main-content {
+    background-color: #f5f6fa;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content .MuiToolbar-root {
+    margin-top: 60px;
+  }
+  
+  /* Card/Container for Dashboard Items */
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .dashboard-card .card-title {
+    font-weight: 600;
+    font-size: 22px;
+    color: #333;
+  }
+  
+  .dashboard-card .card-value {
+    font-weight: 700;
+    font-size: 18px;
+    color: #0288d1;
+  }
+  
+  /* Button Styles */
+  .button-primary {
+    background-color: #0288d1;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-primary:hover {
+    background-color: #0277bd;
+  }
+  

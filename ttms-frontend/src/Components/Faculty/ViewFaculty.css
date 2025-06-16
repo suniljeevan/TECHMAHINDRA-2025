@@ -1,0 +1,270 @@
+/* Enhanced Timetable Management System with Improved Contrast */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #4F46E5;       /* More vibrant purple */
+  --primary-dark: #4338CA;
+  --primary-light: #EEF2FF;
+  --secondary: #F59E0B;
+  --danger: #DC2626;        /* Stronger red */
+  --success: #059669;       /* Deeper green */
+  --warning: #D97706;
+  --text-primary: #111827;  /* Darker text for better contrast */
+  --text-secondary: #4B5563;
+  --bg-light: #F9FAFB;
+  --bg-white: #FFFFFF;
+  --border-color: #E5E7EB;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.2s ease-out;
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Container */
+.teacher-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Card Design */
+.teacher-paper {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.teacher-paper:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Title with Strong Contrast */
+.teacher-title {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.teacher-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.faculty-subtitle {
+  color: #6b7280;
+}
+
+/* Table Styling */
+.teacher-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1.5rem;
+}
+
+/* Table Header with Clear Contrast */
+.teacher-header th {
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  position: sticky;
+  top: 0;
+}
+
+/* Table Cells */
+.teacher-row td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  background-color: var(--bg-white);
+}
+
+.teacher-row-alt td {
+  background-color: var(--bg-light);
+}
+
+.teacher-row:last-child td {
+  border-bottom: none;
+}
+
+/* Hover Effect */
+.teacher-row:hover td {
+  background-color: var(--primary-light);
+}
+
+/* Action Buttons */
+.actions-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Solid Buttons */
+.action-btn.update {
+  background-color: var(--primary);
+  color: white;
+}
+
+.action-btn.update:hover {
+  background-color: var(--primary-dark);
+}
+
+.action-btn.delete {
+  background-color: var(--danger);
+  color: white;
+}
+
+.action-btn.delete:hover {
+  background-color: #B91C1C;
+}
+
+.action-btn.view {
+  background-color: var(--success);
+  color: white;
+}
+
+.action-btn.view:hover {
+  background-color: #047857;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background-color: #D1FAE5;
+  color: var(--success);
+}
+
+.status-inactive {
+  background-color: #FEE2E2;
+  color: var(--danger);
+}
+
+/* Search and Filter */
+.table-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  flex: 1;
+  max-width: 300px;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .teacher-container {
+    padding: 1rem;
+  }
+  
+  .teacher-paper {
+    padding: 1.25rem;
+  }
+  
+  .table-controls {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    max-width: 100%;
+  }
+  
+  .actions-container {
+    flex-wrap: wrap;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.teacher-row {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.teacher-row:nth-child(2n) {
+  animation-delay: 0.05s;
+}
+
+/* Focus States for Accessibility */
+.action-btn:focus, 
+.search-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
