@@ -1,0 +1,246 @@
+/* Modern Semester Management UI */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #4F46E5;
+  --primary-dark: #4338CA;
+  --primary-light: #EEF2FF;
+  --danger: #DC2626;
+  --success: #059669;
+  --warning: #D97706;
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --bg-light: #F9FAFB;
+  --bg-white: #FFFFFF;
+  --border-color: #E5E7EB;
+  --border-radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Container Styles */
+.semester-container {
+  padding: 2rem !important;
+  max-width: 1200px !important;
+  margin: 0 auto;
+}
+
+/* Paper/Card Design */
+.semester-paper {
+  background-color: var(--bg-white) !important;
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 2rem !important;
+  border: 1px solid var(--border-color) !important;
+  transition: var(--transition) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+.semester-paper:hover {
+  box-shadow: 0 20px 25px rgba(0, 0, 0, 0.12) !important;
+  transform: translateY(-2px);
+}
+
+/* Title Styling */
+.semester-title {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.semester-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.semester-subtitle {
+  color: #6b7280;
+}
+
+/* Table Styling */
+.semester-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem !important;
+}
+
+/* Table Header */
+.semester-header {
+  background-color: var(--primary) !important;
+}
+
+.semester-header th {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem !important;
+}
+
+.semester-header th:first-child {
+  border-top-left-radius: var(--border-radius) !important;
+}
+
+.semester-header th:last-child {
+  border-top-right-radius: var(--border-radius) !important;
+}
+
+/* Table Rows */
+.semester-row td {
+  padding: 1rem !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  background-color: var(--bg-white) !important;
+  transition: var(--transition);
+}
+
+.semester-row-alt td {
+  background-color: var(--bg-light) !important;
+}
+
+.semester-row:hover td {
+  background-color: var(--primary-light) !important;
+}
+
+/* Action Buttons */
+.action-btn {
+  text-transform: none !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: 4px !important;
+  padding: 0.375rem 0.75rem !important;
+  font-size: 0.8125rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.375rem !important;
+}
+
+.action-btn.update {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+.action-btn.update:hover {
+  background-color: var(--primary-dark) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.action-btn.delete {
+  background-color: var(--danger) !important;
+  color: white !important;
+}
+
+.action-btn.delete:hover {
+  background-color: #B91C1C !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Empty State */
+.MuiTypography-root.MuiTypography-h6 {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* Modal Styling */
+.MuiModal-root .MuiBox-root {
+  outline: none !important;
+}
+
+.MuiTextField-root {
+  margin-bottom: 1rem !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root {
+  border-radius: var(--border-radius) !important;
+}
+
+.MuiButton-root {
+  text-transform: none !important;
+  font-weight: 500 !important;
+  border-radius: var(--border-radius) !important;
+  padding: 0.5rem 1.5rem !important;
+}
+
+/* Snackbar Styling */
+.MuiSnackbar-root {
+  bottom: 24px !important;
+}
+
+.MuiAlert-root {
+  border-radius: var(--border-radius) !important;
+  font-weight: 500 !important;
+}
+
+.MuiAlert-filledSuccess {
+  background-color: var(--success) !important;
+}
+
+.MuiAlert-filledError {
+  background-color: var(--danger) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .semester-container {
+    padding: 1rem !important;
+  }
+  
+  .semester-paper {
+    padding: 1.25rem !important;
+  }
+  
+  .semester-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .semester-header th {
+    font-size: 0.75rem !important;
+    padding: 0.5rem !important;
+  }
+  
+  .semester-row td {
+    padding: 0.75rem !important;
+    font-size: 0.8125rem !important;
+  }
+  
+  .action-btn {
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.semester-row {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.semester-row:nth-child(2n) {
+  animation-delay: 0.05s;
+}

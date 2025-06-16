@@ -1,0 +1,150 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f3f4f6, #e0e7ff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Container Styling for Add Course */
+.add-course-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Paper Styling for the Add Course Form */
+.add-course-paper {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 50px 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.add-course-paper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+}
+
+/* Typography for Title and Subtitle */
+.form-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #4338ca;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  font-style: italic;
+}
+
+/* Input Field Styling */
+.input-field {
+  margin-bottom: 20px;
+}
+
+.input-field input,
+.input-field textarea {
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 16px;
+  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Custom Focus Styling for Input */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 5px rgba(99, 102, 241, 0.4);
+}
+
+/* Submit Button Styling */
+.add-btn {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #6366f1;
+  color: #ffffff;
+  border-radius: 12px;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 14px rgba(99, 102, 241, 0.2);
+}
+
+.add-btn:hover {
+  background-color: #4f46e5;
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  background-color: #4338ca;
+  transform: scale(0.98);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+}
+
+.add-btn:disabled {
+  color: white !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
+  .add-course-paper {
+    padding: 30px 20px;
+  }
+
+  .form-title {
+    font-size: 24px;
+  }
+
+  .form-subtitle {
+    font-size: 13px;
+  }
+
+  .add-btn {
+    font-size: 15px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

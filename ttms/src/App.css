@@ -1,0 +1,170 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global App Container */
+.App {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3f4f6, #e0e7ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #1e293b;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Responsive Page Container */
+.page-container {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+  max-width: 1200px;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Responsive Header Typography */
+h1, h2, h3, h4 {
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Paragraph Style */
+p {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+/* Primary Button */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4f46e5, #2563eb);
+  transform: translateY(-2px);
+}
+
+/* Responsive Grid Layout */
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+/* Input Styles */
+input, select, textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Table Styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .App {
+    padding: 10px;
+  }
+
+  .page-container {
+    padding: 20px;
+  }
+}

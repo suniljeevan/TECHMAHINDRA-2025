@@ -1,0 +1,142 @@
+.view-courses-wrapper {
+  --primary: #4F46E5;
+  --danger: #DC2626;
+  --bg-light: #F9FAFB;
+  --bg-white: #ffffff;
+  --border-color: #E5E7EB;
+  --border-radius: 10px;
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --transition: all 0.2s ease;
+  padding: 2rem 1rem;
+}
+
+/* Center container and paper */
+.course-container {
+  display: flex;
+  justify-content: center;
+}
+
+.course-paper {
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+/* Title styling */
+.course-title {
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.course-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.course-subtitle {
+  color: #6b7280;
+}
+
+/* Table styles */
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.course-header th {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+}
+
+.course-row td,
+.course-row-alt td {
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.course-row-alt td {
+  background-color: var(--bg-light);
+}
+
+.course-row:hover td {
+  background-color: var(--bg-light);
+}
+
+/* Action buttons */
+.action-btn {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  text-transform: none;
+  border-radius: 6px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-lg);
+  color: white;
+}
+
+.action-btn.update {
+  background-color: var(--primary);
+}
+
+.action-btn.update:hover {
+  background-color: #4338ca;
+}
+
+.action-btn.delete {
+  background-color: var(--danger);
+}
+
+.action-btn.delete:hover {
+  background-color: #b91c1c;
+}
+
+/* Modal styling */
+.modal-box {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .course-title {
+    font-size: 1.5rem;
+  }
+
+  .course-paper {
+    padding: 1rem;
+  }
+
+  .action-btn {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
