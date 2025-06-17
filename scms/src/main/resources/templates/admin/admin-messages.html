@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <link rel="stylesheet" href="/css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+
+		    body {
+		      font-family: 'Segoe UI', sans-serif;
+		      background-color: #f4f7fc;
+		      display: flex;
+		    }
+
+		    .container {
+		      display: flex;
+		      width: 100%;
+		    }
+
+		    .sidebar {
+		      width: 270px;
+		      background: #2c3e50;
+		      min-height: 100vh;
+		      color: white;
+		      padding: 20px;
+		    }
+
+		    .sidebar h2 {
+		      text-align: center;
+		      margin-bottom: 30px;
+		      font-size: 24px;
+		    }
+
+		    .sidebar ul {
+		      list-style: none;
+		    }
+
+		    .sidebar ul li {
+		      margin: 2px 0;
+		    }
+
+		    .sidebar ul li a {
+		      color: white;
+		      text-decoration: none;
+		      display: block;
+		      padding: 10px;
+		      transition: 0.3s;
+		    }
+
+		    .sidebar ul li a:hover {
+		      background-color: #1a252f;
+		      padding-left: 15px;
+		    }
+
+		    .main-content {
+		      flex: 1;
+		      display: flex;
+		      flex-direction: column;
+		    }
+
+	</style>
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Scholarship Admin</h2>
+        <ul>
+            <li><a href="/admin/dashboard">🏠 Dashboard</a></li>
+            <li><a href="/admin/scholarships">🎓 Scholarships</a></li>
+            <li><a href="/admin/applications">📝 Applications</a></li>
+            <li><a href="/admin/messages">✉️ Messages</a></li>
+            <li><a href="/login">🚪 Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <input type="text" placeholder="Search...">
+            <div class="notifications">🔔</div>
+        </div>
+
+        <div class="content-area">
+            <h1>Messages</h1>
+            <ul class="messages-list">
+                <li th:each="msg : ${messages}">
+                    <strong th:text="${msg.name}">Name</strong>: 
+                    <span th:text="${msg.message}">Message</span> 
+                    (<em th:text="${msg.email}">Email</em>)
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

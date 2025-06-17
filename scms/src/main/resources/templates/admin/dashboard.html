@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7fc;
+      display: flex;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+    }
+
+    .sidebar {
+      width: 270px;
+      background: #2c3e50;
+      min-height: 100vh;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li {
+      margin: 2px 0;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      transition: 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      background-color: #1a252f;
+      padding-left: 15px;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .topbar input {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .content-area {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .chart-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      height: 350px;
+    }
+
+    .table-section {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    thead {
+      background: #f0f0f0;
+    }
+
+    .status {
+      font-weight: bold;
+    }
+
+    .pending { color: orange; }
+    .approved { color: green; }
+    .rejected { color: red; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Scholarship Admin</h2>
+      <ul>
+        <li><a href="/admin/dashboard">🏠 Dashboard</a></li>
+        <li><a href="/admin/scholarships">🎓 Scholarships</a></li>
+        <li><a href="/admin/applications">📝 Applications</a></li>
+        <li><a href="/admin/messages">✉️ Messages</a></li>
+        <li><a href="/login">🚪 Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <div class="topbar">
+        <div>Welcome, Admin 👋</div>
+        <input type="text" placeholder="Search...">
+      </div>
+
+      <div class="content-area">
+        <section class="cards">
+          <div class="card">
+            <h3>Total Applications</h3>
+            <p><span th:text="${totalApplications}">0</span></p>
+          </div>
+          <div class="card">
+            <h3>Approved Applications</h3>
+            <p><span th:text="${approvedCount}">0</span></p>
+          </div>
+          <div class="card">
+            <h3>Pending Applications</h3>
+            <p><span th:text="${pendingCount}">0</span></p>
+          </div>
+          <div class="card">
+            <h3>Total Funds Disbursed</h3>
+            <p>₹<span th:text="${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 2, 'POINT')}">0.00</span></p>
+          </div>
+        </section>
+
+        <section class="charts">
+          <div class="chart-box">
+            <h3>📈 Applications by Scholarship Type</h3>
+            <canvas id="amountChart"></canvas>
+          </div>
+          <div class="chart-box">
+            <h3>📊 Approved Scholarships by Category</h3>
+            <canvas id="categoriesChart"></canvas>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- THYMELEAF DATA BINDING FOR CHART -->
+  <script th:inline="javascript">
+    let typeCounts = [[${typeCounts}]];
+    let approvedTypeCounts = [[${approvedTypeCounts}]];
+  </script>
+
+  <script>
+    const typeLabels = Object.keys(typeCounts);
+    const typeData = Object.values(typeCounts);
+
+    const approvedLabels = Object.keys(approvedTypeCounts);
+    const approvedData = Object.values(approvedTypeCounts);
+
+    // Line Chart - Applications by Type
+    const ctx1 = document.getElementById('amountChart');
+    if (ctx1) {
+		new Chart(ctx1, {
+		  type: 'line',
+		  data: {
+		    labels: typeLabels,
+		    datasets: [{
+		      label: 'Applications',
+		      data: typeData,
+		      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+		      borderColor: 'rgba(54, 162, 235, 1)',
+		      fill: true,
+		      tension: 0.4
+		    }]
+		  },
+		  options: {
+		    responsive: true,
+		    scales: {
+		      x: {
+		        title: {
+		          display: true,
+		          text: 'Scholarship Types',
+		          font: { size: 14 }
+		        }
+		      },
+		      y: {
+		        title: {
+		          display: true,
+		          text: 'Number of Applications',
+		          font: { size: 14 }
+		        },
+		        beginAtZero: true
+		      }
+		    }
+		  }
+		});
+    }
+
+    // Pie Chart - Approved by Type
+    const ctx2 = document.getElementById('categoriesChart');
+    if (ctx2) {
+      new Chart(ctx2, {
+        type: 'pie',
+        data: {
+          labels: approvedLabels,
+          datasets: [{
+            label: 'Approved Applications',
+            data: approvedData,
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(54, 162, 235, 0.6)'
+            ]
+          }]
+        },
+        options: { responsive: true }
+      });
+    }
+  </script>
+</body>
+</html>

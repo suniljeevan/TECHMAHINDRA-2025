@@ -1,0 +1,213 @@
+<!-- templates/admin/scholarships.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scholarship Schemes</title>
+    <style>
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+
+		        body {
+		            font-family: 'Segoe UI', sans-serif;
+		            background-color: #f4f7fc;
+		            display: flex;
+		        }
+
+		        .container {
+		            display: flex;
+		            width: 100%;
+		        }
+
+		        .sidebar {
+		            width: 270px;
+		            background: #2c3e50;
+		            min-height: 100vh;
+		            color: white;
+		            padding: 20px;
+		        }
+
+		        .sidebar h2 {
+		            text-align: center;
+		            margin-bottom: 30px;
+		            font-size: 24px;
+		        }
+
+		        .sidebar ul {
+		            list-style: none;
+		        }
+
+		        .sidebar ul li {
+		            margin: 2px 0;
+		        }
+
+		        .sidebar ul li a {
+		            color: white;
+		            text-decoration: none;
+		            display: block;
+		            padding: 10px;
+		            transition: 0.3s;
+		        }
+
+		        .sidebar ul li a:hover {
+		            background-color: #1a252f;
+		            padding-left: 15px;
+		        }
+
+		        .main-content {
+		            flex: 1;
+		            display: flex;
+		            flex-direction: column;
+		        }
+
+		        .topbar {
+		            background: white;
+		            padding: 15px 20px;
+		            display: flex;
+		            justify-content: space-between;
+		            align-items: center;
+		            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		        }
+
+		        .topbar input {
+		            padding: 6px 12px;
+		            border: 1px solid #ccc;
+		            border-radius: 4px;
+		        }
+
+		        .content-area {
+		            padding: 20px;
+		        }
+
+		        .amount-banner {
+		            background-color: #e0f7fa;
+		            color: #006064;
+		            padding: 15px 20px;
+		            margin-bottom: 20px;
+		            border-radius: 8px;
+		            font-size: 18px;
+		            font-weight: bold;
+		            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		        }
+
+		        table {
+		            width: 100%;
+		            background: white;
+		            border-collapse: collapse;
+		            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+		        }
+
+		        th, td {
+		            padding: 12px;
+		            border: 1px solid #ddd;
+		            text-align: left;
+		        }
+
+		        th {
+		            background-color: #f0f0f0;
+		        }
+
+		        tr:hover {
+		            background-color: #f9f9f9;
+		        }
+
+		        form {
+		            display: inline-block;
+		        }
+
+		        button {
+		            padding: 6px 12px;
+		            border: none;
+		            background-color: #4CAF50;
+		            color: white;
+		            cursor: pointer;
+		            border-radius: 4px;
+		            font-size: 14px;
+		        }
+
+		        button:hover {
+		            background-color: #45a049;
+		        }
+
+		        form:last-child button {
+		            background-color: #f44336;
+		        }
+
+		        form:last-child button:hover {
+		            background-color: #d32f2f;
+		        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 5px;
+        }
+    </style>
+	<script>
+	    function confirmDelete() {
+	        return confirm("Are you sure you want to delete this scholarship scheme?");
+	    }
+	</script>
+
+</head>
+<body>
+<div class="container">
+		<aside class="sidebar">
+		      <h2>Scholarship Admin</h2>
+		      <ul>
+		        <li><a href="/admin/dashboard">🏠 Dashboard</a></li>
+		        <li><a href="/admin/scholarships">🎓 Scholarships</a></li>
+		        <li><a href="/admin/applications">📝 Applications</a></li>
+		        <li><a href="/admin/messages">✉️ Messages</a></li>
+		        <li><a href="/login">🚪 Logout</a></li>
+		      </ul>
+		    </aside>
+ 
+    <div class="main-content">
+        <div class="topbar">
+            <input type="text" placeholder="Search...">
+            <div class="notifications">🔔</div>
+        </div>
+
+        <div class="content-area">
+            <form action="/admin/add-scholarship" method="get">
+                <button type="submit">➕ Add New Scholarship Scheme</button>
+            </form>
+            <br>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Eligibility Criteria 1</th>
+                    <th>Eligibility Criteria 2</th>
+                    <th>Eligibility Criteria 3</th>
+                    <th>Eligibility Criteria 4</th>
+                    <th>Eligibility Criteria 5</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+				<tr th:each="sch : ${scholarships}">
+				    <form th:action="@{'/admin/update-scholarship/' + ${sch.id}}" method="post">
+				        <td><input type="text" name="title" th:value="${sch.title}"/></td>
+				        <td><input type="number" name="amount" th:value="${sch.amount}"/></td>
+				        <td><input type="text" name="egc1" th:value="${sch.egc1}"/></td>
+				        <td><input type="text" name="egc2" th:value="${sch.egc2}"/></td>
+				        <td><input type="text" name="egc3" th:value="${sch.egc3}"/></td>
+				        <td><input type="text" name="egc4" th:value="${sch.egc4}"/></td>
+				        <td><input type="text" name="egc5" th:value="${sch.egc5}"/></td>
+				        <td>
+				            <button type="submit">Save</button>
+				        </td>
+				    </form>
+				    <form th:action="@{'/admin/delete-scholarship/' + ${sch.id}}" method="post" th:object="${sch}">
+				        <td>
+							<button type="submit" style="background-color:#f44336;" onclick="return confirmDelete()">Delete</button>
+				        </td>
+				    </form>
+				</tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scholarship Admin Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; display: flex; }
+.sidebar { width: 250px; background: #2c3e50; color: white; min-height: 100vh; padding: 20px; }
+.sidebar h2 { margin-bottom: 30px; font-size: 24px; }
+.sidebar nav a { display: block; color: white; padding: 10px 0; text-decoration: none; transition: 0.3s; }
+.sidebar nav a:hover { background: #1a252f; padding-left: 10px; }
+.logout { color: #ff6b6b; }
+.main { flex: 1; display: flex; flex-direction: column; }
+.navbar { background: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.search-area { display: flex; align-items: center; gap: 10px; }
+.search-area input { padding: 5px 10px; border: 1px solid #ccc; border-radius: 4px; }
+.dashboard { padding: 20px; overflow-y: auto; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+.card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.card h3 { color: gray; margin-bottom: 10px; }
+.card p { font-size: 24px; font-weight: bold; }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+.chart-box { background: white; padding: 20px; border-radius: 8px; height: 350px; }
+.table-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px; }
+thead { background: #f0f0f0; }
+.pending { color: orange; font-weight: bold; }
+.approved { color: green; font-weight: bold; }
+.rejected { color: red; font-weight: bold; }
+.reminders { background: white; padding: 20px; border-radius: 8px; }
+.reminders ul { list-style-type: disc; padding-left: 20px; margin-top: 10px; }
+.reminders li { margin-bottom: 8px; }
+
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>🎓 Scholarship Admin</h2>
+    <nav>
+      <a href="#">🏠 Dashboard</a>
+      <a href="#">🎓 Scholarships</a>
+      <a href="#">📑 Applications</a>
+      <a href="#">👥 Students</a>
+      <a href="#">💵 Payments</a>
+      <a href="#">📊 Reports</a>
+      <a href="#">💬 Messages</a>
+      <a href="#">⚙️ Settings</a>
+      <a href="#" class="logout">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <div class="main">
+    <header class="navbar">
+      <div class="welcome">Welcome, Admin 👋</div>
+      <div class="search-area">
+        <input type="text" placeholder="Search...">
+        <span>🔔</span>
+        <span class="avatar">👤</span>
+      </div>
+    </header>
+    <main class="dashboard">
+      <section class="cards">
+        <div class="card"><h3>📑 Total Applications</h3><p>1,250</p></div>
+        <div class="card"><h3>🎓 Approved Scholarships</h3><p>875</p></div>
+        <div class="card"><h3>⏳ Pending Reviews</h3><p>375</p></div>
+        <div class="card"><h3>💵 Total Funds Disbursed</h3><p>$500,000</p></div>
+      </section>
+      <section class="charts">
+        <div class="chart-box"><h3>📈 Applications Over Time</h3><canvas id="lineChart"></canvas></div>
+        <div class="chart-box"><h3>📊 Scholarships by Category</h3><canvas id="pieChart"></canvas></div>
+      </section>
+      <section class="table-section">
+        <h3>📝 Latest Applications</h3>
+        <table>
+          <thead>
+            <tr><th>Student Name</th><th>Scholarship</th><th>Date Applied</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>John Doe</td><td>Merit Scholarship</td><td>2025-04-25</td><td class="pending">Pending</td></tr>
+            <tr><td>Jane Smith</td><td>Sports Scholarship</td><td>2025-04-24</td><td class="approved">Approved</td></tr>
+            <tr><td>Mark Wilson</td><td>Need-Based Scholarship</td><td>2025-04-23</td><td class="rejected">Rejected</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="reminders">
+        <h3>🔔 Reminders</h3>
+        <ul>
+          <li>Review 5 new applications.</li>
+          <li>Scholarship 2025 deadline approaching!</li>
+          <li>Export the disbursement report.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <script>
+    // Line Chart - Applications Over Time
+const ctxLine = document.getElementById('lineChart').getContext('2d');
+const lineChart = new Chart(ctxLine, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: 'Applications',
+      data: [50, 100, 250, 300, 500, 600],
+      backgroundColor: 'rgba(52, 152, 219, 0.2)',
+      borderColor: '#3498db',
+      borderWidth: 2,
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }
+});
+
+// Pie Chart - Scholarships by Category
+const ctxPie = document.getElementById('pieChart').getContext('2d');
+const pieChart = new Chart(ctxPie, {
+  type: 'pie',
+  data: {
+    labels: ['Merit-Based', 'Need-Based', 'Sports', 'Other'],
+    datasets: [{
+      label: 'Scholarships',
+      data: [40, 30, 20, 10],
+      backgroundColor: ['#1abc9c', '#3498db', '#f39c12', '#e74c3c'],
+      borderWidth: 1
+    }]
+  },
+  options: { responsive: true }
+});
+
+  </script>
+</body>
+</html>
