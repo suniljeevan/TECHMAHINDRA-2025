@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Deletion</title>
+
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Custom Styles -->
+   <link rel="stylesheet" href="/css/admin-styles.css">
+<link rel="stylesheet" href="/css/admin-sidebar.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="main-sidebar">
+            <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <h1>Confirm Course Deletion</h1>
+            </div>
+            <div class="content">
+                <div class="container-fluid">
+                    <h2>Are you sure you want to delete this Course?</h2>
+                    <form th:action="@{/admin/delete-course}" method="post">
+                        <input type="hidden" name="id" th:value="${id}" />
+                        <button type="submit" class="btn-delete" onclick="return confirm('Are you sure you want to delete this course?');">Delete</button>
+                    </form>
+                    <a href="/admin/courses" class="btn-cancel">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+</body>
+</html>

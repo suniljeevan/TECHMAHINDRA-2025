@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/css/adminlte.min.css" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
+<link rel="stylesheet" href="/css/admin-sidebar.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <h1 class="m-0">Admin Settings</h1>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <form th:action="@{/admin/settings/update}" method="post" class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Configure System Settings</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Enable Student Course Enrollment -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="enrollCourseEnabled"
+                                       th:checked="${settings.enrollCourseEnabled}" id="enrollCourseEnabled">
+                                <label class="form-check-label" for="enrollCourseEnabled">
+                                    Enable Student Course Enrollment
+                                </label>
+                            </div>
+
+                            <!-- Enable Instructor Marks Assignment -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="assignMarksEnabled"
+                                       th:checked="${settings.assignMarksEnabled}" id="assignMarksEnabled">
+                                <label class="form-check-label" for="assignMarksEnabled">
+                                    Enable Instructor Marks Assignment
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Update Settings</button>
+                        </div>
+                    </form>
+                    <!-- New Semester Controls -->
+						<h2>Semester Management</h2>
+						<form th:action="@{/admin/settings/increment-semester}" method="post" style="display:inline-block">
+						    <button type="submit">Increment All Semesters</button>
+						</form>
+						
+						<form th:action="@{/admin/settings/decrement-semester}" method="post" style="display:inline-block; margin-left:10px">
+						    <button type="submit">Decrement All Semesters</button>
+						</form>
+
+                    <!-- Back to Dashboard Link -->
+                    <div>
+                        <a href="/admin/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <strong>&copy; 2025 Result Management System. All rights reserved.</strong>
+        </footer>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+</body>
+</html>

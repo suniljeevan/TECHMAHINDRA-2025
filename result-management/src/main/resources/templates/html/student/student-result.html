@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Results</title>
+
+    <!-- Bootstrap & AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/student-sidebar :: sidebar"></div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper p-4">
+        <div class="content-header">
+            <div class="container-fluid">
+                <h3>Results for Semester <span th:text="${selectedSemester}"></span></h3>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Semester</th>
+                            <th>Course Name</th>
+                            <th>GPA</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="result : ${results}">
+                            <td th:text="${result.semester}"></td>
+                            <td th:text="${result.courseEnrollment.course.name}"></td>
+                            <td th:text="${result.GPA}"></td>
+                            <td th:text="${result.remarks}"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-light font-weight-bold">
+                            <td colspan="2" class="text-right">Total Credits Earned</td>
+                            <td colspan="2" th:text="${totalCredits}">0</td>
+                        </tr>
+                        <tr class="table-info font-weight-bold">
+                            <td colspan="2" class="text-right">CGPA</td>
+                            <td colspan="2" th:text="${cgpa}">0.0</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <form method="get" th:action="@{/student/results/pdf}">
+    <input type="hidden" name="semester" th:value="${selectedSemester}" />
+    <button type="submit" class="btn btn-primary">Download PDF</button>
+</form>
+        
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

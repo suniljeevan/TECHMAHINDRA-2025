@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Marks</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Upload Marks (Excel)</h2>
+    <form th:action="@{/instructor/course/{courseId}/upload-marks-confirm(courseId=${courseId})}" 
+      method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".xlsx" required />
+    <button type="submit">Upload and Confirm</button>
+</form>
+
+</div>
+</body>
+</html>

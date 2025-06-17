@@ -1,0 +1,30 @@
+<!-- templates/error.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8d7da;
+            color: #721c24;
+            text-align: center;
+            padding: 50px;
+        }
+        .error-container {
+            background-color: #f5c6cb;
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Oops! Something went wrong.</h1>
+        <p th:text="${status} + ' - ' + ${error}"></p>
+        <p th:text="${message}"></p>
+        <a href="/" style="text-decoration: none; color: #0056b3;">Go back to Home</a>
+    </div>
+</body>
+</html>

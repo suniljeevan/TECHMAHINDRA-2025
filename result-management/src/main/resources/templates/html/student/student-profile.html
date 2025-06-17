@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Profile</title>
+
+    <!-- Bootstrap & AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/student-sidebar :: sidebar"></div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper p-4">
+        <div class="content-header">
+            <div class="container-fluid">
+                <h2 class="mb-4">Student Profile</h2>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <p><strong>Name:</strong> <span th:text="${student.name}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${student.email}"></span></p>
+                <p><strong>Roll Number:</strong> <span th:text="${student.rollNumber}"></span></p>
+                <p><strong>Year:</strong> <span th:text="${student.year}"></span></p>
+                  <p><strong>Semester:</strong> <span th:text="${student.semester}"></span></p>
+                <p><strong>Department:</strong> <span th:text="${student.department.name}"></span></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

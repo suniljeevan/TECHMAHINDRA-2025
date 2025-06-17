@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Semester</title>
+
+    <!-- Bootstrap & AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Sidebar Fragment -->
+    <div th:replace="fragments/student-sidebar :: sidebar"></div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper p-4">
+        <div class="content-header">
+            <div class="container-fluid">
+                <h3 class="mb-4">Select Semester to View Results</h3>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <form th:action="@{/student/results}" method="post" class="form-inline">
+                    <div class="form-group mr-3">
+                        <label for="semester" class="mr-2 font-weight-bold">Semester:</label>
+                        <select name="semester" id="semester" class="form-control">
+                            <option th:each="i : ${#numbers.sequence(1, 8)}"
+                                    th:value="${i}"
+                                    th:text="'Semester ' + ${i}">
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">View Results</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<!-- Instructor Sidebar Fragment -->
+<div class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="sidebar">
+    <!-- Brand Logo -->
+    <a href="/instructor/dashboard" class="brand-link">
+        <span class="brand-text font-weight-light">Instructor Portal</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+                
+                <li class="nav-item">
+                    <a href="/instructor/dashboard" class="nav-link" th:classappend="${currentURI == '/instructor/dashboard'} ? ' active'">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/instructor/profile" class="nav-link" th:classappend="${currentURI == '/instructor/profile'} ? ' active'">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>Profile</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+    <a th:href="@{/instructor/courses(instructorId=${instructorId})}"
+       class="nav-link"
+       th:classappend="${currentURI == '/instructor/courses'} ? ' active'">
+        <i class="nav-icon fas fa-book"></i>
+        <p>My Courses</p>
+    </a>
+</li>
+
+               
+
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>Logout</p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+    <!-- /.sidebar -->
+</div>
+</body>
+</html>

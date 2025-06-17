@@ -1,0 +1,18 @@
+<h2>Confirm Marks Upload</h2>
+<form th:action="@{/instructor/course/{courseId}/upload-marks-final(courseId=${courseId})}" 
+      method="post">
+    <table border="1">
+        <thead>
+            <tr><th>Roll No</th><th>CA</th><th>Midterm</th><th>Endterm</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="row : ${previewList}">
+                <td th:text="${row['rollNo']}"></td>
+                <td th:text="${row['caMarks']}"></td>
+                <td th:text="${row['midtermMarks']}"></td>
+                <td th:text="${row['endtermMarks']}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit">Confirm and Save</button>
+</form>

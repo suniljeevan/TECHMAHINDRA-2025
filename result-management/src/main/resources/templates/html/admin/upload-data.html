@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            padding: 40px;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        select, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 30px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Bulk Data Upload</h2>
+
+<form method="POST" enctype="multipart/form-data" action="/admin/upload/preview">
+    <label>Select Data Type:</label>
+    <select name="dataType" required>
+        <option value="" disabled selected>-- Choose --</option>
+        <option value="student">Student</option>
+        <option value="instructor">Instructor</option>
+        <option value="department">Department</option>
+        <option value="course">Course</option>
+    </select>
+
+    <label>Select Excel File:</label>
+    <input type="file" name="file" accept=".xlsx" required>
+
+    <button type="submit">Preview</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course</title>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  
+<link rel="stylesheet" href="/css/admin-sidebar.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <h1 class="m-0">Create Course</h1>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="content">
+                <div class="container-fluid">
+                    <form th:action="@{/admin/create-course}" th:object="${course}" method="post" class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Course Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <!-- Course Name -->
+                            <div class="form-group">
+                                <label for="name">Course Name:</label>
+                                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Enter course name" required>
+                            </div>
+
+                            <!-- Course Code -->
+                            <div class="form-group">
+                                <label for="code">Course Code:</label>
+                                <input type="text" th:field="*{code}" class="form-control" id="code" placeholder="Enter course code" required>
+                            </div>
+
+                            <!-- Credits -->
+                            <div class="form-group">
+                                <label for="credits">Credits:</label>
+                                <input type="number" th:field="*{credits}" class="form-control" min="1" max="5" id="credits" placeholder="Enter credits" required>
+                            </div>
+
+                            <!-- Course Type -->
+                            <div class="form-group">
+                                <label for="course_type">Course Type:</label>
+                                <select th:field="*{course_type}" class="form-control" id="course_type" required>
+                                    <option value="Practical">Practical</option>
+                                    <option value="Theory">Theory</option>
+                                    <option value="Theory and Practical">Theory and Practical</option>
+                                </select>
+                            </div>
+
+                            <!-- Department -->
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <select id="department" name="departmentId" class="form-control" onchange="loadInstructors()" required>
+                                    <option value="">-- Select Department --</option>
+                                    <option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}"></option>
+                                </select>
+                            </div>
+
+                            <!-- Instructor -->
+                            <div class="form-group">
+                                <label for="instructor">Instructor:</label>
+                                <select id="instructor" name="instructorId" class="form-control" required>
+                                    <option value="">-- Select Instructor --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Create Course</button>
+                        </div>
+                    </form>
+
+                    <!-- Back to Dashboard Link -->
+                    <div>
+                        <a href="/admin/dashboard" class="btn btn-secondary mt-3">← Back to Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+
+    <!-- JavaScript for Dynamic Instructor Loading -->
+    <script>
+        function loadInstructors() {
+            var departmentId = document.getElementById("department").value;
+            var instructorSelect = document.getElementById("instructor");
+
+            // Clear previous options
+            instructorSelect.innerHTML = '<option value="">-- Select Instructor --</option>';
+
+            if (departmentId) {
+                console.log("Selected departmentId:", departmentId); // Debug
+                fetch('/admin/instructors/department/' + departmentId)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Fetched instructors:", data); // Debug
+                        if (data.length > 0) {
+                            data.forEach(instr => {
+                                var option = document.createElement('option');
+                                option.value = instr.id;    // Must match JSON
+                                option.text = instr.name;   // Must match JSON
+                                instructorSelect.appendChild(option);
+                            });
+                        } else {
+                            var option = document.createElement('option');
+                            option.disabled = true;
+                            option.text = 'No instructors available';
+                            instructorSelect.appendChild(option);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching instructors:', error);
+                        var option = document.createElement('option');
+                        option.disabled = true;
+                        option.text = 'Error loading instructors';
+                        instructorSelect.appendChild(option);
+                    });
+            }
+        }
+    </script>
+
+</body>
+</html>

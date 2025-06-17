@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | Result Management</title>
+
+    <!-- AdminLTE & dependencies -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+
+    <style>
+        .login-link {
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .feature-box {
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f4f6f9;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="hold-transition layout-top-nav">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand">
+                <span class="brand-text font-weight-bold">Result Management System</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <div class="content-header text-center mt-5">
+            <div class="container">
+                <h1 class="display-4">Welcome to Presidency University</h1>
+                <p class="lead text-muted">Empowering students through knowledge and results.</p>
+                <a class="btn btn-primary btn-lg login-link" th:href="@{/login}">
+                    <i class="fas fa-sign-in-alt"></i> Login Area
+                </a>
+            </div>
+        </div>
+
+        <div class="content pb-5">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="feature-box text-center">
+                            <i class="fas fa-university fa-3x text-primary mb-3"></i>
+                            <h4>About Us</h4>
+                            <p>Our University is a premier institution offering top-tier education in science, arts, and technology for over 25 years.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="feature-box text-center">
+                            <i class="fas fa-laptop-code fa-3x text-success mb-3"></i>
+                            <h4>Digital Management</h4>
+                            <p>Our result management system ensures quick access, transparency, and security of student records and academic results.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="feature-box text-center">
+                            <i class="fas fa-user-graduate fa-3x text-info mb-3"></i>
+                            <h4>Student Success</h4>
+                            <p>Our students graduate with the skills and knowledge needed to excel in careers and further education around the globe.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer text-center">
+        <strong>&copy; 2025 Greenfield University.</strong> All rights reserved.
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

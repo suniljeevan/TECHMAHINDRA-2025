@@ -1,0 +1,28 @@
+
+        /* Sticky Sidebar */
+        .main-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh; /* Full height of the viewport */
+            background-color: #343a40;
+            padding-top: 50px;
+            padding-left: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .content-wrapper {
+            margin-left: 250px; /* Space for the sidebar */
+            padding: 20px;
+        }
+
+        /* Ensure content area scrolls independently */
+        .wrapper {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+    

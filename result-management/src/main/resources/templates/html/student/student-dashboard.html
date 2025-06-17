@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Dashboard</title>
+    
+    <!-- AdminLTE and Bootstrap from jsDelivr CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Sidebar Fragment -->
+    <div th:replace="fragments/student-sidebar :: sidebar"></div>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper p-4">
+        <div class="content-header">
+            <div class="container-fluid">
+                <h2 class="m-0 text-dark">Welcome to Student Dashboard</h2>
+                <h2>Welcome, <span th:text="${student.name}"></span></h2>
+                
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container-fluid">
+                <ul class="list-group">
+                    <li class="list-group-item"><a th:href="@{/student/profile}">Profile</a></li>
+                    <li class="list-group-item"><a th:href="@{/student/enrollments}">My Enrollments</a></li>
+                    <li class="list-group-item"><a th:href="@{/student/courses}">New Course Enrollment</a></li>
+                    <li class="list-group-item"><a th:href="@{/student/results}">My Results</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- AdminLTE and Bootstrap JS from jsDelivr CDN -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>

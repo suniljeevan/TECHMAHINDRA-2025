@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Course</title>
+
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+       
+        .content {
+            text-align: center;
+            margin-top: 50px;
+        }
+       
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="main-sidebar">
+            <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Edit Course</h1>
+                <form th:action="@{/admin/edit-course}" th:object="${course}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    
+                    <label for="name">Name:</label>
+                    <input type="text" required th:field="*{name}" id="name" /><br/>
+
+                    <label for="code">Code:</label>
+                    <input type="text" required th:field="*{code}" id="code" /><br/>
+
+                    <!-- Credits Input Field -->
+                    <label for="credits">Credits:</label>
+                    <input type="number" required th:field="*{credits}" min="1" max="5" id="credits" /><br/>
+
+                    <!-- Course Type Dropdown Field -->
+                    <label for="course_type">Course Type:</label>
+                    <select th:field="*{course_type}" required id="course_type">
+                        <option value="Practical">Practical</option>
+                        <option value="Theory">Theory</option>
+                        <option value="Theory and Practical">Theory and Practical</option>
+                    </select><br/>
+
+                    <!-- Department Selection -->
+                    <label for="department">Department:</label>
+                    <select id="department" required name="departmentId" onchange="loadInstructors()">
+                        <option value="">-- Select Department --</option>
+                        <option th:each="dept : ${departments}" th:value="${dept.id}" th:text="${dept.name}">
+                        </option>
+                    </select><br/>
+
+                    <!-- Instructor Selection -->
+                    <label for="instructor">Instructor:</label>
+                    <select name="instructorId" required id="instructor">
+                        <option th:each="instr : ${instructorss}" th:value="${instr.id}" th:text="${instr.name}"
+                                th:selected="${instr.id} == ${course.instructor.id}">
+                        </option>
+                    </select><br/>
+
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+</body>
+</html>

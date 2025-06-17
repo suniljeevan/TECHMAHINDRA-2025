@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses List</title>
+
+    <!-- AdminLTE CSS -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/css/admin-sidebar.css">
+
+    <!-- Custom Styles -->
+   <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+     
+ 
+    .table-container {
+        padding: 20px;
+    }
+
+    .table {
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-collapse: collapse; /* Ensure borders align properly */
+    }
+
+    .table th, .table td {
+        font-size: 18px;
+        padding: 12px;
+        border: 1px solid #dee2e6; /* Column border */
+        text-align: center; /* Center-align content */
+    }
+
+    .table th {
+        background-color: #343a40;
+        color: #fff;
+        font-size: 18px;
+    }
+
+    .table tbody tr:hover {
+        background-color: #e9ecef;
+        transition: 0.3s;
+    }
+
+    .btn {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .btn-warning {
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <div class="main-sidebar">
+            <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <h2>Courses List</h2>
+            
+            <div class="table-container">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Code</th>
+                            <th class="text-left">Name</th>
+                            <th>Department</th>
+                            <th>Instructor</th>
+                            <th>Course Type</th>
+                            <th>Credits</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="course : ${allcourses}">
+                            <td th:text="${course.code}"></td>
+                            <td  class="text-left"th:text="${course.name}"></td>
+                            <td th:text="${course.department.name}"></td>
+                            <td th:text="${course.instructor.name}"></td>
+                            <td th:text="${course.course_type}"></td>
+                            <td th:text="${course.credits}"></td>
+                            <td>
+                                <a th:href="@{/admin/edit-course/{id}(id=${course.id})}" class="btn btn-warning btn-sm me-2">Edit</a>
+                                <a th:href="@{/admin/delete-course/{id}(id=${course.id})}" class="btn btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <a href="/admin/dashboard" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- AdminLTE JS -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1.0/dist/js/adminlte.min.js"></script>
+</body>
+</html>
