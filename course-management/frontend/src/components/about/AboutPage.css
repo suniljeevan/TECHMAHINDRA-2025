@@ -1,0 +1,496 @@
+.about-page {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.about-hero {
+    padding: clamp(6rem, 15vw, 10rem) 0;
+    background: linear-gradient(90deg, #1a1c1e 0%, #2b2d42 100%);
+    color: white;
+}
+
+.about-hero h1 {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 800;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    line-height: 1.2;
+}
+
+.about-hero .display-1 {
+    color: white;
+}
+
+.mission-section,
+.team-section,
+.values-section {
+    padding: clamp(4rem, 10vw, 8rem) 0;
+}
+
+.team-section {
+    position: relative;
+    background: white;
+    overflow: hidden;
+}
+
+.team-grid {
+    display: flex;
+    gap: 2rem;
+    margin-top: clamp(3rem, 6vw, 4rem);
+    width: 100%;
+    overflow-x: auto;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.team-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.team-grid::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.team-grid::-webkit-scrollbar-thumb {
+    background: rgba(37, 117, 252, 0.3);
+    border-radius: 4px;
+}
+
+.team-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(37, 117, 252, 0.5);
+}
+
+.team-card {
+    flex: 1 0 calc(20% - 1.6rem);
+    /* 20% width for 5 cards with gap consideration */
+    min-width: 220px;
+    /* Minimum width for each card */
+    height: 300px;
+    scroll-snap-align: start;
+    position: relative;
+    background: white;
+    backdrop-filter: blur(10px);
+    border-radius: clamp(15px, 3vw, 20px);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.team-card-content {
+    height: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+}
+
+.team-card:hover::before {
+    transform: scaleX(1);
+}
+
+.team-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-icon {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.team-card h3 {
+    color: #2b2d42;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.team-card p {
+    color: #6c757d;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    position: relative;
+    z-index: 1;
+}
+
+/* Role-specific styles */
+.team-card.frontend::before {
+    background: linear-gradient(90deg, #FF6B6B, #FFB84C);
+}
+
+.team-card.frontend .team-icon {
+    color: #FF6B6B;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 184, 76, 0.1));
+}
+
+.team-card.backend::before {
+    background: linear-gradient(90deg, #4FACFE, #00F2FE);
+}
+
+.team-card.backend .team-icon {
+    color: #4FACFE;
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
+}
+
+.team-card.design::before {
+    background: linear-gradient(90deg, #B721FF, #21D4FD);
+}
+
+.team-card.design .team-icon {
+    color: #B721FF;
+    background: linear-gradient(135deg, rgba(183, 33, 255, 0.1), rgba(33, 212, 253, 0.1));
+}
+
+.team-card.fullstack::before {
+    background: linear-gradient(90deg, #11998e, #38ef7d);
+}
+
+.team-card.fullstack .team-icon {
+    color: #11998e;
+    background: linear-gradient(135deg, rgba(17, 153, 142, 0.1), rgba(56, 239, 125, 0.1));
+}
+
+.team-card.qa::before {
+    background: linear-gradient(90deg, #F857A6, #FF5858);
+}
+
+.team-card.qa .team-icon {
+    color: #F857A6;
+    background: linear-gradient(135deg, rgba(248, 87, 166, 0.1), rgba(255, 88, 88, 0.1));
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+    box-shadow: none;
+}
+
+.card-overlay {
+    display: none;
+}
+
+.values-section {
+    position: relative;
+    background: white;
+    overflow: hidden;
+}
+
+.values-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(37, 117, 252, 0.2), transparent);
+}
+
+.values-section .d-flex {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+    height: 360px;
+    /* Set exact height */
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    margin-top: clamp(3rem, 6vw, 4rem);
+}
+
+.value-card {
+    flex: 1;
+    width: calc(33.33% - 1.33rem);
+    /* Equal width accounting for gaps */
+    height: 360px !important;
+    /* Force exact height */
+    min-width: 280px;
+    max-width: none;
+    /* Remove max-width constraint */
+    position: relative;
+    background: white;
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: clamp(15px, 3vw, 20px);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+}
+
+.value-card:hover::before {
+    transform: scaleX(1);
+}
+
+.value-card.innovation::before {
+    background: linear-gradient(90deg, #FF6B6B, #FFB84C);
+}
+
+.value-card.accessibility::before {
+    background: linear-gradient(90deg, #4FACFE, #00F2FE);
+}
+
+.value-card.excellence::before {
+    background: linear-gradient(90deg, #B721FF, #21D4FD);
+}
+
+.value-card .icon-wrapper {
+    flex: 0 0 80px;
+    /* Fixed size */
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover .icon-wrapper {
+    transform: scale(1.1) translateY(-5px);
+}
+
+.innovation .icon-wrapper {
+    color: #FF6B6B;
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 184, 76, 0.1));
+}
+
+.accessibility .icon-wrapper {
+    color: #4FACFE;
+    background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
+}
+
+.excellence .icon-wrapper {
+    color: #B721FF;
+    background: linear-gradient(135deg, rgba(183, 33, 255, 0.1), rgba(33, 212, 253, 0.1));
+}
+
+.value-card h3 {
+    flex: 0 0 auto;
+    /* Don't allow shrinking */
+    color: #2b2d42;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    position: relative;
+    z-index: 1;
+}
+
+.value-card p {
+    flex: 1 1 auto;
+    /* Take remaining space */
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    box-shadow: none;
+}
+
+@media (max-width: 1400px) {
+    .team-grid {
+        justify-content: flex-start;
+        padding: 1rem;
+    }
+
+    .team-card {
+        flex: 1 0 calc(25% - 1.5rem);
+        /* 25% width for 4 cards */
+    }
+}
+
+@media (max-width: 992px) {
+    .values-section .d-flex {
+        flex-direction: column;
+        height: auto;
+        gap: 2rem;
+        min-height: unset;
+    }
+
+    .value-card {
+        width: 100%;
+        height: 300px !important;
+        /* Consistent height on mobile */
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .value-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        overflow-x: hidden;
+        padding: 0;
+    }
+
+    .team-card {
+        flex: none;
+        width: 100%;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .team-card-content {
+        padding: 1.5rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-card:hover,
+    .value-card:hover {
+        transform: translateY(-3px);
+    }
+}
+
+@media (max-width: 576px) {
+    .about-page {
+        padding: 0.5rem;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+        margin: 2rem auto 0;
+        gap: 1.5rem;
+    }
+
+    .team-grid > div:nth-last-child(-n+2) {
+        width: 100%;
+    }
+}
+
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Dark mode styles for AboutPage */
+[data-theme='dark'] .about-page {
+    background: radial-gradient(circle, rgba(37, 117, 252, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    color: var(--text);
+}
+
+[data-theme='dark'] .about-hero {
+    background: radial-gradient(circle, rgba(37, 117, 252, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    color: var(--text);
+}
+
+/* Updated dark mode background for team and values sections to use --bg-secondary */
+[data-theme='dark'] .team-section {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+[data-theme='dark'] .values-section {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+/* Updated dark mode background for mission section to use --bg-secondary */
+[data-theme='dark'] .mission-section {
+    background: var(--bg-secondary);
+    color: var(--text);
+}
+
+/* Updated team and value cards to match the feature card styles from LandingPage */
+[data-theme='dark'] .team-card,
+[data-theme='dark'] .value-card {
+    background: rgba(255, 255, 255, 0.089);
+    backdrop-filter: blur(10px);
+    color: var(--bs-body-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme='dark'] .team-card:hover,
+[data-theme='dark'] .value-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Updated team and value card text color for dark mode */
+[data-theme='dark'] .team-card h3,
+[data-theme='dark'] .team-card p,
+[data-theme='dark'] .value-card h3,
+[data-theme='dark'] .value-card p {
+    color: white;
+}
