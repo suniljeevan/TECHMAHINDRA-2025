@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - Event Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana,sans-serif;
+	  padding: 2rem;
+	  }
+
+	/*html, body {
+	  overflow: hidden;
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	}*/
+
+	
+    .sidebar {
+      background-color: #003366;
+      color: white;
+      padding: 2rem 1rem;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar .nav-btn {
+      display: block;
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      padding: 12px 20px;
+      text-align: left;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .sidebar .nav-btn:hover,
+    .sidebar .nav-btn.active {
+      background-color: #0055a5;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+
+    .content-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .action-card {
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      background-color: white;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .action-card:hover {
+      transform: scale(1.03);
+      background-color: #f8f9fa;
+    }
+
+    .action-card i {
+      font-size: 2rem;
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 767px) {
+      .sidebar {
+        height: auto;
+        position: static;
+      }
+    }
+
+    /* Smooth toggle styles for Add Event Form */
+    #add-event-form {
+	  max-height: 0;
+	  overflow: hidden;
+	  opacity: 0;
+	  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+	  margin-top: 20px;
+	  padding-left: 0;
+	  padding-right: 0;
+	  padding-top: 0;
+	  padding-bottom: 0;
+	  border-radius: 12px;
+	  border: 1px solid #ddd;
+	  box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+	}
+
+	#add-event-form.show {
+	  max-height: 1200px; /* enough height for form */
+	  opacity: 1;
+	  padding-left: 24px;
+	  padding-right: 24px;
+	  padding-top: 24px;
+	  padding-bottom: 24px;
+	  background-color: #ffffff;
+	}
+	/* Fix: Student Forms */
+	  .student-form {
+	    background: #fff;
+	    padding: 20px;
+	    border-radius: 10px;
+	    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+	    margin-bottom: 20px;
+	  }
+
+	  .student-form input {
+	    width: 100%;
+	    margin-bottom: 12px;
+	    padding: 10px;
+	    border: 1px solid #ccc;
+	    border-radius: 6px;
+	  }
+
+	  .student-form button {
+	    background-color: #003366;
+	    color: white;
+	    padding: 10px 20px;
+	    border: none;
+	    border-radius: 6px;
+	    cursor: pointer;
+	    transition: background-color 0.3s ease;
+	  }
+
+	  .student-form button:hover {
+	    background-color: #0055a5;
+	  }
+
+	  #studentTable {
+	    width: 100%;
+	    border-collapse: collapse;
+	    background-color: #fff;
+	  }
+
+	  #studentTable th, #studentTable td {
+	    padding: 12px;
+	    border: 1px solid #ccc;
+	    text-align: left;
+	  }
+
+	  #studentSearch {
+	    width: 100%;
+	    max-width: 300px;
+	    margin-bottom: 15px;
+	    padding: 10px;
+	    border: 1px solid #ccc;
+	    border-radius: 6px;
+	  }
+	  
+	  .container {
+	        max-width: 900px;
+	        margin: auto;
+	        background: white;
+	        border-radius: 1rem;
+	        padding: 2rem 3rem;
+	        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+	      }
+	      h1 {
+	        text-align: center;
+	        color: #003366;
+	        margin-bottom: 2rem;
+	        font-weight: 700;
+	      }
+	      #eventSelect {
+	        border-radius: 12px;
+	        border: 1.5px solid #ccc;
+	        padding: 0.65rem 1rem;
+	        font-size: 1rem;
+	        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	        width: 100%;
+	        max-width: 400px;
+	        margin-bottom: 1.5rem;
+	      }
+	      #eventSelect:focus {
+	        border-color: #764ba2;
+	        box-shadow: 0 0 10px #a78bfa;
+	        outline: none;
+	      }
+	      table {
+	        width: 100%;
+	        border-collapse: collapse;
+	        margin-top: 1rem;
+	      }
+	      th, td {
+	        padding: 12px 15px;
+	        border-bottom: 1px solid #ddd;
+	        text-align: left;
+	      }
+	      th {
+	        background-color: #764ba2;
+	        color: white;
+	        font-weight: 600;
+	      }
+	      tr:hover {
+	        background-color: #f9f9f9;
+	      }
+	      .no-data {
+	        margin-top: 1rem;
+	        font-style: italic;
+	        color: #666;
+	      }
+	  
+  </style>
+</head>
+<body>
+
+<scriptdiv class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 sidebar">
+      <h4 class="text-center mb-4">Admin Panel</h4>
+      <button class="nav-btn active" data-section="dashboard">📊 Dashboard</button>
+      <button class="nav-btn" data-section="students">🎓 Manage Students</button>
+      <button class="nav-btn" data-section="events">📅 Manage Events</button>
+      <button class="nav-btn" data-section="admins">👤 Manage Admin</button>
+      <a href="/index" class="nav-btn text-center bg-light text-dark mt-4">🏠 Home</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 p-4">
+      <h2 id="sectionTitle">Dashboard</h2>
+
+      <!-- Dashboard Section -->
+      <div class="content-section active" id="dashboard">
+        <div class="card p-4">
+          <h4>Welcome to Admin Dashboard</h4>
+          <p>Select a category from the left to manage.</p>
+        </div>
+      </div>
+	  
+	  <!--<div id="dashboardStudentContainer">
+	  <div class="container">
+	      <h1>Admin Dashboard: View Registered Students</h1>
+
+	      <label for="eventSelect" class="form-label fw-semibold">Select Event</label>
+	      <select id="eventSelect" aria-label="Select an event">
+	        <option value="" disabled selected>Select an event</option>
+	      </select>
+
+	      <div id="studentsContainer">
+	        Student table will be rendered here
+	      </div>
+	    </div>
+	  </div>-->
+	  
+	  
+	  <!-- Student Section -->
+	  <div class="content-section" id="students">
+	    <div class="card-container">
+	      <div class="action-card" onclick="showsection('addStudentForm')">
+	        <i class="fas fa-user-plus"></i>
+	        <div>Add Student</div>
+	      </div>
+	      <div class="action-card" onclick="showsection('updateStudentForm')">
+	        <i class="fas fa-user-edit"></i>
+	        <div>Update Student</div>
+	      </div>
+	      <div class="action-card" onclick="showsection('deleteStudentForm')">
+	        <i class="fas fa-user-times"></i>
+	        <div>Delete Student</div>
+	      </div>
+	      <div class="action-card" onclick="showsection('viewStudentSection'); viewStudents();">
+	        <i class="fas fa-users"></i>
+	        <div>View Students</div>
+	      </div>
+	    </div>
+
+		<!-- WHITESPACE: Forms and Results Section -->
+		<div id="studentFormsContainer" style="margin-top: 30px;">
+
+		  <!-- Add Student -->
+		  <div id="addStudentForm" class="student-form" style="display: none;">
+		    <h3>Add Student</h3>
+		    <form onsubmit="submitStudent(event, 'add')">
+		      <input type="text" id="addRegId" placeholder="Registration ID" required><br>
+		      <input type="email" id="addEmail" placeholder="Email" required><br>
+		      <input type="password" id="addPassword" placeholder="Password" required><br>
+		      <button type="submit">Add Student</button>
+		    </form>
+		  </div>
+
+		  <!-- Update Student Form -->
+		  <div id="updateStudentForm" class="student-form" style="display:none;">
+		    <h3>Update Student</h3>
+		    <form onsubmit="submitStudent(event, 'update')">
+		      <select id="updateSelect" onchange="fillUpdateFields()" class="form-select mb-2"></select>
+		      <input type="text" id="updateRegId" placeholder="Registration ID" name="registrationId" required class="form-control mb-2"/>
+		      <input type="email" id="updateEmail" placeholder="Email" name="email" required class="form-control mb-2"/>
+		      <input type="password" id="updatePassword" placeholder="Password" name="password" required class="form-control mb-2"/>
+		      <button type="submit" class="btn btn-primary">Update Student</button>
+		    </form>
+		  </div>
+
+		  <!-- Delete Student Form -->
+		  <div id="deleteStudentForm" class="student-form" style="display:none;">
+		    <h3>Delete Student</h3>
+		    <form onsubmit="submitStudent(event, 'delete')">
+		      <select id="deleteRegId" class="form-select mb-2"></select><br>
+		      <button type="submit" class="btn btn-danger">Delete Student</button>
+		    </form>
+		  </div>
+
+		  <!-- View Students -->
+		  <div id="viewStudentSection" class="student-form" style="display: none;">
+		    <h3>Student List</h3>
+
+		    <!-- Search box -->
+		    <input
+		      type="text"
+		      id="studentSearch"
+		      placeholder="Search by Registration ID or Email"
+		      onkeyup="filterStudents()"
+		      class="form-control mb-3"
+		      style="max-width: 400px;"
+		    />
+
+		    <table class="table table-bordered" id="studentTable">
+		      <thead class="table-dark">
+		        <tr>
+		          <th>Registration ID</th>
+		          <th>Email</th>
+		          <th>Password</th>
+		        </tr>
+		      </thead>
+		      <tbody></tbody>
+		    </table>
+		  </div>
+</div>
+		</div>
+
+		<!-- Event Section -->
+		<div class="content-section" id="events">
+		  <div class="card-container">
+		    <div class="action-card" onclick="toggleAddEventForm()">
+		      <i class="fas fa-calendar-plus"></i>
+		      <div>Add Event</div>
+		    </div>
+		    <div class="action-card" onclick="toggleUpdateEventForm()">
+		      <i class="fas fa-pen-to-square"></i>
+		      <div>Update Event</div>
+		    </div>
+		    <div class="action-card" onclick="toggleDeleteEventForm()">
+		      <i class="fas fa-calendar-times"></i>
+		      <div>Delete Event</div>
+		    </div>
+		    <div class="action-card" onclick="toggleViewEventForm()">
+		      <i class="fas fa-calendar-alt"></i>
+		      <div>View Events</div>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Improved Add Event Form -->
+		<div id="add-event-form" class="p-4 bg-white rounded shadow-sm" style="display: none;">
+		  <h3 class="mb-4 text-primary">Add New Event</h3>
+		  <form id="eventForm" novalidate>
+		    <div class="mb-3">
+		      <label for="eventName" class="form-label fw-semibold">Event Name</label>
+		      <input type="text" class="form-control" id="eventName" name="eventName" placeholder="Enter event name" required />
+		    </div>
+
+		    <div class="row">
+		      <div class="mb-3 col-md-6">
+		        <label for="eventDate" class="form-label fw-semibold">Event Date</label>
+		        <input type="date" class="form-control" id="eventDate" name="eventDate" required />
+		      </div>
+		      <div class="mb-3 col-md-6">
+		        <label for="eventTime" class="form-label fw-semibold">Event Time</label>
+		        <input type="time" class="form-control" id="eventTime" name="eventTime" required />
+		      </div>
+		    </div>
+
+		    <div class="mb-3">
+		      <label for="eventPlace" class="form-label fw-semibold">Event Place</label>
+		      <input type="text" class="form-control" id="eventPlace" name="eventPlace" placeholder="Enter venue/location" required />
+		    </div>
+
+		    <div class="mb-3">
+		      <label for="eventDescription" class="form-label fw-semibold">Event Description</label>
+		      <textarea class="form-control" id="eventDescription" name="eventDescription" rows="4" placeholder="Describe the event" required></textarea>
+		    </div>
+
+		    <div class="mb-4">
+		      <label for="eventImage" class="form-label fw-semibold">Event Image URL / Base64</label>
+		      <input type="text" class="form-control" id="eventImage" name="eventImage" placeholder="Paste image URL or base64 string" required />
+		    </div>
+
+		    <button type="submit" class="btn btn-primary px-4 py-2 fw-bold">
+		      <i class="fas fa-plus-circle me-2"></i> Add Event
+		    </button>
+		  </form>
+		</div>
+
+		<!-- Update Event Form -->
+		<div id="update-event-form" class="p-4 bg-white rounded shadow-sm mt-4" style="display: none;">
+		  <h3 class="mb-4 text-warning">Update Event</h3>
+		  <form id="updateForm">
+		    <div class="mb-3">
+		      <label for="updateEventSelect" class="form-label fw-semibold">Select Event</label>
+		      <select id="updateEventSelect" class="form-select" required></select>
+		    </div>
+
+		    <div class="mb-3">
+		      <label for="updateEventName" class="form-label fw-semibold">Event Name</label>
+		      <input type="text" class="form-control" id="updateEventName" required />
+		    </div>
+		    <div class="row">
+		      <div class="mb-3 col-md-6">
+		        <label for="updateEventDate" class="form-label fw-semibold">Event Date</label>
+		        <input type="date" class="form-control" id="updateEventDate" required />
+		      </div>
+		      <div class="mb-3 col-md-6">
+		        <label for="updateEventTime" class="form-label fw-semibold">Event Time</label>
+		        <input type="time" class="form-control" id="updateEventTime" required />
+		      </div>
+		    </div>
+		    <div class="mb-3">
+		      <label for="updateEventPlace" class="form-label fw-semibold">Event Place</label>
+		      <input type="text" class="form-control" id="updateEventPlace" required />
+		    </div>
+		    <div class="mb-3">
+		      <label for="updateEventDescription" class="form-label fw-semibold">Event Description</label>
+		      <textarea class="form-control" id="updateEventDescription" rows="4" required></textarea>
+		    </div>
+		    <div class="mb-4">
+		      <label for="updateEventImage" class="form-label fw-semibold">Event Image</label>
+		      <input type="text" class="form-control" id="updateEventImage" required />
+		    </div>
+
+		    <button type="submit" class="btn btn-warning fw-bold">
+		      <i class="fas fa-pen-to-square me-2"></i> Update Event
+		    </button>
+		  </form>
+		</div>
+
+		<!-- Delete Event Form -->
+		<div id="delete-event-form" class="p-4 bg-white rounded shadow-sm mt-4" style="display: none;">
+		  <h3 class="mb-4 text-danger">Delete Event</h3>
+		  <form id="deleteForm">
+		    <div class="mb-3">
+		      <label for="deleteEventSelect" class="form-label fw-semibold">Select Event to Delete</label>
+		      <select id="deleteEventSelect" class="form-select" required></select>
+		    </div>
+		    <button type="submit" class="btn btn-danger fw-bold">
+		      <i class="fas fa-trash-alt me-2"></i> Delete Event
+		    </button>
+		  </form>
+		</div>
+
+		<!-- View All Events Table -->
+		<div id="view-event-form" class="p-4 bg-white rounded shadow-sm mt-4" style="display: none;">
+		  <h3 class="mb-4 text-primary">All Events</h3>
+		  <div class="table-responsive">
+		    <table class="table table-striped table-bordered">
+		      <thead class="table-dark">
+		        <tr>
+		          <th>Event Name</th>
+		          <th>Date</th>
+		          <th>Time</th>
+		          <th>Place</th>
+		          <th>Description</th>
+		        </tr>
+		      </thead>
+		      <tbody id="eventsTableBody"></tbody>
+		    </table>
+		  </div>
+		</div>
+			
+				<!-- Admin Section -->
+				<div class="content-section" id="admins">
+				  <div class="card-container">
+				    <div class="action-card" onclick="showSection('add')">
+				      <i class="fas fa-user-shield"></i>
+				      <div>Add Admin</div>
+				    </div>
+				    <div class="action-card" onclick="showSection('edit')">
+				      <i class="fas fa-user-edit"></i>
+				      <div>Edit Admin</div>
+				    </div>
+				    <div class="action-card" onclick="showSection('delete')">
+				      <i class="fas fa-user-times"></i>
+				      <div>Delete Admin</div>
+				    </div>
+					<div class="action-card" onclick="showSection('viewAdmins')">
+					  <i class="fas fa-users-cog"></i>
+					  <div>View Admins</div>
+					</div>
+				  </div>
+
+				  <!-- Inline Forms Section -->
+				    <div id="adminForms">
+				      <!-- Add Admin Form -->
+				      <form id="addForm" class="d-none" onsubmit="addAdmin(event)">
+				        <h5>Add Admin</h5>
+				        <div class="row g-2 mb-2">
+				          <div class="col"><input required class="form-control" placeholder="User ID" id="addUserId"></div>
+				          <div class="col"><input required class="form-control" placeholder="Name" id="addName"></div>
+				          <div class="col"><input required class="form-control" placeholder="Department" id="addDept"></div>
+				          <div class="col"><input required class="form-control" type="password" placeholder="Password" id="addPassword"></div>
+				          <div class="col-auto"><button class="btn btn-primary" type="submit">Add</button></div>
+				        </div>
+				      </form>
+
+				      <!-- Edit Admin Form -->
+				      <form id="editForm" class="d-none" onsubmit="editAdmin(event)">
+				        <h5>Edit Admin</h5>
+				        <div class="row g-2 mb-2">
+				          <div class="col">
+				            <select id="editUserIdDropdown" class="form-select" required>
+				              <option value="" disabled selected>Select Admin</option>
+				            </select>
+				          </div>
+				          <div class="col"><input required class="form-control" placeholder="Updated Name" id="editName"></div>
+				          <div class="col"><input required class="form-control" placeholder="Updated Department" id="editDept"></div>
+				          <div class="col"><input required class="form-control" type="password" placeholder="New Password" id="editPassword"></div>
+				          <div class="col-auto"><button class="btn btn-success" type="submit">Update</button></div>
+				        </div>
+				      </form>
+
+				      <!-- Delete Admin Form -->
+				      <form id="deleteAForm" class="d-none" onsubmit="deleteAdmin(event)">
+				        <h5>Delete Admin</h5>
+				        <div class="row g-2 mb-2">
+				          <div class="col">
+				            <select id="deleteUserIdDropdown" class="form-select" required>
+				              <option value="" disabled selected>Select Admin to Delete</option>
+				            </select>
+				          </div>
+				          <div class="col-auto"><button class="btn btn-danger" type="submit">Delete</button></div>
+				        </div>
+				      </form>
+				    
+
+					<!-- Admin Table Section -->
+					<div id="viewAdminsSection" class="d-none">
+					  <h5 class="mt-4">Admin List</h5>
+					  <table class="table table-bordered table-striped" id="adminTable">
+					    <thead>
+					      <tr>
+					        <th>User ID</th>
+					        <th>Name</th>
+					        <th>Department</th>
+					      </tr>
+					    </thead>
+					    <tbody></tbody>
+					  </table>
+					</div>
+			</div>
+		</div>
+</div>
+
+<!-- Toast Container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055">
+  <div id="toastMessage" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body" id="toastBody">Success message here</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<!--JS Logic for admin dashboard-->
+<script>
+    // Fetch all events to populate dropdown
+    async function loadEvents() {
+      try {
+        const res = await fetch("http://localhost:8080/api/events/all");
+        if (!res.ok) throw new Error("Failed to fetch events");
+        const events = await res.json();
+        const select = document.getElementById("eventSelect");
+        events.forEach(event => {
+          const option = document.createElement("option");
+          option.value = event.eventId;
+          option.textContent = event.eventName;
+          select.appendChild(option);
+        });
+      } catch (error) {
+        console.error("Error loading events:", error);
+        //alert("Error loading events, please try again later.");
+      }
+    }
+	
+    // Fetch students registered to a specific event
+    async function loadStudents(eventId) {
+      const container = document.getElementById("studentsContainer");
+      container.innerHTML = "<p>Loading registered students...</p>";
+      try {
+        const res = await fetch(`http://localhost:8080/api/event-registration?eventId=${encodeURIComponent(eventId)}`);
+        if (!res.ok) throw new Error("Failed to fetch registered students");
+        const students = await res.json();
+
+        if (students.length === 0) {
+          container.innerHTML = "<p class='no-data'>No students registered for this event yet.</p>";
+          return;
+        }
+
+        // Create table
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        thead.innerHTML = `
+          <tr>
+            <th>Registration ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Program</th>
+            <th>School</th>
+            <th>Course</th>
+            <th>Year</th>
+            <th>Semester</th>
+          </tr>
+        `;
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+        students.forEach(s => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${s.registrationId}</td>
+            <td>${s.name}</td>
+            <td>${s.collegeMailId}</td>
+            <td>${s.phone}</td>
+            <td>${s.program}</td>
+            <td>${s.school}</td>
+            <td>${s.department}</td>
+            <td>${s.year}</td>
+            <td>${s.semester}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        container.innerHTML = "";
+        container.appendChild(table);
+      } catch (error) {
+        console.error("Error loading registered students:", error);
+        container.innerHTML = "<p class='no-data'>Failed to load registered students.</p>";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadEvents();
+
+      document.getElementById("eventSelect").addEventListener("change", (e) => {
+        const eventId = e.target.value;
+        if (eventId) {
+          loadStudents(eventId);
+        }
+      });
+    });
+  </script>
+
+
+<!-- JS Logic for event-->
+<script>
+	// IDs of all event forms
+	const eventForms = [
+	  'add-event-form',
+	  'update-event-form',
+	  'delete-event-form',
+	  'view-event-form'
+	];
+
+	// Show only one event form or hide all if formId=null
+	function showEventForm(formId) {
+	  eventForms.forEach(id => {
+	    const el = document.getElementById(id);
+	    if (!el) return;
+	    if (id === formId) {
+	      el.classList.add('show');
+	      el.style.display = 'block';
+	    } else {
+	      el.classList.remove('show');
+	      el.style.display = 'none';
+	    }
+	  });
+	}
+
+	// Navigation buttons and sections
+	const navButtons = document.querySelectorAll('.nav-btn');
+	const sections = document.querySelectorAll('.content-section');
+	const sectionTitle = document.getElementById('sectionTitle');
+
+	navButtons.forEach(button => {
+	  button.addEventListener('click', () => {
+	    // Highlight active nav button
+	    navButtons.forEach(btn => btn.classList.remove('active'));
+	    button.classList.add('active');
+
+	    // Show corresponding section
+	    const target = button.getAttribute('data-section');
+	    sections.forEach(section => section.classList.remove('active'));
+	    document.getElementById(target).classList.add('active');
+
+	    // Update section title
+	    sectionTitle.innerText = button.innerText.trim();
+
+	    // Hide all event forms on section switch
+	    showEventForm(null);
+	  });
+	});
+
+	// Toggle functions for event forms (toggle show/hide)
+	function toggleAddEventForm() {
+	  const form = document.getElementById('add-event-form');
+	  if (form.classList.contains('show')) {
+	    showEventForm(null);
+	  } else {
+	    showEventForm('add-event-form');
+	  }
+	}
+
+	function toggleUpdateEventForm() {
+	  const form = document.getElementById('update-event-form');
+	  if (form.style.display === 'block') {
+	    showEventForm(null);
+	  } else {
+	    showEventForm('update-event-form');
+	  }
+	}
+
+	function toggleDeleteEventForm() {
+	  const form = document.getElementById('delete-event-form');
+	  if (form.style.display === 'block') {
+	    showEventForm(null);
+	  } else {
+	    showEventForm('delete-event-form');
+	  }
+	}
+
+	function toggleViewEventForm() {
+	  const form = document.getElementById('view-event-form');
+	  if (form.style.display === 'block') {
+	    showEventForm(null);
+	  } else {
+	    showEventForm('view-event-form');
+	  }
+	}
+
+	// Add event form submission
+	document.getElementById("eventForm").addEventListener("submit", function (e) {
+	  e.preventDefault();
+
+	  const eventData = {
+	    eventName: document.getElementById("eventName").value,
+	    eventDate: document.getElementById("eventDate").value,
+	    eventTime: document.getElementById("eventTime").value,
+	    eventPlace: document.getElementById("eventPlace").value,
+	    eventDescription: document.getElementById("eventDescription").value,
+	    eventImage: document.getElementById("eventImage").value
+	  };
+
+	  fetch("http://localhost:8080/api/events/add", {
+	    method: "POST",
+	    headers: { "Content-Type": "application/json" },
+	    body: JSON.stringify(eventData)
+	  })
+	  .then(response => {
+	    if (!response.ok) throw new Error("Failed to add event");
+	    return response.json();
+	  })
+	  .then(data => {
+	    showToast("Event added successfully: " + data.eventName);
+	    this.reset();
+	    showEventForm(null);
+	    fetchEventsDropdown();
+	  })
+	  .catch(error => {
+	    console.error("Error:", error);
+	    showToast("Error adding event", true);
+	  });
+	});
+
+	// Fetch events and populate dropdowns and table
+	async function fetchEventsDropdown() {
+	  try {
+	    const res = await fetch("http://localhost:8080/api/events/all");
+	    if (!res.ok) throw new Error('Failed to fetch events');
+	    const events = await res.json();
+
+	    // Update dropdowns
+	    const updateSel = document.getElementById("updateEventSelect");
+	    const deleteSel = document.getElementById("deleteEventSelect");
+	    if (updateSel && deleteSel) {
+	      updateSel.innerHTML = deleteSel.innerHTML = `<option value="" disabled selected>Select an event</option>`;
+	      events.forEach(event => {
+	        const opt = new Option(event.eventName, event.eventId);
+	        updateSel.appendChild(opt.cloneNode(true));
+	        deleteSel.appendChild(opt.cloneNode(true));
+	      });
+	    }
+
+	    // Update table
+	    const tbody = document.getElementById("eventsTableBody");
+	    if (tbody) {
+	      tbody.innerHTML = "";
+	      events.forEach(ev => {
+	        const row = `
+	          <tr>
+	            <td>${ev.eventName}</td>
+	            <td>${ev.eventDate}</td>
+	            <td>${ev.eventTime}</td>
+	            <td>${ev.eventPlace}</td>
+	            <td>${ev.eventDescription}</td>
+	          </tr>`;
+	        tbody.innerHTML += row;
+	      });
+	    }
+
+	    // Update Event Cards on index.html
+	    const container = document.getElementById("eventCardsContainer");
+	    if (container) {
+	      container.innerHTML = "";
+	      events.forEach(event => {
+	        const imageSource = event.eventImage.startsWith("data:image") ? event.eventImage : `data:image/jpeg;base64,${event.eventImage}`;
+	        const card = `
+	          <div class="col-md-4">
+	            <div class="card bg-dark text-white h-100 shadow-lg">
+	              <img src="${imageSource}" class="card-img-top" alt="${event.eventName}" style="height: 200px; object-fit: cover;">
+	              <div class="card-body">
+	                <h5 class="card-title">${event.eventName}</h5>
+	                <p class="card-text"><strong>Date:</strong> ${event.eventDate}</p>
+	                <p class="card-text"><strong>Time:</strong> ${event.eventTime}</p>
+	                <p class="card-text"><strong>Place:</strong> ${event.eventPlace}</p>
+	                <p class="card-text">${event.eventDescription}</p>
+	              </div>
+	            </div>
+	          </div>`;
+	        container.innerHTML += card;
+	      });
+	    }
+	  } catch (error) {
+	    console.error('Error fetching events:', error);
+	    showToast('Error loading events', true);
+	  }
+	}
+
+
+	// Update event select change handler to fill form with data
+	document.getElementById("updateEventSelect").addEventListener("change", async (e) => {
+	  const eventId = e.target.value;
+	  if (!eventId) return;
+	  try {
+	    const res = await fetch(`http://localhost:8080/api/events/${eventId}`);
+	    if (!res.ok) throw new Error('Failed to fetch event details');
+	    const data = await res.json();
+
+	    document.getElementById("updateEventName").value = data.eventName || "";
+	    document.getElementById("updateEventDate").value = data.eventDate || "";
+	    document.getElementById("updateEventTime").value = data.eventTime || "";
+	    document.getElementById("updateEventPlace").value = data.eventPlace || "";
+	    document.getElementById("updateEventDescription").value = data.eventDescription || "";
+	    document.getElementById("updateEventImage").value = data.eventImage || "";
+
+	  } catch (error) {
+	    console.error("Error fetching event details:", error);
+	    showToast("Error loading event details", true);
+	  }
+	});
+
+	// Update event form submission
+	document.getElementById("updateForm").addEventListener("submit", async function (e) {
+	  e.preventDefault();
+	  const eventId = document.getElementById("updateEventSelect").value;
+	  if (!eventId) {
+	    showToast("Please select an event to update", true);
+	    return;
+	  }
+
+	  const payload = {
+	    eventName: document.getElementById("updateEventName").value,
+	    eventDate: document.getElementById("updateEventDate").value,
+	    eventTime: document.getElementById("updateEventTime").value,
+	    eventPlace: document.getElementById("updateEventPlace").value,
+	    eventDescription: document.getElementById("updateEventDescription").value,
+	    eventImage: document.getElementById("updateEventImage").value
+	  };
+
+	  try {
+	    const response = await fetch(`http://localhost:8080/api/events/update/${eventId}`, {
+	      method: "PUT",
+	      headers: { "Content-Type": "application/json" },
+	      body: JSON.stringify(payload)
+	    });
+
+	    if (!response.ok) throw new Error("Failed to update event");
+
+	    showToast("Event updated successfully");
+	    await fetchEventsDropdown();
+	    showEventForm(null);
+
+	  } catch (error) {
+	    console.error("Error updating event:", error);
+	    showToast("Error updating event", true);
+	  }
+	});
+
+	// Delete event form submission
+	document.getElementById("deleteForm").addEventListener("submit", async function (e) {
+	  e.preventDefault();
+	  const eventId = document.getElementById("deleteEventSelect").value;
+	  if (!eventId) {
+	    showToast("Please select an event to delete", true);
+	    return;
+	  }
+	  if (confirm("Are you sure you want to delete this event?")) {
+	    try {
+	      const res = await fetch(`http://localhost:8080/api/events/delete/${eventId}`, { method: "DELETE" });
+	      if (!res.ok) throw new Error("Failed to delete event");
+
+	      showToast("Event deleted successfully");
+	      await fetchEventsDropdown();
+	      showEventForm(null);
+
+	    } catch (error) {
+	      console.error("Error deleting event:", error);
+	      showToast("Error deleting event", true);
+	    }
+	  }
+	});
+
+	// Initial fetch of events for dropdown and table
+	fetchEventsDropdown();
+</script>
+
+<!-- JS for student-->
+<script>
+  function showsection(sectionId) {
+    const sections = ['addStudentForm', 'updateStudentForm', 'deleteStudentForm', 'viewStudentSection'];
+    sections.forEach(id => {
+      document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
+    });
+
+    if (sectionId === 'updateStudentForm' || sectionId === 'deleteStudentForm') {
+      populateStudentDropdowns(); // load dropdowns when those forms are shown
+    }
+
+    if (sectionId === 'viewStudentSection') {
+      viewStudents();
+    }
+  }
+
+  function submitStudent(e, action) {
+    e.preventDefault();
+
+    let regId, data, url, method;
+
+    if (action === 'add') {
+      data = {
+        registrationId: document.getElementById("addRegId").value,
+        email: document.getElementById("addEmail").value,
+        password: document.getElementById("addPassword").value
+      };
+      url = '/students/add';
+      method = 'POST';
+    } 
+    else if (action === 'update') {
+      regId = document.getElementById("updateRegId").value;
+      data = {
+        registrationId: regId,
+        email: document.getElementById("updateEmail").value,
+        password: document.getElementById("updatePassword").value
+      };
+      url = `/students/update/${regId}`;
+      method = 'PUT';
+    } 
+    else if (action === 'delete') {
+      regId = document.getElementById("deleteRegId").value;
+      url = `/students/delete/${regId}`;
+      method = 'DELETE';
+      data = null;
+    }
+
+    fetch(url, {
+      method: method,
+      headers: { "Content-Type": "application/json" },
+      body: method !== 'DELETE' ? JSON.stringify(data) : null
+    })
+    .then(res => res.text())
+    .then(msg => {
+      showToast(msg, false);
+      document.querySelector(`#${action}StudentForm form`).reset();
+      viewStudents();
+      populateStudentDropdowns(); // refresh dropdowns
+    })
+	.catch(err => {
+	  console.error(err);
+	  showToast("Error: " + err.message, true); // true = error
+	});
+  }
+
+  function viewStudents() {
+    fetch("/students/all")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#studentTable tbody");
+        tbody.innerHTML = "";
+        data.forEach(s => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${s.registrationId}</td>
+              <td>${s.email}</td>
+              <td>${s.password}</td>
+            </tr>`;
+        });
+      });
+  }
+
+  function filterStudents() {
+    const filter = document.getElementById('studentSearch').value.toLowerCase();
+    const rows = document.querySelector("#studentTable tbody").getElementsByTagName('tr');
+
+    Array.from(rows).forEach(row => {
+      const regId = row.getElementsByTagName('td')[0].textContent.toLowerCase();
+      const email = row.getElementsByTagName('td')[1].textContent.toLowerCase();
+
+      row.style.display = (regId.includes(filter) || email.includes(filter)) ? "" : "none";
+    });
+  }
+
+  function populateStudentDropdowns() {
+    fetch("/students/all")
+      .then(res => res.json())
+      .then(data => {
+        const updateDropdown = document.getElementById('updateSelect');
+        const deleteDropdown = document.getElementById('deleteRegId');
+
+        updateDropdown.innerHTML = `<option value="" disabled selected>Select a student</option>`;
+        deleteDropdown.innerHTML = `<option value="" disabled selected>Select a student</option>`;
+
+        data.forEach(s => {
+          const option = `<option value="${s.registrationId}">${s.registrationId} - ${s.email}</option>`;
+          updateDropdown.innerHTML += option;
+          deleteDropdown.innerHTML += option;
+        });
+      });
+  }
+
+  function fillUpdateFields() {
+    const selectedId = document.getElementById('updateSelect').value;
+    if (!selectedId) return;
+
+    fetch(`/students/${selectedId}`)
+      .then(res => res.json())
+      .then(student => {
+        document.getElementById("updateRegId").value = student.registrationId;
+        document.getElementById("updateEmail").value = student.email;
+        document.getElementById("updatePassword").value = student.password;
+      });
+  }
+
+  // Call viewStudents initially
+  document.addEventListener('DOMContentLoaded', () => {
+    viewStudents();
+  });
+</script>
+
+
+
+
+
+
+
+<!-- JS Section for admin-->
+<script>
+  const API_URL = 'http://localhost:8080/api/admins';
+  let adminVisible = false;
+
+  function showSection(type) {
+    // Hide all sections
+	
+    document.getElementById('addForm').classList.add('d-none');
+    document.getElementById('editForm').classList.add('d-none');
+    document.getElementById('deleteAForm').classList.add('d-none');
+    document.getElementById('viewAdminsSection').classList.add('d-none');
+
+    // Show the requested section
+    if (type === 'add') {
+      document.getElementById('addForm').classList.remove('d-none');
+    } else if (type === 'edit') {
+      document.getElementById('editForm').classList.remove('d-none');
+    } else if (type === 'delete') {
+      document.getElementById('deleteAForm').classList.remove('d-none');
+    } else if (type === 'viewAdmins') {
+      document.getElementById('viewAdminsSection').classList.remove('d-none');
+      fetchAdmins();
+    }
+  }
+
+  function fetchAdmins() {
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector('#adminTable tbody');
+        tbody.innerHTML = '';
+        data.forEach(admin => {
+          tbody.innerHTML += `<tr><td>${admin.userId}</td><td>${admin.name}</td><td>${admin.department}</td></tr>`;
+        });
+        populateAdminDropdowns(data);
+      });
+  }
+
+  function populateAdminDropdowns(admins) {
+    const editDropdown = document.getElementById("editUserIdDropdown");
+    const deleteDropdown = document.getElementById("deleteUserIdDropdown");
+    editDropdown.innerHTML = `<option value="" disabled selected>Select Admin</option>`;
+    deleteDropdown.innerHTML = `<option value="" disabled selected>Select Admin to Delete</option>`;
+    admins.forEach(admin => {
+      const option = `<option value="${admin.userId}">${admin.userId} - ${admin.name}</option>`;
+      editDropdown.innerHTML += option;
+      deleteDropdown.innerHTML += option;
+    });
+  }
+
+  function addAdmin(e) {
+    e.preventDefault();
+
+    const userId = document.getElementById('addUserId').value.trim();
+    const name = document.getElementById('addName').value.trim();
+    const department = document.getElementById('addDept').value.trim();
+    const password = document.getElementById('addPassword').value;
+
+    // Simple validation
+    if (!userId || !name || !department || !password) {
+      showToast("Please fill in all fields to add an admin.", true);
+      return;
+    }
+
+    const admin = { userId, name, department, password };
+
+    fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(admin)
+    })
+      .then(response => {
+        if (response.status === 409) {
+          // Conflict (already exists)
+          return response.text().then(msg => { throw new Error(msg); });
+        }
+        if (!response.ok) {
+          return response.text().then(msg => { throw new Error("Failed to add admin. " + msg); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        showToast(`Admin ${data.name} added successfully.`, false);
+        fetchAdmins();
+        e.target.reset();
+      })
+      .catch(error => {
+        console.error("Add admin error:", error);
+        showToast(error.message, true);
+      });
+  }
+
+
+  function editAdmin(e) {
+    e.preventDefault();
+
+    const userId = document.getElementById('editUserIdDropdown').value;
+    const name = document.getElementById('editName').value.trim();
+    const department = document.getElementById('editDept').value.trim();
+    const password = document.getElementById('editPassword').value;
+
+    // Basic validation
+    if (!userId || !name || !department || !password) {
+      showToast("Please fill in all fields to update the admin.", true);
+      return;
+    }
+
+    const admin = { userId, name, department, password };
+
+    fetch(API_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(admin)
+    })
+      .then(response => {
+        if (response.status === 404) {
+          return response.text().then(msg => { throw new Error(msg); });
+        }
+        if (!response.ok) {
+          return response.text().then(msg => { throw new Error("Failed to update admin. " + msg); });
+        }
+        return response.json();
+      })
+      .then(data => {
+        showToast(`Admin ${data.name} updated successfully.`, false);
+        fetchAdmins();
+        e.target.reset();
+      })
+      .catch(error => {
+        console.error("Edit admin error:", error);
+        showToast(error.message, true);
+      });
+  }
+
+
+  function deleteAdmin(e) {
+    e.preventDefault();
+
+    const userId = document.getElementById('deleteUserIdDropdown').value;
+
+    if (!userId) {
+      showToast("Please select an admin to delete.", true);
+      return;
+    }
+
+    const confirmDelete = confirm(`Are you sure you want to delete Admin with ID: ${userId}?`);
+    if (!confirmDelete) return;
+
+    fetch(`${API_URL}/${userId}`, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to delete admin.");
+        return response.text();
+      })
+      .then(message => {
+        showToast(message, false);
+        fetchAdmins();
+        e.target.reset();
+      })
+      .catch(error => {
+        console.error("Delete failed:", error);
+        showToast("An error occurred while deleting the admin.", true);
+      });
+  }
+
+  window.onload = fetchAdmins;
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+	function showToast(message, isError) {
+	  const toastEl = document.getElementById('toastMessage');
+	  const toastBody = document.getElementById('toastBody');
+
+	  // Set toast color
+	  if (isError) {
+	    toastEl.classList.remove('text-bg-success');
+	    toastEl.classList.add('text-bg-danger');
+	  } else {
+	    toastEl.classList.remove('text-bg-danger');
+	    toastEl.classList.add('text-bg-success');
+	  }
+
+	  toastBody.textContent = message;
+	  const toast = new bootstrap.Toast(toastEl);
+	  toast.show();
+	}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
