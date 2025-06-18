@@ -6,9 +6,9 @@ This project is a **Result Management System (RMS)** developed as part of the TE
 
 ## 🔍 Overview
 
-- Admin Panel to manage students, courses, and marks.
-- Upload results in bulk using Excel templates.
-- View individual and department-wise performance.
+- Admin Panel to manage students, courses, and semester.
+- Faculty can upload results in bulk using Excel templates.
+- Students View individual and department-wise performance.
 - Export results to downloadable formats.
 - Responsive UI using Bootstrap and Thymeleaf.
 
@@ -57,9 +57,9 @@ TECHMAHINDRA-2025/
 ---
 
 🔐 Admin Login Credentials
-Username	Password
-admin	admin123
-
+Username :admin 
+Password : admin123
+	
 These are default credentials. You can change them in the code or directly in the database.
 
 ---
@@ -69,8 +69,8 @@ The system supports uploading student results through an Excel sheet.
 
 Expected format:
 
-Reg No	Name	Subject1	Subject2	Subject3	Total	Grade
-1001	John Doe	89	76	92	257	A
+Reg No |	Name	| Subject1|	Subject2|	Subject3|	Total|	Grade
+1001|John Doe	|89|	76|	92|	257|	A
 
 To upload:
 
