@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            min-height: 100vh;
+        }
+        .card {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-white">
+            <h4>Add New Course</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/courses}" th:object="${course}" method="post">
+                
+                <div class="mb-3">
+                    <label for="cname" class="form-label">Course Name</label>
+                    <input type="text" th:field="*{cname}" class="form-control" id="cname" placeholder="Enter Full Name" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="credit" class="form-label">Credit</label>
+                    <input type="text" th:field="*{credit}" class="form-control" id="email" placeholder="Enter Credit" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="ctype" class="form-label">Course Type</label>
+                    <input type="text" th:field="*{ctype}" class="form-control" id="ctype" placeholder="Enter Course Type" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="faculty">Faculty:</label>
+            <select th:field="*{faculty.facultyId}" name="faculty" required>
+                <option th:each="faculty : ${faculties}" 
+                        th:value="${faculty.facultyId}" 
+                        th:text="${faculty.name}"></option>
+            </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Save Course</button>
+                    <a th:href="@{/courses}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

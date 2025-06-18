@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Attendance</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            padding: 30px;
+        }
+        .form-container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        select {
+            padding: 6px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1 th:text="'Edit Attendance for ' + ${course.cname}"></h1>
+
+    <form th:action="@{/attendances/update}" method="post">
+        <table>
+            <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="att : ${attendances}">
+                <td th:text="${att.student.name}"></td>
+                <td>
+                    <input type="hidden" name="attendanceIds" th:value="${att.id}"/>
+                    <select name="statuses">
+                        <option value="Present" th:selected="${att.status == 'Present'}">Present</option>
+                        <option value="Absent" th:selected="${att.status == 'Absent'}">Absent</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <button type="submit">Update Attendance</button>
+    </form>
+
+    <a th:href="@{/attendances}" class="back-link">Back to List</a>
+</div>
+</body>
+</html>

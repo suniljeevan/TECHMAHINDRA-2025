@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit [[${entityName}]]</title>
+
+    <!-- CSS Styles (same as create.html) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F4F6F8;
+        }
+
+        h2 {
+            color: #2C3E50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #BDC3C7;
+            background-color: #ECF0F1;
+            border-radius: 8px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #BDC3C7;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980B9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #3498DB;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit [[${entityName}]]</h2>
+
+    <form th:action="@{'/' + ${entityPath} + '/update/' + ${object[idField]} }" th:object="${object}" method="post">
+
+        <!-- Hidden ID Field -->
+        <input type="hidden" th:field="*{__${idField}__}" />
+
+        <!-- Dynamic Form Fields -->
+        <div th:each="field : ${fields}">
+            <label th:for="${field}" th:text="${field}"></label>
+
+            <!-- Handle dropdowns for related entities -->
+            <div th:if="${field == 'student'}">
+                <select th:field="*{student}">
+                    <option th:each="s : ${students}" th:value="${s}" th:text="${s.name}"></option>
+                </select>
+            </div>
+            <div th:if="${field == 'course'}">
+                <select th:field="*{course}">
+                    <option th:each="c : ${courses}" th:value="${c}" th:text="${c.name}"></option>
+                </select>
+            </div>
+            <div th:if="${field == 'faculty'}">
+                <select th:field="*{faculty}">
+                    <option th:each="f : ${faculties}" th:value="${f}" th:text="${f.name}"></option>
+                </select>
+            </div>
+            <div th:if="${field == 'department'}">
+                <select th:field="*{department}">
+                    <option th:each="d : ${departments}" th:value="${d}" th:text="${d.name}"></option>
+                </select>
+            </div>
+
+            <!-- Other normal fields -->
+            <div th:if="${field != 'student' and field != 'course' and field != 'faculty' and field != 'department'}">
+                <input type="text" th:attr="name=${field}" th:value="*{__${field}__}" th:placeholder="|Enter ${field}|" />
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Update</button>
+    </form>
+
+    <!-- Back to List Link -->
+    <a th:href="@{'/' + ${entityPath}}">Back to List</a>
+</body>
+</html>

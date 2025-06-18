@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Examination</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            min-height: 100vh;
+        }
+        .card {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center bg-primary text-white">
+            <h4>Add New Exam</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/exams}" th:object="${exam}" method="post">
+                
+                <div class="mb-3">
+                    <label for="examName" class="form-label">Exam Name</label>
+                    <input type="text" th:field="*{examName}" class="form-control" id="examName" placeholder="Enter Name of Exam" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="text" th:field="*{date}" class="form-control" id="date" placeholder="Enter Date of Exam" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="totalMarks" class="form-label">Total Marks</label>
+                    <input type="text" th:field="*{totalMarks}" class="form-control" id="totalMarks" placeholder="Enter Maximum marks" required>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="course">Course:</label>
+            <select th:field="*{course.cid}" name="course" required>
+                <option th:each="course : ${courses}" 
+                        th:value="${course.cid}" 
+                        th:text="${course.cname}"></option>
+            </select>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Save Exam</button>
+                    <a th:href="@{/exams}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
