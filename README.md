@@ -48,7 +48,7 @@ It includes secure login via JWT tokens, role-based access control, and provides
          - Maven clean
          - Maven Install
          - Spring Boot App
-- In your default browser, type localhost:3304
+- In your default browser, type localhost:9954
 - For AUTHENTICATION MICROSERVICES'S verification,
          - Open Postman
          - POST data
