@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        margin: 0; /* remove default margin */
+        height: 100vh; /* ensure body takes full height */
+        background-image: url('../images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 80px;
+
+    }
+    .container {
+        margin-top: 27.5px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 15px;
+    }
+    .card {
+        background-color: transparent;
+    }
+    .container a, .container form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+    .container tbody a{
+        display: unset;
+        margin-left: unset;
+        justify-content:unset;
+        text-align: unset;
+        align-items: unset;
+    }
+    .container h1{
+        padding-top: 25px;
+        text-align: center;
+    }
+    .container form div{
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+        background-color: transparent;
+    }
+    .container form, .form-group input, .form-group input:focus, .form-group input.transparent-input {
+        background-color: transparent;
+        color: white;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Add New Student</h1>
+        <form action="/students" method="post">
+            <div class="form-group">
+                <label for="sid">Student ID</label>
+                <input type="text" class="form-control" id="sid" name="sid" required>
+            </div>
+            <div class="form-group">
+                <label for="sname">Name</label>
+                <input type="text" class="form-control" id="sname" name="sname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="text" class="form-control" id="contact" name="contact" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Save Student</button>
+        </form>
+        <a href="/students" class="btn btn-secondary mt-3">Back to Students List</a>
+    </div>
+</body>
+</html>

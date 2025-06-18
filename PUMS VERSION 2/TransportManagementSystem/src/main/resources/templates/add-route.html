@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Route</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0; /* remove default margin */
+        height: 100vh; /* ensure body takes full height */
+        background-image: url('../images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        margin-top: 27.5px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 20px;
+    }
+    .container a, .container button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+    .container tbody a{
+        display: unset;
+        margin-left: unset;
+        justify-content:unset;
+        text-align: unset;
+        align-items: unset;
+    }
+    .container h2{
+        padding-top: 10px;
+        text-align: center;
+    }
+    .container table {
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+    }
+    select.form-select {
+        background-color: transparent;
+        color: white; /* adjust based on your background */
+    }
+
+    select.form-select option {
+        background-color: transparent !important;
+        color: #000; /* or any color that ensures readability */
+    }
+</style>
+<body>
+    <div class="container mt-5">
+        <h2>Add Route</h2>
+        <form th:action="@{/routes/addRoute}" method="post">
+            <div class="mb-3">
+                <label for="studentId" class="form-label">Select Student:</label>
+                <select name="studentId" id="studentId" class="form-select" required>
+                    <option th:each="student : ${students}" 
+                            th:value="${student.sid}" 
+                            th:text="${student.sid + ' - ' + student.sname}">
+                    </option>
+                </select>
+            </div>
+
+            <button type="button" class="btn btn-info mt-3" id="findBusesBtn">Find Buses</button>
+
+            <div id="busSelection" class="mt-3" style="display:none;">
+                <label for="busNo" class="form-label">Select Bus:</label>
+                <select name="busNo" id="busNo" class="form-select" required>
+                    <!-- Available buses will be added dynamically here -->
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Add Route</button>
+            <a href="/routes" class="btn btn-secondary mt-3">Back to List</a>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#findBusesBtn').click(function() {
+                const studentId = $('#studentId').val();
+                if (studentId) {
+                    // Send AJAX request to get buses for the student's location
+                    $.ajax({
+                        url: '/routes/findBuses',
+                        method: 'GET',
+                        data: { studentId: studentId },
+                        success: function(buses) {
+                            const busSelect = $('#busNo');
+                            busSelect.empty();  // Clear existing options
+                            if (buses.length > 0) {
+                                buses.forEach(function(bus) {
+                                    busSelect.append(new Option(bus.busNo + ' - ' + bus.driverName, bus.busNo));
+                                });
+                                $('#busSelection').show();  // Show bus selection
+                            } else {
+                                alert('No buses available for this location.');
+                                $('#busSelection').hide();
+                            }
+                        },
+                        error: function() {
+                            alert('Error retrieving buses.');
+                        }
+                    });
+                } else {
+                    alert('Please select a student first.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

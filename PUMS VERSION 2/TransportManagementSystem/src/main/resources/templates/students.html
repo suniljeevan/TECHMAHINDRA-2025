@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        margin: 0; /* remove default margin */
+        height: 100vh; /* ensure body takes full height */
+        background-image: url('../images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        margin-top: 27.5px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 20px;
+    }
+    .container a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+    .container tbody a{
+        display: unset;
+        margin-left: unset;
+        justify-content:unset;
+        text-align: unset;
+        align-items: unset;
+    }
+    .container h1{
+        padding-top: 10px;
+        text-align: center;
+    }
+    .container table {
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+    }
+    .container a ion-icon {
+        font-size: 25px;
+    }
+</style>
+<body>
+<div class="container">
+    <h1>Students List</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.sid}"></td>
+            <td th:text="${student.sname}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.contact}"></td>
+            <td th:text="${student.location}"></td>
+            <td>
+                <a th:href="@{/students/edit/{sid}(sid=${student.sid})}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{/students/delete/{sid}(sid=${student.sid})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <span></span>
+    <a href="/students/new" class="btn btn-primary mb-3">Add New Student</a>
+    <a href="#" th:href="@{/dashboard}" class="btn btn-success mb-3"><ion-icon name="caret-back-outline"></ion-icon></a>
+</div>
+
+<!--    <a href="/dashboard">Back to Dashboard</a>-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup | Transport Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0; /* remove default margin */
+            height: 100vh; /* ensure body takes full height */
+            background-image: url('../images/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .signup-container {
+            margin-top: 27.5px;
+            background-color: rgba(0, 4, 53, .9);
+            color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+            max-width: 400px;
+            width: 100%;
+            padding: 30px;
+        }
+
+        .signup-container h2 {
+            padding-top: 10px;
+            text-align: center;
+        }
+        .signup-container form div, .form-group div input, .form-group div input:focus, .form-group div input.transparent-input {
+            background-color: transparent;
+            color: white;
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        select.form-select {
+            background-color: transparent;
+            color: white; /* adjust based on your background */
+        }
+
+        select.form-select option {
+            background-color: transparent !important;
+            color: #000; /* or any color that ensures readability */
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2 class="text-center">Create an Account</h2>
+        <form th:action="@{/signup}" method="post" class="form-group">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select name="role" class="form-select">
+                    <option value="ADMIN">Admin</option>
+                    <option value="USER">User</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+        <div class="login-link">
+            <p>Already have an account? <a th:href="@{/login}">Login here</a></p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

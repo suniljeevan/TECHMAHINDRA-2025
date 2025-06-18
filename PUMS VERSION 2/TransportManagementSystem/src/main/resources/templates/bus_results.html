@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Results | Transport Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0; /* remove default margin */
+            height: 100vh; /* ensure body takes full height */
+            background-image: url('../images/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            margin-top: 27.5px;
+            background-color: rgba(0, 4, 53, .9);
+            color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+            width: 75%;
+            padding-bottom: 20px;
+        }
+        .container a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 20dvw;
+            margin-left: 35%;
+            /* optional */
+        }
+        .container tbody a {
+            display: unset;
+            margin-left: unset;
+            justify-content:unset;
+            text-align: unset;
+            align-items: unset;
+        }
+        .container h2 {
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .container .available ul li, .container .available ul li span{
+            background-color: transparent !important;
+            border: 0;
+            color: white;
+        }
+
+        .list-group-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 15px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .list-group-item:hover {
+            background-color: #e6f7ff;
+            transform: translateY(-5px);
+        }
+
+        .list-group-item strong {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .list-group-item span {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .alert {
+            margin-top: 20px;
+            text-align: center;
+            background-color: transparent !important;
+            border: 0;
+            color: white;
+        }
+
+        .btn-back {
+            margin-top: 30px;
+            display: block;
+            width: 100%;
+            background-color: #28a745;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Buses Available</h2>
+    <div th:if="${#lists.isEmpty(buses)}">
+        <div class="alert alert-warning">
+            No buses found for your search.
+        </div>
+    </div>
+    <div th:unless="${#lists.isEmpty(buses)}" class="available">
+        <ul class="list-group">
+            <li class="list-group-item" th:each="bus : ${buses}">
+                <strong th:text="${bus.bus.driverName}">Driver Name</strong> - College to
+                <!-- Display dynamic origin (College) and user-selected destination -->
+                <span th:text="${userDestination}"></span> -
+                <span th:text="${bus.departureTimes[0]}">Departure Time</span>
+            </li>
+        </ul>
+    </div>
+    <a href="/findBus" class="btn-back">Back to Search</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

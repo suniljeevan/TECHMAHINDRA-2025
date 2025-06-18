@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Bus Schedule Management</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<style>
+		body {
+            margin: 0; /* remove default margin */
+            height: 100vh; /* ensure body takes full height */
+            background-image: url('../images/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 80px;
+
+        }
+        .container {
+            margin-top: 27.5px;
+            background-color: rgba(0, 4, 53, .9);
+            color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+            width: 75%;
+            padding-bottom: 15px;
+        }
+        .card {
+            background-color: transparent;
+        }
+        .container a, .container form button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 20dvw;
+            margin-left: 35%;
+            /* optional */
+        }
+        .container tbody a{
+            display: unset;
+            margin-left: unset;
+            justify-content:unset;
+            text-align: unset;
+            align-items: unset;
+        }
+        .container h2{
+            padding-top: 25px;
+            text-align: center;
+        }
+        .container form div{
+            margin-top: 15px;
+            padding-top: 2px;
+            color: white;
+            background-color: transparent;
+        }
+        .container form div, .form-group input, .form-group input:focus, .form-group input.transparent-input {
+            background-color: transparent;
+            color: white;
+        }
+        .dynamic-days-container {
+            margin-top: 20px;
+            min-height: 50px; /* Ensures container is visible */
+        }
+
+        .day-entry {
+            margin-bottom: 10px;
+        }
+
+        select.form-select {
+            background-color: transparent;
+            color: white; /* adjust based on your background */
+        }
+
+        select.form-select option {
+            background-color: transparent !important;
+            color: #000; /* or any color that ensures readability */
+        }
+		.container a ion-icon {
+			font-size: 25px;
+		}
+	</style>
+</head>
+<body>
+
+<div class="container mt-5">
+	<h2>Manage Bus Schedule</h2>
+	<form method="POST" th:action="@{/addBusSchedule}" class="form-group">
+		<div class="mb-3">
+			<label for="busNo" class="form-label">Bus Number</label>
+			<input type="text" id="busNo" name="busNo" class="form-control" required>
+		</div>
+
+		<div class="dynamic-days-container">
+			<div class="day-entry">
+				<label for="day1" class="form-label">Select Day</label>
+				<select id="day1" name="daysRunning" class="form-select" required>
+					<option value="">--Select Day--</option>
+					<option value="Monday">Monday</option>
+					<option value="Tuesday">Tuesday</option>
+					<option value="Wednesday">Wednesday</option>
+					<option value="Thursday">Thursday</option>
+					<option value="Friday">Friday</option>
+					<option value="Saturday">Saturday</option>
+					<option value="Sunday">Sunday</option>
+				</select>
+				<label for="departureTime1" class="form-label">Departure Time</label>
+				<input type="time" id="departureTime1" name="departureTimes" class="form-control" required>
+			</div>
+		</div>
+
+		<button type="button" id="addDay" class="btn btn-outline-primary mt-3">Add Day</button>
+
+		<div class="mb-3 mt-4">
+			<button type="submit" class="btn btn-success mt-3">Save Bus Schedule</button>
+		</div>
+	</form>
+	<a href="#" th:href="@{/dashboard}" class="btn btn-success mb-3"><ion-icon name="caret-back-outline"></ion-icon></a>
+
+</div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+	document.getElementById('addDay').addEventListener('click', function() {
+        const container = document.querySelector('.dynamic-days-container');
+        const currentDays = document.querySelectorAll('.day-entry').length;
+        
+        if (currentDays < 7) {
+            const newDayEntry = document.createElement('div');
+            newDayEntry.classList.add('day-entry');
+
+            newDayEntry.innerHTML = `
+                <label for="day${currentDays + 1}" class="form-label">Select Day</label>
+                <select id="day${currentDays + 1}" name="daysRunning" class="form-select" required>
+                    <option value="">--Select Day--</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <label for="departureTime${currentDays + 1}" class="form-label">Departure Time</label>
+                <input type="time" id="departureTime${currentDays + 1}" name="departureTimes" class="form-control" required>
+            `;
+
+            container.appendChild(newDayEntry);
+        }
+    });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
