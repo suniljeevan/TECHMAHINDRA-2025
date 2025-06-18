@@ -40,37 +40,69 @@ This project is a **Result Management System (RMS)** developed as part of the TE
 
 ## 📁 Project Structure
 
-TECHMAHINDRA-2025/
-└── result-management/
-├── src/
-│ ├── main/
-│ │ ├── java/
-│ │ │ └── com/result/management/
-│ │ │ ├── controller/ # Controllers for admin & results
-│ │ │ ├── model/ # Entity classes (Student, Course, etc.)
-│ │ │ └── service/ # Business logic and helpers
-│ │ └── resources/
-│ │ ├── templates/ # Thymeleaf HTML files
-│ │ └── application.properties
-├── pom.xml
+TECHMAHINDRA-2025/  
+└── result-management/  
+  ├── src/  
+  │  ├── main/  
+  │  │  ├── java/  
+  │  │  │  └── com/result/management/  
+  │  │  │    ├── controller/    # Controllers for admin & results  
+  │  │  │    ├── model/        # Entity classes (Student, Course, etc.)  
+  │  │  │    └── service/      # Business logic and helpers  
+  │  ├── resources/  
+  │  │  ├── templates/    # Thymeleaf HTML templates  
+  │  │  └── application.properties # App configuration  
+  ├── pom.xml       # Maven build configuration
+
+
+---
+## 🔐 Login Credentials
+
+| User Role | Username | Password   | Notes                          |
+|-----------|----------|------------|--------------------------------|
+| Admin     | admin    | admin123   | Full access to upload, edit, and manage results |
+| Faculty   | faculty1 | faculty123 | Access to view and upload marks for assigned subjects |
+| Student   | student1 | student123 | View personal results and performance |
+
+> 📝 These credentials can be updated manually in the database or configured via the user registration/login module.
 
 ---
 
-🔐 Admin Login Credentials
-Username :admin 
-Password : admin123
-	
-These are default credentials. You can change them in the code or directly in the database.
+## 📄 Data Upload Format
+
+The system supports bulk data upload via Excel files. Below are the required formats for each type of data:
 
 ---
 
-📥 Excel Upload Template
-The system supports uploading student results through an Excel sheet.
+### 📘 1. Student Upload Format
 
-Expected format:
+| Reg No | Name        | Department | Semester | Email               |
+|--------|-------------|------------|----------|---------------------|
+| 1001   | John Doe    | CSE        | 4        | john@example.com    |
+| 1002   | Jane Smith  | ECE        | 3        | jane@example.com    |
 
-Reg No |	Name	| Subject1|	Subject2|	Subject3|	Total|	Grade
-1001|John Doe	|89|	76|	92|	257|	A
+---
+
+### 📘 2. Course Upload Format
+
+| Course Code | Course Name         | Credits | Department |
+|-------------|---------------------|---------|------------|
+| CSE101      | Data Structures     | 4       | CSE        |
+| ECE201      | Digital Electronics | 3       | ECE        |
+
+---
+
+### 📘 3. Result Upload Format
+
+| Reg No | Name        | Subject 1 | Subject 2 | Subject 3 | Total | Grade |
+|--------|-------------|-----------|-----------|-----------|-------|--------|
+| 1001   | John Doe    | 80        | 75        | 85        | 240   | A      |
+| 1002   | Jane Smith  | 60        | 70        | 65        | 195   | B      |
+
+> ✅ Ensure that Reg No matches the student database before uploading results.
+
+---
+
 
 To upload:
 
