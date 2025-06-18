@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Bus</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        margin: 0; /* remove default margin */
+        height: 100vh; /* ensure body takes full height */
+        background-image: url('/images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 80px;
+
+    }
+    .container {
+        margin-top: 27.5px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 15px;
+    }
+    .card {
+        background-color: transparent;
+    }
+    .container a, .container form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+    .container tbody a{
+        display: unset;
+        margin-left: unset;
+        justify-content:unset;
+        text-align: unset;
+        align-items: unset;
+    }
+    .container h2{
+        padding-top: 25px;
+        text-align: center;
+    }
+    .container form div{
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+        background-color: transparent;
+    }
+    .container form, form .form-group input, form .form-group input:focus, form .form-group input.readonly {
+        background-color: transparent !important;
+        color: white;
+    }
+
+</style>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Edit Bus</h2>
+        <div class="card p-4 shadow-sm">
+            <form th:action="@{/buses/{busNo}/update(busNo=${bus.busNo})}" method="post">
+                <div class="form-group">
+                    <label for="busNo">Bus Number</label>
+                    <input type="text" class="form-control" id="busNo" name="busNo" th:value="${bus.busNo}" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="location1">Location 1</label>
+                    <input type="text" class="form-control" id="location1" name="location1" th:value="${bus.location1}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location2">Location 2</label>
+                    <input type="text" class="form-control" id="location2" name="location2" th:value="${bus.location2}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location3">Location 3</label>
+                    <input type="text" class="form-control" id="location3" name="location3" th:value="${bus.location3}">
+                </div>
+
+                <div class="form-group">
+                    <label for="driverName">Driver Name</label>
+                    <input type="text" class="form-control" id="driverName" name="driverName" th:value="${bus.driverName}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="driverNum">Driver Number</label>
+                    <input type="text" class="form-control" id="driverNum" name="driverNum" th:value="${bus.driverNum}" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-3">Update Bus</button>
+                    <a href="/buses" class="btn btn-secondary mt-3">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

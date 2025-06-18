@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Edit Student</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+	body {
+        margin: 0;
+        height: 80vh;
+        background-image: url("/images/background.jpg"); /* assuming image is in static/images/ */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed; /* optional: makes background stay in place on scroll */
+    }
+    .container {
+        margin-top: 55px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 15px;
+        margin-bottom: -75px;
+    }
+    .card {
+        background-color: transparent;
+    }
+    .container a, .container form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+
+    .container h1{
+        padding-top: 25px;
+        text-align: center;
+    }
+    .container form div{
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+        background-color: transparent;
+    }
+    .container form, form .form-group input, form .form-group input:focus, form .form-group input.readonly {
+        background-color: transparent !important;
+        color: white;
+    }
+
+</style>
+<body>
+<div class="container">
+	<h1>Edit Student</h1>
+	<form th:action="@{/students/{sid}/update(sid=${student.sid})}" method="post">
+		<input type="hidden" name="_method" value="POST" />  <!-- This line can be removed if you're using POST for updates -->
+
+		<div class="form-group">
+			<label for="sid">Student ID</label>
+			<input type="text" id="sid" class="form-control" th:value="${student.sid}" name="sid" readonly />
+		</div>
+		<div class="form-group">
+			<label for="sname">Name</label>
+			<input type="text" id="sname" class="form-control" th:value="${student.sname}" name="sname" />
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" id="email" class="form-control" th:value="${student.email}" name="email" />
+		</div>
+		<div class="form-group">
+			<label for="contact">Contact</label>
+			<input type="tel" id="contact" class="form-control" th:value="${student.contact}" name="contact" />
+		</div>
+		<div class="form-group">
+			<label for="location">Location</label>
+			<input type="text" id="location" class="form-control" th:value="${student.location}" name="location" />
+		</div>
+		<button type="submit" class="btn btn-primary mt-3">Update Student</button>
+		<a href="/students" class="btn btn-secondary mt-3">Cancel</a>
+	</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

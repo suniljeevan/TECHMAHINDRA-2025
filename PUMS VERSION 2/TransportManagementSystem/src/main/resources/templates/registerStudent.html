@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background-image: url('../images/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(0, 4, 53, .9);
+            color: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+            width: 75%;
+            padding: 30px 40px;
+        }
+        .container a, .container form button{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 20dvw;
+            margin-left: 35%;
+            height: 47.5px;
+              /* optional */
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .alert {
+            display: none;
+        }
+        .container form, .form-group input, .form-group input:focus, .form-group input.transparent-input {
+            background-color: transparent;
+            color: white;
+        }
+        .container a ion-icon {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Register Student</h1>
+        <form th:action="@{/registerStudent}" method="post">
+            <div class="form-group">
+                <label for="sid">Student ID</label>
+                <input type="text" class="form-control" id="sid" name="sid" required>
+            </div>
+            <div class="form-group">
+                <label for="sname">Name</label>
+                <input type="text" class="form-control" id="sname" name="sname" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact</label>
+                <input type="text" class="form-control" id="contact" name="contact" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Register Student</button>
+        </form>
+        <a href="#" th:href="@{/userDashboard}" class="btn btn-success mt-3"><ion-icon name="caret-back-outline"></ion-icon></a>
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
