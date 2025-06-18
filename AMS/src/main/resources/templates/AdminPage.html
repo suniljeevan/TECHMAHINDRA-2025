@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Presidency University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+		body {
+		          margin: 0;
+		          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		          display: flex;
+		          height: 100vh;
+		      }
+
+		      .sidebar {
+		          width: 250px;
+		          background-color: #1d3557;
+		          color: white;
+		          padding-top: 20px;
+		          position: fixed;
+		          height: 100vh;
+		      }
+
+		      .sidebar h3 {
+		          text-align: center;
+		          font-weight: bold;
+		          margin-bottom: 30px;
+		      }
+
+		      .sidebar a {
+		          display: block;
+		          color: white;
+		          padding: 12px 20px;
+		          text-decoration: none;
+		          transition: background 0.2s;
+		      }
+
+		      .sidebar a:hover,
+		      .sidebar a.active {
+		          background-color: #3e5c76;
+		      }
+
+		      .sidebar .submenu {
+		          padding-left: 30px;
+		          font-size: 0.95em;
+		      }
+
+		      .main-content {
+		          margin-left: 250px;
+		          padding: 30px;
+		          flex: 1;
+		          background-color: #f5f9fd;
+		          overflow-y: auto;
+		      }
+
+		      .page-title {
+		          font-size: 1.8em;
+		          font-weight: bold;
+		          color: #1d3557;
+		          margin-bottom: 20px;
+		          text-align: center;
+		      }
+
+		      .card {
+		          background: white;
+		          border-radius: 15px;
+		          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+		          padding: 30px;
+		      }
+
+		      .form-control {
+		          background-color: #e8f0fe;
+		          color: black;
+		      }
+
+		      .form-control::placeholder {
+		          color: #666;
+		      }
+
+		      .btn-primary, .btn-danger, .btn-warning {
+		          margin-top: 10px;
+		      }
+
+		      table th {
+		          background-color: #1d3557;
+		          color: white;
+		      }
+
+		      table td, table th {
+		          vertical-align: middle;
+		      }
+
+		      footer {
+		          background-color: #1d3557;
+		          color: white;
+		          text-align: center;
+		          padding: 10px;
+		          position: fixed;
+		          width: calc(100% - 250px);
+		          bottom: 0;
+		          left: 250px;
+		      }
+
+		      footer p {
+		          margin: 0;
+		          font-size: 1em;
+		      }
+
+    </style>
+</head>
+<body>
+<div class="sidebar">
+	<h3>Admin Panel</h3>
+	   <a href="#" onclick="toggleSection('adminProfileSection')"><i class="fas fa-user-circle"></i> View Profile</a>
+
+	   <a href="#!" data-bs-toggle="collapse" data-bs-target="#alumniMenu" aria-expanded="true">
+	       <i class="fas fa-users"></i> Manage Alumni
+	   </a>
+	   <div class="collapse show submenu" id="alumniMenu">
+		<a href="/admin/alumni/view"><i class="fas fa-id-card"></i> View Alumni</a>
+	       <a href="#" onclick="toggleSection('addFormSection')"><i class="fas fa-user-plus"></i> Add Alumni</a>
+	   </div>
+
+	   <a href="#!" data-bs-toggle="collapse" data-bs-target="#contactMenu" aria-expanded="false">
+	       <i class="fas fa-envelope"></i> Contact Alumni
+	   </a>
+	   <div class="collapse submenu" id="contactMenu">
+	       <a href="#" onclick="toggleSection('contactAlumniSection')"> <i class="fas fa-paper-plane"></i> Send Message</a>
+	       <a href="#" onclick="toggleSection('messagesFromAlumniSection')">  <i class="fas fa-inbox"></i> View Messages from Alumni</a>
+	       <a href="#" onclick="toggleSection('sentMessagesSection')"><i class="fas fa-inbox"></i> View Sent Messages</a>
+	   </div>
+	  
+
+	   <a href="#!" data-bs-toggle="collapse" data-bs-target="#eventMenu" aria-expanded="false">
+	       <i class="fas fa-calendar"></i> Alumni Event
+	   </a>
+	   <div class="collapse submenu" id="eventMenu">
+		<a href="/admin/events/view"><i class="fas fa-list"></i> View Events</a>
+	       <a href="#" onclick="toggleSection('postEventSection')"><i class="fas fa-calendar-plus"></i> Post New Event</a>
+	   </div>
+	   <a href="#" onclick="toggleSection('activityLogSection')"><i class="fas fa-file-alt"></i> View Activity Logs</a>
+	   <form th:action="@{/logout}" method="post" style="display: inline;">
+	   	        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	   	        <button type="submit" class="btn btn-link text-white" style="text-decoration: none;">
+	   	            <i class="fas fa-sign-out-alt"></i> Logout
+	   	        </button>
+	   	    </form>
+</div>
+
+<div class="main-content">
+    <div class="page-title">Admin Dashboard</div>
+
+    <div class="card">
+		<!-- Admin Profile Section -->
+		<div id="adminProfileSection" style="display: none;">
+		    <h4>My Profile</h4>
+		    <form id="adminProfileForm" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+		        <div class="mb-3">
+		            <label>Full Name</label>
+		            <input type="text" class="form-control" id="adminName" name="fullName" disabled th:value="${admin.fullName}">
+		        </div>
+		        <div class="mb-3">
+		            <label>Username</label>
+		            <input type="text" class="form-control" id="adminUsername" name="username" disabled th:value="${admin.username}">
+		        </div>
+				<!-- Change Password Toggle -->
+				<div class="mb-3">
+				    <button type="button" class="btn btn-secondary" id="togglePasswordForm">Change Password</button>
+				</div>
+
+				<!-- Hidden Change Password Form -->
+				<div id="changePasswordSection" style="display: none;">
+				    <div class="mb-3">
+				        <label>New Password</label>
+				        <input type="password" class="form-control" id="newAdminPassword">
+				    </div>
+				    <div class="mb-3">
+				        <label>Confirm Password</label>
+				        <input type="password" class="form-control" id="confirmAdminPassword">
+				    </div>
+				    <button type="button" class="btn btn-danger" id="submitAdminPasswordChange">Update Password</button>
+				    <div id="passwordChangeMsg" class="mt-2"></div>
+				</div>
+		        <button type="button" id="editAdminBtn" class="btn btn-warning">Edit</button>
+		        <button type="submit" id="saveAdminBtn" class="btn btn-primary" style="display: none;">Save</button>
+		    </form>
+		</div>
+
+	
+        <!-- Alumni Table -->
+		<div id="alumniTableSection" style="display: block;">
+		    <div th:if="${alumniList != null and !alumniList.isEmpty()}" class="table-responsive mt-3">
+		        <table class="table table-bordered" id="alumniTable">
+					 <thead>
+					                <tr>
+					                    <th>Alumni ID</th>
+					                    <th>Name</th>
+					                    <th>Username</th>
+					                    <th>Email</th>
+					                    <th>Graduation Year</th>
+					                    <th>University ID</th>
+					                    <th>Actions</th>
+					                </tr>
+					            </thead>
+					            <tbody>
+					                <tr th:each="a : ${alumniList}" th:data-id="${a.alumniId}">
+					                    <td th:text="${a.alumniId}"></td>
+					                    <td class="editable" data-field="name" th:text="${a.name}"></td>
+					                    <td class="editable" data-field="username" th:text="${a.username}"></td>
+					                    <td class="editable" data-field="email" th:text="${a.email}"></td>
+					                    <td class="editable" data-field="graduationYear" th:text="${a.graduationYear}"></td>
+					                    <td class="editable" data-field="universityId" th:text="${a.universityId}"></td>
+					           
+					                    <td>
+					                        <button class="btn btn-sm btn-primary edit-btn">Edit</button>
+					                        <form th:action="@{/admin/alumni/delete}" method="post" style="display:inline;">
+												<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					                            <input type="hidden" name="alumniId" th:value="${a.alumniId}" />
+					                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+					                        </form>
+					                    </td>
+					                </tr>
+					            </tbody>
+					        </table>
+					    </div>
+					    <p th:if="${alumniList == null or alumniList.isEmpty()}">No alumni records found.</p>
+					</div>
+
+					<!-- Add Alumni Form -->
+					<div id="addFormSection" style="display: none;">
+					    <form th:action="@{/admin/alumni/add}" method="post" class="mt-3">
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					        <input type="hidden" name="action" value="add">
+
+					        <div class="mb-3">
+					            <label>Name</label>
+					            <input type="text" name="name" class="form-control" required />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Username</label>
+					            <input type="text" name="username" class="form-control" required />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Email</label>
+					            <input type="email" name="email" class="form-control" required />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Password</label>
+					            <input type="password" name="password" class="form-control" required />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Graduation Year</label>
+					            <input type="number" name="graduationYear" class="form-control" required />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>University ID</label>
+					            <input type="text" name="universityId" class="form-control" required />
+					        </div>
+
+					    
+					        <div class="mb-3">
+					            <label>Branch</label>
+					            <input type="text" name="branch" class="form-control" />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Company</label>
+					            <input type="text" name="companyName" class="form-control" />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Job Title</label>
+					            <input type="text" name="jobTitle" class="form-control" />
+					        </div>
+
+					        <div class="mb-3">
+					            <label>Upload Image</label>
+					            <input type="text" name="imageUrl" class="form-control" placeholder="/images/default_alumni.png" />
+					        </div>
+
+					        <button type="submit" class="btn btn-primary">Add Alumni</button>
+					    </form>
+					</div>
+
+		
+					<!-- Contact Alumni Section -->
+					<div id="contactAlumniSection" style="display: none;">
+					    <h4>Contact Alumni</h4>
+					    <form action="/admin/messages/send" method="post" class="mt-3">
+							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> 
+
+					        <div class="mb-3">
+					            <label for="alumniId" class="form-label">Recipient Alumni ID</label>
+					            <input type="number" id="alumniId" name="alumniId" class="form-control" required>
+					        </div>
+					        <div class="mb-3">
+					            <label for="subject" class="form-label">Subject</label>
+					            <input type="text" id="subject" name="subject" class="form-control" required>
+					        </div>
+					        <div class="mb-3">
+					            <label for="content" class="form-label">Message</label>
+					            <textarea id="content" name="content" class="form-control" rows="5" required></textarea>
+					        </div>
+					        <button type="submit" class="btn btn-primary">Send Message</button>
+					        <div th:if="${successMessage}" class="alert alert-success mt-3" th:text="${successMessage}"></div>
+					        <div th:if="${errorMessage}" class="alert alert-danger mt-3" th:text="${errorMessage}"></div>
+					    </form>
+					</div>
+		
+					
+					<!-- View Messages from Alumni Section -->
+					<div id="messagesFromAlumniSection" style="display: none;">
+					    <h4>Messages from Alumni</h4>
+					    <div id="alumniMessagesContainer" class="mt-3">
+					        <!-- Messages will be loaded here dynamically -->
+					    </div>
+					</div>
+
+					<!-- Sent Messages Section -->
+					<div id="sentMessagesSection" style="display: none;">
+					    <h4>Messages Sent by Admin</h4>
+					    <div id="sentMessagesContainer" class="mt-3">
+					        <!-- Sent messages will be loaded here dynamically -->
+					    </div>
+					</div>
+
+		<!-- Post Event Section -->
+		<div id="postEventSection" th:if="${showViewEventsSection == null or !showViewEventsSection}" style="display: none;">
+		    <h4>Post New Event</h4>
+		    <form method="post" action="/admin/events/save" enctype="multipart/form-data" class="needs-validation mt-3" novalidate>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<div class="mb-3">
+				    <label for="eventId" class="form-label">Event ID</label>
+				    <input type="text" class="form-control" id="eventId" name="eventId" placeholder="e.g., EVT001" required>
+				</div>
+
+				<div class="mb-3">
+		            <label for="title" class="form-label">Event Title</label>
+		            <input type="text" class="form-control" id="title" name="title" required>
+		        </div>
+
+		        <div class="mb-3">
+		            <label for="description" class="form-label">Description</label>
+		            <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+		        </div>
+
+		        <div class="mb-3">
+		            <label for="venue" class="form-label">Location / Online Link</label>
+		            <input type="text" class="form-control" id="venue" name="venue">
+		        </div>
+
+		        <div class="row">
+		            <div class="col-md-6 mb-3">
+		                <label for="eventDate" class="form-label">Date</label>
+		                <input type="date" class="form-control" id="eventDate" name="eventDate" required>
+		            </div>
+		            <div class="col-md-6 mb-3">
+		                <label for="eventTime" class="form-label">Time</label>
+		                <input type="time" class="form-control" id="eventTime" name="eventTime" required>
+		            </div>
+		        </div>
+
+		        <div class="mb-3">
+		            <label for="image" class="form-label">Upload Image (Optional)</label>
+		            <input type="file" class="form-control" id="image" name="image">
+		        </div>
+
+		        <button type="submit" class="btn btn-primary">Post Event</button>
+		    </form>
+		</div>
+		
+		
+
+		
+		<!-- Activity Logs Section -->
+		<div id="activityLogSection" class="section" style="display: none;">
+		    <h4>Admin Activity Logs</h4>
+		    <div id="activityLogsTable" class="table-responsive mt-3"></div>
+		</div>
+		
+		
+    </div>
+	
+	<!-- View Events Section -->
+		
+			<div  class="card" id="viewEventsSection" th:if="${showViewEventsSection}" style="display: block;">
+			    <h4>Existing Alumni Events</h4>
+			    <div th:if="${events != null and !events.isEmpty()}" class="table-responsive mt-3">
+			        <table class="table table-bordered">
+			            <thead>
+			                <tr>
+			                    <th>Event ID</th>
+			                    <th>Title</th>
+			                    <th>Description</th>
+			                    <th>Venue</th>
+			                    <th>Date</th>
+			                    <th>Time</th>
+			                    <th>Created At</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+			                <tr th:each="event : ${events}">
+			                    <td th:text="${event.eventId}"></td>
+			                    <td th:text="${event.title}"></td>
+			                    <td th:text="${event.description}"></td>
+			                    <td th:text="${event.venue}"></td>
+			                    <td th:text="${event.eventDate}"></td>
+			                    <td th:text="${event.eventTime}"></td>
+			                    <td th:text="${#dates.format(event.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+			    <p th:if="${events == null or events.isEmpty()}">No events found.</p>
+			</div>
+		</div>	
+</div>
+
+<footer>
+    <p>📧 contact@presidencyuniversity.in | ☎ +91 98765 43210‬ | 📍 Bengaluru, Karnataka 560064</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:inline="javascript">
+	const adminId = [[${adminId}]];
+	
+</script>
+<!--Admin profile script tags-->
+<script>
+	
+    // Toggle View/Edit Mode
+    document.getElementById("editAdminBtn").addEventListener("click", function () {
+        const form = document.getElementById("adminProfileForm");
+        form.querySelectorAll("input").forEach(input => input.disabled = false);
+        this.style.display = "none";
+        document.getElementById("saveAdminBtn").style.display = "inline-block";
+    });
+
+    // Submit and redirect
+    document.getElementById("adminProfileForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const data = {
+            fullName: document.getElementById("adminName").value,
+            username: document.getElementById("adminUsername").value,
+          
+        };
+		
+		const csrfToken = document.querySelector('input[name="_csrf"]').value;
+	
+
+		
+        fetch('/admin/update-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken},
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (res.ok) {
+                // ✅ Redirect to dashboard to reflect updates
+                window.location.href = "/admin/dashboard";
+            } else {
+                alert("Failed to update profile.");
+            }
+        })
+        .catch(err => {
+            console.error("Error updating profile:", err);
+            alert("An error occurred.");
+        });
+    });
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+		toggleSection('adminProfileSection');
+        const table = document.getElementById('alumniTable');
+        table.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('edit-btn')) {
+                const row = e.target.closest('tr');
+                const isEditing = row.classList.contains('editing');
+
+                if (!isEditing) {
+                    // Switch to edit mode
+                    row.classList.add('editing');
+                    const cells = row.querySelectorAll('.editable');
+                    cells.forEach(cell => {
+                        const field = cell.getAttribute('data-field');
+                        const value = cell.textContent.trim();
+                        cell.innerHTML = `<input type="text" class="form-control" name="${field}" value="${value}">`;
+                    });
+                    e.target.textContent = 'Save';
+                } else {
+                    // Save changes
+                    const alumniId = row.getAttribute('data-id');
+                    const inputs = row.querySelectorAll('input');
+                    const data = { action: 'update', alumniId: alumniId };
+                    inputs.forEach(input => {
+                        data[input.name] = input.value;
+                    });
+
+                    // Send AJAX request to update the record
+                    fetch('/admin/alumni/update', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Update the row with new values
+							// Update the row with new values
+							inputs.forEach(input => {
+							    const cell = input.parentElement;
+							    cell.textContent = input.value;
+							});
+
+							const alumniId = row.getAttribute('data-id');
+
+							// Replace the Actions cell (last td)
+							const actionsCell = row.querySelector('td:last-child');
+							actionsCell.innerHTML = `
+							    <button class="btn btn-sm btn-primary edit-btn">Edit</button>
+							    <form action="/alumni/delete" method="post" style="display:inline;">
+							        <input type="hidden" name="alumniId" value="${alumniId}" />
+							        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+							    </form>
+							`;
+
+							row.classList.remove('editing');
+                        } else {
+                            alert('Failed to update the record.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while updating the record.');
+                    });
+                }
+            }
+        });
+    });
+</script>
+
+<!-- Admin password change-->
+
+<script>
+    document.getElementById("togglePasswordForm").addEventListener("click", function () {
+        const section = document.getElementById("changePasswordSection");
+        section.style.display = (section.style.display === "none") ? "block" : "none";
+    });
+
+    document.getElementById("submitAdminPasswordChange").addEventListener("click", function () {
+        const newPassword = document.getElementById("newAdminPassword").value;
+        const confirmPassword = document.getElementById("confirmAdminPassword").value;
+        const messageBox = document.getElementById("passwordChangeMsg");
+		
+		const csrfHeader = document.querySelector('input[name="_csrf"]').name;
+		const csrfToken = document.querySelector('input[name="_csrf"]').value;
+		
+		
+        if (newPassword !== confirmPassword) {
+            messageBox.innerHTML = '<div class="alert alert-danger">Passwords do not match.</div>';
+            return;
+        }
+
+        fetch('/admin/change-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json',  [csrfHeader]: csrfToken },
+			
+            body: JSON.stringify({ newPassword: newPassword })
+        })
+		.then(res => res.text().then(text => {
+		    if (res.ok) {
+		        messageBox.innerHTML = '<div class="alert alert-success">' + text + '</div>';
+		        document.getElementById("newAdminPassword").value = "";
+		        document.getElementById("confirmAdminPassword").value = "";
+		    } else {
+		        messageBox.innerHTML = '<div class="alert alert-danger">' + text + '</div>';
+		    }
+		}))
+        .catch(err => {
+            console.error("Password update error:", err);
+            messageBox.innerHTML = '<div class="alert alert-danger">Error occurred while updating password.</div>';
+        });
+    });
+</script>
+
+
+
+<!-- Contact message JS code-->
+<script>
+    function toggleSection(sectionId) {
+        const sections = document.querySelectorAll('.card > div');
+        sections.forEach(section => section.style.display = 'none');
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.style.display = 'block';
+        }
+    }
+
+	document.getElementById('contactForm').addEventListener('submit', function(e) {
+	    e.preventDefault();
+
+	    const messageId = document.getElementById('messageId').value;
+	    const alumniId = document.getElementById('alumniId').value;
+	    const subject = document.getElementById('subject').value;
+	    const message = document.getElementById('message').value;
+
+	    fetch('/api/messages/send', {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/json' },
+	        body: JSON.stringify({
+	            messageId: messageId,
+	            alumniId: alumniId,
+	            subject: subject,
+	            message: message
+	        })
+	    })
+	    .then(response => {
+	        if (!response.ok) {
+	            throw new Error("Network response was not ok");
+	        }
+	        return response.json();
+	    })
+	    .then(data => {
+	        document.getElementById('responseMessage').innerHTML = `
+	            <div class="alert alert-success alert-dismissible fade show" role="alert">
+	                Message delivered successfully (ID: <strong>${data.messageId}</strong>)
+	                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	            </div>`;
+	        document.getElementById('contactForm').reset();
+	    })
+	    .catch(error => {
+	        document.getElementById('responseMessage').innerHTML = `
+	            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+	                Failed to send message. Please try again.
+	                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	            </div>`;
+	        console.error('Error:', error);
+	    });
+	});
+
+
+</script>
+
+<!--View message from Alumni-->
+<script>
+    function loadAdminMessages() {
+        const adminId = [[${adminId}]];
+
+        // View messages from alumni (Inbox)
+        fetch(`/api/messages/received/${adminId}`)
+            .then(res => res.json())
+            .then(messages => {
+                const container = document.getElementById("alumniMessagesContainer");
+                if (messages.length === 0) {
+                    container.innerHTML = '<div class="alert alert-info">No new messages from alumni.</div>';
+                    return;
+                }
+
+                let html = '<ul class="list-group">';
+                messages.forEach(msg => {
+                    html += `<li class="list-group-item">
+                        <strong>From Alumni #${msg.senderId}</strong> - <em>${msg.subject}</em><br/>
+                        ${msg.content}<br/>
+                        <small>${new Date(msg.sentAt).toLocaleString()}</small>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("alumniMessagesContainer").innerHTML =
+                    '<div class="alert alert-danger">Failed to load messages.</div>';
+            });
+
+        // View sent messages
+        fetch(`/api/messages/sent/${adminId}`)
+            .then(res => res.json())
+            .then(messages => {
+                const container = document.getElementById("sentMessagesContainer");
+                if (messages.length === 0) {
+                    container.innerHTML = '<div class="alert alert-info">No sent messages.</div>';
+                    return;
+                }
+
+                let html = '<ul class="list-group">';
+                messages.forEach(msg => {
+                    html += `<li class="list-group-item">
+                        <strong>To Alumni #${msg.recipientId}</strong> - <em>${msg.subject}</em><br/>
+                        ${msg.content}<br/>
+                        <small>${new Date(msg.sentAt).toLocaleString()}</small>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("sentMessagesContainer").innerHTML =
+                    '<div class="alert alert-danger">Failed to load sent messages.</div>';
+            });
+    }
+
+    // Attach to toggle events
+    document.querySelector('[onclick="toggleSection(\'messagesFromAlumniSection\')"]')
+        .addEventListener("click", loadAdminMessages);
+
+    document.querySelector('[onclick="toggleSection(\'sentMessagesSection\')"]')
+        .addEventListener("click", loadAdminMessages);
+</script>
+
+
+<!-- Activity logs-->
+<script>
+    function loadActivityLogs(adminId) {
+        fetch(`/api/logs/admin/${adminId}`)
+            .then(res => res.json())
+            .then(logs => {
+                let html = `<table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Log ID</th>
+                            <th>Action</th>
+                            <th>Entity</th>
+                            <th>Entity ID</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                logs.forEach(log => {
+                    html += `<tr>
+                        <td>${log.logId}</td>
+                        <td>${log.action}</td>
+                        <td>${log.entityType}</td>
+                        <td>${log.entityId}</td>
+                        <td>${new Date(log.timestamp).toLocaleString()}</td>
+                    </tr>`;
+                });
+                html += `</tbody></table>`;
+                document.getElementById('activityLogsTable').innerHTML = html;
+            })
+            .catch(err => {
+                console.error('Error loading logs:', err);
+                document.getElementById('activityLogsTable').innerHTML =
+                    '<div class="alert alert-danger">Failed to load logs.</div>';
+            });
+    }
+
+    document.querySelector('[onclick="toggleSection(\'activityLogSection\')"]').addEventListener('click', function () {
+        toggleSection('activityLogSection');
+        loadActivityLogs(adminId); // ⬅ This will now be defined properly
+    });
+
+   
+</script>
+
+
+
+
+</body>
+</html>

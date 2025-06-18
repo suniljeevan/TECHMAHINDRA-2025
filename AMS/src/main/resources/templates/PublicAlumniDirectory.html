@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alumni Directory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <style>
+        body {
+            background-color: #f5f9fd;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding-bottom: 60px; /* Space for footer */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+			width: 100%;
+			    aspect-ratio: 4 / 3;
+			    object-fit: cover;
+			    object-position: center;
+			    border-bottom: 1px solid #ddd;
+        }
+
+        .card-body {
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            color: #1d3557;
+            font-weight: 600;
+        }
+
+        .card-text {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1d3557;
+        }
+
+        footer {
+            background-color: #1d3557;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="section-title">Alumni Directory</h2>
+
+    <div class="row" th:if="${allAlumni != null}">
+		<div class="col-12 col-sm-6 col-lg-3 mb-4" th:each="al : ${allAlumni}">
+			<div class="card">
+				<img th:src="${al.imageUrl != null ? al.imageUrl : '/images/default_alumni.png'}"
+				     alt="Alumni Photo" class="img-fluid"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${al.name}">Alumni Name</h5>
+                    <p class="card-text"><strong>Graduation Year:</strong> <span th:text="${al.graduationYear}">Year</span></p>
+                    <p class="card-text"><strong>Branch:</strong> <span th:text="${al.branch}">Branch</span></p>
+                    <p class="card-text"><strong>Company:</strong> <span th:text="${al.companyName}">Company</span></p>
+                    <p class="card-text"><strong>Role:</strong> <span th:text="${al.jobTitle}">Role</span></p>
+                    <p class="card-text"><strong>Email:</strong> <span th:text="${al.email}">Email</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>📧 contact@presidencyuniversity.in | ☎ ‪+91 98765 43210‬ | 📍 Bengaluru, Karnataka 560064</p>
+</footer>
+
+</body>
+</html>

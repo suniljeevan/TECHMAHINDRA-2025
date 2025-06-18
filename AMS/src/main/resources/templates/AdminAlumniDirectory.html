@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Alumni Directory</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1d3557;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3e5c76;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            width: calc(100% - 250px);
+            background-color: #f5f9fd;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1d3557;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+			width: 100%;
+						    aspect-ratio: 4 / 3;
+						    object-fit: cover;
+						    object-position: center;
+						    border-bottom: 1px solid #ddd;
+        }
+
+        .card-body {
+            background-color: #fff;
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1d3557;
+        }
+
+        .card-text {
+            font-size: 0.95rem;
+        }
+
+        .card-footer {
+            text-align: right;
+            background: #f1f1f1;
+            padding: 10px 20px;
+        }
+
+        footer {
+            background-color: #1d3557;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: calc(100% - 250px);
+            left: 250px;
+            bottom: 0;
+        }
+    </style>
+</head>
+<!-- ... head content remains unchanged ... -->
+
+<body>
+	<div class="sidebar">
+	    <h3>Admin Panel</h3>
+
+	    <a href="#" onclick="toggleSection('adminProfileSection')"><i class="fas fa-user-circle"></i> View Profile</a>
+
+	    <a href="#!" data-bs-toggle="collapse" data-bs-target="#alumniMenu" aria-expanded="true">
+	        <i class="fas fa-users"></i> Manage Alumni
+	    </a>
+	    <div class="collapse show submenu" id="alumniMenu">
+	        <a href="/admin/alumni/view"><i class="fas fa-id-card"></i> View Alumni</a>
+	        <a href="#" onclick="toggleSection('addFormSection')"><i class="fas fa-user-plus"></i> Add Alumni</a>
+	    </div>
+
+	    <a href="#!" data-bs-toggle="collapse" data-bs-target="#contactMenu" aria-expanded="false">
+	        <i class="fas fa-envelope"></i> Contact Alumni
+	    </a>
+	    <div class="collapse submenu" id="contactMenu">
+	        <a href="#" onclick="toggleSection('contactAlumniSection')"><i class="fas fa-paper-plane"></i> Send Message</a>
+	        <a href="#" onclick="toggleSection('messagesFromAlumniSection')"><i class="fas fa-inbox"></i> View Messages from Alumni</a>
+	        <a href="#" onclick="toggleSection('sentMessagesSection')"><i class="fas fa-inbox"></i> View Sent Messages</a>
+	    </div>
+
+	    <a href="#!" data-bs-toggle="collapse" data-bs-target="#eventMenu" aria-expanded="false">
+	        <i class="fas fa-calendar"></i> Alumni Event
+	    </a>
+	    <div class="collapse submenu" id="eventMenu">
+	        <a href="/admin/events/view"><i class="fas fa-list"></i> View Events</a>
+	        <a href="#" onclick="toggleSection('postEventSection')"><i class="fas fa-calendar-plus"></i> Post New Event</a>
+	    </div>
+
+	    <a href="#" onclick="toggleSection('activityLogSection')"><i class="fas fa-file-alt"></i> View Activity Logs</a>
+	    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+	</div>
+
+<div class="main-content">
+    <h2 class="section-title">Manage Alumni Directory</h2>
+
+    <div class="row" th:if="${allAlumni != null}">
+		<div class="col-12 col-sm-6 col-lg-3 mb-4" th:each="al : ${allAlumni}">
+            <div class="card">
+				<img th:src="@{${al.imageUrl}}" alt="Alumni Image" class="img-fluid"/>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${al.name}">Alumni Name</h5>
+                    <p class="card-text"><strong>Graduation Year:</strong> <span th:text="${al.graduationYear}"></span></p>
+                    <p class="card-text"><strong>Branch:</strong> <span th:text="${al.branch}"></span></p>
+                    <p class="card-text"><strong>Company:</strong> <span th:text="${al.companyName}"></span></p>
+                    <p class="card-text"><strong>Role:</strong> <span th:text="${al.jobTitle}"></span></p>
+                    <p class="card-text"><strong>Email:</strong> <span th:text="${al.email}"></span></p>
+					
+
+                </div>
+                <div class="card-footer">
+					<button class="btn btn-sm btn-primary"
+					        data-bs-toggle="modal"
+					        data-bs-target="#editModal"
+					        th:attr="data-id=${al.alumniId},
+					                 data-name=${al.name},
+					                 data-email=${al.email},
+					                 data-username=${al.username},
+					                 data-branch=${al.branch},
+					                 data-company=${al.companyName},
+					                 data-job=${al.jobTitle},
+					                 data-year=${al.graduationYear},
+									 data-imageurl=${al.imageUrl},
+					                 data-password=${al.password}">
+					    Edit
+					</button>
+                    <form th:action="@{/admin/alumni/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="alumniId" th:value="${al.alumniId}"/>
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="editAlumniForm" th:action="@{/admin/alumni/update}" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Alumni</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="alumniId" id="edit-id" />
+					<input type="hidden" name="password" id="edit-password" />
+					<!--<input type="hidden" name="imageUrl" id="edit-imageUrl" /> -->
+
+                    <div class="mb-3"><label>Name</label><input type="text" class="form-control" name="name" id="edit-name"/></div>
+                    <div class="mb-3"><label>Email</label><input type="email" class="form-control" name="email" id="edit-email"/></div>
+                    <div class="mb-3"><label>Username</label><input type="text" class="form-control" name="username" id="edit-username"/></div>
+                    <div class="mb-3"><label>Graduation Year</label><input type="number" class="form-control" name="graduationYear" id="edit-year"/></div>
+                    <div class="mb-3"><label>Branch</label><input type="text" class="form-control" name="branch" id="edit-branch"/></div>
+                    <div class="mb-3"><label>Company</label><input type="text" class="form-control" name="companyName" id="edit-company"/></div>
+                    <div class="mb-3"><label>Job Title</label><input type="text" class="form-control" name="jobTitle" id="edit-job"/></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>📧 contact@presidencyuniversity.in | ☎ +91 98765 43210‬ | 📍 Bengaluru, Karnataka 560064</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const editModal = document.getElementById('editModal');
+    editModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        document.getElementById('edit-id').value = button.getAttribute('data-id');
+        document.getElementById('edit-name').value = button.getAttribute('data-name');
+        document.getElementById('edit-email').value = button.getAttribute('data-email');
+		document.getElementById("edit-password").value = button.getAttribute("data-password");
+        document.getElementById('edit-username').value = button.getAttribute('data-username');
+        document.getElementById('edit-branch').value = button.getAttribute('data-branch');
+		document.getElementById('edit-imageUrl').value = button.getAttribute('data-imageurl');
+
+        document.getElementById('edit-company').value = button.getAttribute('data-company');
+        document.getElementById('edit-job').value = button.getAttribute('data-job');
+        document.getElementById('edit-year').value = button.getAttribute('data-year');
+    });
+</script>
+
+<!-- View messages from Alumni & Sent Messages -->
+<script>
+    function loadAdminMessages() {
+        const adminId = [[${adminId}]];
+
+        // View messages from alumni
+        fetch(`/api/messages/received/${adminId}`)
+            .then(res => res.json())
+            .then(messages => {
+                const container = document.getElementById("alumniMessagesContainer");
+                if (messages.length === 0) {
+                    container.innerHTML = '<div class="alert alert-info">No new messages from alumni.</div>';
+                    return;
+                }
+                let html = '<ul class="list-group">';
+                messages.forEach(msg => {
+                    html += `<li class="list-group-item">
+                        <strong>From Alumni #${msg.senderId}</strong> - <em>${msg.subject}</em><br/>
+                        ${msg.content}<br/>
+                        <small>${new Date(msg.sentAt).toLocaleString()}</small>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("alumniMessagesContainer").innerHTML =
+                    '<div class="alert alert-danger">Failed to load messages.</div>';
+            });
+
+        // View sent messages
+        fetch(`/api/messages/sent/${adminId}`)
+            .then(res => res.json())
+            .then(messages => {
+                const container = document.getElementById("sentMessagesContainer");
+                if (messages.length === 0) {
+                    container.innerHTML = '<div class="alert alert-info">No sent messages.</div>';
+                    return;
+                }
+
+                let html = '<ul class="list-group">';
+                messages.forEach(msg => {
+                    html += `<li class="list-group-item">
+                        <strong>To Alumni #${msg.recipientId}</strong> - <em>${msg.subject}</em><br/>
+                        ${msg.content}<br/>
+                        <small>${new Date(msg.sentAt).toLocaleString()}</small>
+                    </li>`;
+                });
+                html += '</ul>';
+                container.innerHTML = html;
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById("sentMessagesContainer").innerHTML =
+                    '<div class="alert alert-danger">Failed to load sent messages.</div>';
+            });
+    }
+
+    // Attach script to UI actions
+    document.querySelector('[onclick="toggleSection(\'messagesFromAlumniSection\')"]')
+        .addEventListener("click", loadAdminMessages);
+    document.querySelector('[onclick="toggleSection(\'sentMessagesSection\')"]')
+        .addEventListener("click", loadAdminMessages);
+</script>
+
+</body>
+</html>

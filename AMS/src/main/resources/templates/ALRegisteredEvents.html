@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Events - Presidency University</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f5f9fd;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #1d3557;
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background-color: #3e5c76;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .event-card {
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        .event-title {
+            color: #1d3557;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>Alumni Dashboard</h3>
+    <a th:href="@{/Alumni/dashboard}"><i class="fas fa-user"></i> Profile</a>
+    <a th:href="@{/alumni/view-events}"><i class="fas fa-calendar-alt"></i> View Events</a>
+    <a class="active"><i class="fas fa-check-circle"></i> Registered Events</a>
+    <a th:href="@{/alumni/directory}"><i class="fas fa-address-book"></i> Alumni Directory</a>
+    <a th:href="@{/alumni/contact}"><i class="fas fa-envelope"></i> Contact Admin</a>
+    <a th:href="@{/alumni/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+</div>
+
+<div class="main-content">
+    <h2 class="mb-4 text-center">Your Registered Events</h2>
+
+	<div th:if="${registeredEvents != null and !registeredEvents.isEmpty()}">
+	    <div th:each="event : ${registeredEvents}" class="card shadow-sm mb-3">
+	        <div class="card-body">
+	            <h5 class="card-title" th:text="${event.title}">Event Title</h5>
+	            <p><strong>Description:</strong> <span th:text="${event.description}"></span></p>
+	            <p><strong>Venue:</strong> <span th:text="${event.venue}"></span></p>
+	            <p><strong>Date:</strong> <span th:text="${event.eventDate}"></span> |
+	               <strong>Time:</strong> <span th:text="${event.eventTime}"></span></p>
+	        </div>
+	    </div>
+	</div>
+	<p th:if="${registeredEvents == null or registeredEvents.isEmpty()}" class="text-muted">You haven't registered for any events yet.</p>
+</div>
+
+</body>
+</html>
