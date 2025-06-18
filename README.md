@@ -49,7 +49,7 @@ It includes secure login via JWT tokens, role-based access control, and provides
          - Maven Install
          - Spring Boot App
 - In your default browser, type localhost:9954
-- for admin, use the default credentials, gmail : admin@gmail.com; password: admin123
+- for admin, use the default credentials, email : admin@gmail.com; password: admin123
 - For AUTHENTICATION MICROSERVICES'S verification,
          - Open Postman
          - POST data
