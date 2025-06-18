@@ -1,48 +1,56 @@
-# 🏫 ExamMasterfsV0 - The 0th version of exammaster (fullstack  examination management system) 
+# 🎓 TechMahindra-2025 Java WebApp Project
 
-A role-based Spring Boot application for managing university-level exams with secure JWT authentication, dynamic seating arrangements, and a user-friendly UI using Thymeleaf.
+Welcome to the collaborative Java WebApp project for university management.
 
----
+## 🔧 Project Overview
 
-## 🚀 Features
-
-### ✅ Authentication & Authorization
-- **User Registration**: Register new users (Admin or Student).
-- **JWT Login**: Issues a token only if the user is not already logged in.
-- **Secure Logout**: Removes or expires the token from in-memory storage.
-- **Role-Based Access**:
-  - `ADMIN`: Can create exams, manage students/subjects, and allocate seating.
-  - `STUDENT`: Can view hall allocations and download hall tickets.
+This project is modularized and each student has been assigned a specific module via a dedicated Git branch. You should work **only on your assigned branch** and follow professional Git practices.
 
 ---
 
-## 🎓 User Roles
-- `ADMIN`: Full system control.
-- `STUDENT`: Restricted to viewing only permitted information.
+## 🧩 Modules and Assigned Branches
+
+| Module                     | Branch Name             |
+|----------------------------|--------------------------|
+| Student Management         | `student-management`     |
+| Faculty Management         | `faculty-management`     |
+| Course Management          | `course-management`      |
+| Admission Management       | `admission-management`   |
+| Examination Management     | `examination-management` |
+| Library Management         | `library-management`     |
+| Hostel Management          | `hostel-management`       |
+| Fee Management             | `fee-management`         |
+| Result Management          | `result-management`      |
+| Timetable Management       | `timetable-management`   |
+| Placement Management       | `placement-management`   |
+| Transport Management       | `transport-management`   |
+| Alumni Management          | `alumni-management`      |
+| Scholarship Management     | `scholarship-management` |
+| Research Management        | `research-management`    |
+| Event Management           | `event-management`       |
 
 ---
 
-## 🪑 Seating Arrangement
-- Auto-assign students to classrooms in round-robin fashion.
-- Rebuild seating allocations if needed.
-- Generate hall allocation summary for each exam.
+## 📌 Instructions for Students
 
----
+### Step 1: Clone the Repository
 
-## 🎫 Hall Ticket System
-- View assigned classroom per exam.
-- Accessible by students for each scheduled exam.
+```bash
+git clone https://github.com/<your-username>/Techmahindra-2025.git
+cd Techmahindra-2025
+Step 2: Switch to Your Assigned Branch
+git checkout your-assigned-branch-name
+Step 3: Add Your Module Code
+Write your code inside the respective folder structure (if any), or feel free to create files logically under your branch.
+Step 4: Commit and Push
+git add .
+git commit -m "Added my module implementation"
+git push origin your-assigned-branch-name
+Important:
+Always pull the latest before pushing:
+Do not work on main branch.
 
----
+Do not delete or modify code in others' modules.
 
-## 🧰 Tech Stack
-
-| Layer              | Technology                            |
-|-------------------|----------------------------------------|
-| Backend            | Spring Boot, Spring Security, JWT     |
-| Frontend (UI)      | Thymeleaf (dynamic server-side HTML)  |
-| Authentication     | JWT (stateless security)              |
-| Database           | H2 (in-memory for development)        |
-| ORM & Persistence  | JPA / Hibernate                       |
-| API Testing        | Postman                               |
-| Build Tool         | Maven                                 |
+Final Merge
+After completion, you may raise a Pull Request (PR) to merge your branch into main. The instructor will review and merge after validation.

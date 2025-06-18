@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Registration | Presidency University</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 720px;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      padding: 3rem 3.5rem;
+      transition: box-shadow 0.3s ease-in-out;
+      position: relative;
+    }
+
+    .container:hover {
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #3b0764;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #3b0764;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 12px;
+      border: 1.5px solid #ccc;
+      padding: 0.65rem 1rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #764ba2;
+      box-shadow: 0 0 10px #a78bfa;
+      outline: none;
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.4rem;
+    }
+
+    .form-check-input {
+      width: 1.3em;
+      height: 1.3em;
+      cursor: pointer;
+      border: 1.5px solid #764ba2;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .form-check-input:checked {
+      background-color: #764ba2;
+      border-color: #764ba2;
+    }
+
+    .btn-success,
+    .btn-secondary {
+      border-radius: 12px;
+      padding: 12px 30px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 6px 12px rgba(118, 75, 162, 0.3);
+      border: none;
+    }
+
+    .btn-success {
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+      box-shadow: 0 8px 18px rgba(118, 75, 162, 0.5);
+    }
+
+    .btn-secondary {
+      background: #ddd;
+      color: #333;
+    }
+
+    .btn-secondary:hover {
+      background: #bbb;
+      color: #222;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.8rem;
+      justify-content: center;
+    }
+
+    #responseMessage {
+      margin-top: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    .home-btn {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      z-index: 10;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      box-shadow: 0 6px 12px rgba(118, 75, 162, 0.3);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+      box-shadow: 0 8px 18px rgba(118, 75, 162, 0.5);
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container shadow-sm">
+    <a href="/index" class="home-btn">🏠 Home</a>
+    <br><br>
+    <h2>Register for an Event</h2>
+    <form id="eventRegistrationForm" autocomplete="on">
+		
+		<div class="mb-4">
+		    <label for="registrationId" class="form-label">Registration ID</label>
+		    <input type="text" class="form-control" id="registrationId" name="registrationId" placeholder="E.g., PU123456" required autofocus/>
+		</div>
+		
+      <div class="mb-4">
+        <label for="studentName" class="form-label">Full Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="form-label">Email Address</label>
+        <input type="email" class="form-control" id="email" name="collegeMailId" placeholder="your.email@example.com" required />
+      </div>
+	  
+	  <div class="mb-4">
+	    <label for="phone" class="form-label">Phone Number</label>
+	    <input type="tel" class="form-control" id="phone" name="phone" pattern="\d{10}" placeholder="Enter your 10-digit phone number" required />
+	  </div>
+	  
+      <div class="mb-4">
+        <label for="program" class="form-label">Program</label>
+        <select class="form-select" id="program" name="program" required>
+          <option value="" disabled selected>Select your program</option>
+          <option value="BBA">BBA</option>
+          <option value="BSc Computer Science">BSc Computer Science</option>
+          <option value="BA Economics">BA Economics</option>
+          <option value="MBA">MBA</option>
+          <option value="MSc Physics">MSc Physics</option>
+        </select>
+      </div>
+	  
+	  <div class="mb-4">
+	  	  	  	 <label for="school" class="form-label">School</label>
+	  	  	  	 <input type="text" class="form-control" id="school" name="school" placeholder="Enter your school name" required />
+	  	  	  </div>
+	  
+      <div class="mb-4">
+        <label for="department" class="form-label">Course</label>
+        <select class="form-select" id="department" name="department" required>
+          <option value="" disabled selected>Select your course</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Finance">Finance</option>
+          <option value="Computer Networks">Computer Networks</option>
+          <option value="Microeconomics">Microeconomics</option>
+          <option value="Thermodynamics">Thermodynamics</option>
+        </select>
+      </div>
+
+      <div class="row mb-4 g-3">
+        <div class="col-md-6">
+          <label for="year" class="form-label">Year</label>
+          <input type="number" min="1" max="10" class="form-control" id="year" name="year" placeholder="e.g., 2" required />
+        </div>
+        <div class="col-md-6">
+          <label for="semester" class="form-label">Semester</label>
+          <input type="number" min="1" max="12" class="form-control" id="semester" name="semester" placeholder="e.g., 4" required />
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label d-block">Gender</label>
+        <div class="gender-options">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" required />
+            <label class="form-check-label" for="genderMale">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" required />
+            <label class="form-check-label" for="genderFemale">Female</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other" required />
+            <label class="form-check-label" for="genderOther">Other</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="eventSelect" class="form-label">Select Event</label>
+        <select class="form-select" id="eventSelect" name="eventName" required>
+          <option value="" disabled selected>Select an event</option>
+        </select>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-success shadow-sm">Register</button>
+        <button type="button" id="clearBtn" class="btn btn-secondary shadow-sm">Clear</button>
+      </div>
+    </form>
+
+    <div id="responseMessage"></div>
+  </div>
+
+  <!-- Bootstrap JS + Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS to load events and handle form -->
+  <script>
+	document.addEventListener("DOMContentLoaded", () => {
+	  fetch("http://localhost:8080/api/events/all")
+	    .then((res) => res.json())
+	    .then((events) => {
+	      const select = document.getElementById("eventSelect");
+	      select.innerHTML = `<option value="" disabled selected>Select an event</option>`;
+	      events.forEach((event) => {
+	        const option = document.createElement("option");
+	        option.value = event.eventId; // Use eventId as value
+	        option.textContent = event.eventName; // Use eventName as label
+	        select.appendChild(option);
+	      });
+	    })
+	    .catch((err) => {
+	      console.error("Error fetching events:", err);
+	    });
+
+		document.getElementById("eventRegistrationForm").addEventListener("submit", function (e) {
+		  e.preventDefault();
+
+		  const formData = new FormData(this);
+		  const data = Object.fromEntries(formData.entries());
+
+		  // Get the selected event name
+		  const eventSelect = document.getElementById("eventSelect");
+		  data.eventName = eventSelect.options[eventSelect.selectedIndex].textContent;
+
+		  fetch("http://localhost:8080/api/event-registration", {
+		    method: "POST",
+		    headers: {
+		      "Content-Type": "application/json",
+		    },
+		    body: JSON.stringify(data),
+		  })
+		    .then((res) => {
+		      if (!res.ok) throw new Error("Network response was not ok");
+		      return res.json();
+		    })
+		    .then((student) => {
+		      const responseDiv = document.getElementById("responseMessage");
+		      responseDiv.textContent = `Registration successful! ID: ${student.registrationId}`;
+		      responseDiv.className = "alert alert-success mt-4";
+		    })
+		    .catch((err) => {
+		      const responseDiv = document.getElementById("responseMessage");
+		      responseDiv.textContent = "Already registered with this ID";
+		      responseDiv.className = "alert alert-danger mt-4";
+		    });
+		});
+
+
+	  document.getElementById("clearBtn").addEventListener("click", () => {
+	    document.getElementById("eventRegistrationForm").reset();
+	    const responseDiv = document.getElementById("responseMessage");
+	    responseDiv.textContent = "";
+	    responseDiv.className = "";
+	  });
+	});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Management - Presidency University</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+	body {
+	  background: 
+	    linear-gradient(135deg, rgba(16, 24, 32, 0.6), rgba(26, 26, 46, 0.6)),
+	    url('https://wallpapercave.com/wp/wp7488230.jpg');
+	  background-size: cover;
+	  background-position: center center;
+	  background-attachment: fixed;
+	  background-repeat: no-repeat;
+	  color: white;
+	  font-family: 'Segoe UI', sans-serif;
+	  margin: 0;
+	}
+
+
+    .navbar {
+      background-color: #000;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      margin: 0 15px;
+      font-weight: 500;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .btn-custom {
+      background-color: #ff6f61;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .btn-custom:hover {
+      background-color: #e8594f;
+    }
+
+    .flip-container {
+      perspective: 1000px;
+      width: 100%;
+      max-width: 300px;
+      height: 200px;
+      margin: auto;
+    }
+
+    .flipper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: 0.6s;
+    }
+
+    .flip-container:hover .flipper {
+      transform: rotateY(180deg);
+    }
+
+    .front, .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    .front {
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+    }
+
+    .back {
+      background: #292929;
+      transform: rotateY(180deg);
+    }
+
+    .front h3 {
+      font-size: 1.25rem;
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    #scrollUpBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      background-color: #0d6efd;
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      font-size: 18px;
+    }
+
+    #scrollUpBtn:hover {
+      background-color: #0b5ed7;
+    }
+
+    footer {
+      padding: 30px 0;
+      text-align: center;
+      background-color: #000000cc;
+    }
+	
+	/* Hover effect for navbar links */
+	 .navbar-nav .nav-link {
+	   position: relative;
+	   transition: color 0.3s ease;
+	 }
+
+	 .navbar-nav .nav-link:hover {
+	   color: #ffc107 !important; /* Change to yellow on hover */
+	 }
+
+	 /* Optional underline on hover */
+	 .navbar-nav .nav-link::after {
+	   content: '';
+	   position: absolute;
+	   width: 0%;
+	   height: 2px;
+	   bottom: 0;
+	   left: 0;
+	   background-color: #ffc107;
+	   transition: width 0.3s ease;
+	 }
+
+	 .navbar-nav .nav-link:hover::after {
+	   width: 100%;
+	 }
+	 
+	 .navbar-nav .nav-link.active {
+	   color: #ffc107 !important;
+	   font-weight: bold;
+	 }
+
+	 .message {
+	      margin-top: 10px;
+	      font-weight: 600;
+	    }
+	    .message.success {
+	      color: #28a745;
+	    }
+	    .message.error {
+	      color: #dc3545;
+	    }
+  </style>
+</head>
+<body>
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
+	  <div class="container-fluid px-4">
+	    <!-- Brand to left -->
+	    <a class="navbar-brand me-auto" href="#">Event Management</a>
+
+	    <!-- Toggler for mobile -->
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+
+	    <!-- Nav items to right -->
+	    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+	      <ul class="navbar-nav">
+	        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+	        <li class="nav-item"><a class="nav-link" href="#events">Events</a></li>
+	        <li class="nav-item"><a class="nav-link" href="#students">Students</a></li>
+	        <li class="nav-item"><a class="nav-link" href="#admin">Admin</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+
+
+  <!-- HOME -->
+  <section id="home" class="hero">
+    <h1>Welcome to Event Management System</h1>
+    <p class="lead mt-3">Plan, Register, and Manage your Events with ease!</p>
+    <a href="#events" class="btn btn-custom">Explore Events</a>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events">
+    <div class="container text-center">
+      <h2>Available Events</h2>
+      <p class="mb-4">All available events will be shown here.</p>
+      <div class="row g-4 justify-content-center" id="eventCardsContainer">
+        <!-- Dynamic event cards will be loaded here -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch('/api/events/all')
+        .then(response => {
+          if (!response.ok) throw new Error('Failed to fetch events.');
+          return response.json();
+        })
+        .then(events => {
+          console.log("Fetched events: ", events); // TEMP LOG
+          const container = document.getElementById("eventCardsContainer");
+          if (events.length === 0) {
+            container.innerHTML = "<p>No events available.</p>";
+            return;
+          }
+
+          events.forEach(event => {
+            const col = document.createElement("div");
+            col.className = "col-md-4";
+
+			col.innerHTML = `
+			  <div class="flip-container">
+			    <div class="flipper">
+			      <div class="front">
+			        <img src="${event.imageBase64}" alt="${event.eventName}" class="img-fluid" style="max-height: 200px; object-fit: cover;">
+			        <h3>${event.eventName}</h3>
+			      </div>
+			      <div class="back">
+			        <div>
+			          <p><strong>Venue:</strong> ${event.event_place}</p>
+			          <p><strong>Date:</strong> ${event.event_date}</p>
+			          <p><strong>Time:</strong> ${event.event_time}</p>
+			          <p><strong>Description:</strong> ${event.event_description}</p>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			`;
+
+            container.appendChild(col);
+          });
+        })
+        .catch(error => {
+          document.getElementById("eventCardsContainer").innerHTML = "<p class='text-danger'>Failed to load events.</p>";
+          console.error(error);
+        });
+    });
+  </script>
+
+  
+  <!-- STUDENTS -->
+    <section id="students">
+      <div class="container text-center">
+        <h2>Students</h2>
+        <p>Student can register themselves here</p>
+        
+        <!-- Main Container for Login/Signup Options -->
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6">
+            <!-- Options to choose Login or Signup -->
+            <div class="btn-group w-100 mb-4" role="group" aria-label="Login or SignUp">
+              <button type="button" class="btn btn-primary w-50" id="loginBtn">Login</button>
+              <button type="button" class="btn btn-success w-50" id="signupBtn">Sign Up</button>
+            </div>
+            
+            <!-- Container for Forms -->
+            <div id="formContainer" class="border p-4 shadow-sm">
+              <!-- Login Form -->
+              <div id="loginForm" class="form-section d-none">
+                <h3>Login</h3>
+                <form id="loginFormElement">
+                  <div class="mb-3">
+                    <label for="loginRegistrationID" class="form-label">Registration ID</label>
+                    <input type="text" class="form-control" id="loginRegistrationID" name="registrationId" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" name="password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <div id="loginMessage" class="message"></div>
+              </div>
+
+              <!-- Sign Up Form -->
+              <div id="signupForm" class="form-section d-none">
+                <h3>Sign Up</h3>
+                <form id="signupFormElement">
+                  <div class="mb-3">
+                    <label for="signupRegistrationID" class="form-label">Registration ID</label>
+                    <input type="text" class="form-control" id="signupRegistrationID" name="registrationId" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signupEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="signupEmail" name="email" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signupPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="signupPassword" name="password" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="signupConfirmPassword" name="confirmPassword" required>
+                  </div>
+                  <button type="submit" class="btn btn-success">Sign Up</button>
+                </form>
+                <div id="signupMessage" class="message"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Optional JavaScript to toggle between forms -->
+  <script>
+    // Elements
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    // Event Listeners
+    loginBtn.addEventListener("click", function() {
+      loginForm.classList.remove("d-none");
+      signupForm.classList.add("d-none");
+      loginBtn.classList.add("active");
+      signupBtn.classList.remove("active");
+    });
+
+    signupBtn.addEventListener("click", function() {
+      signupForm.classList.remove("d-none");
+      loginForm.classList.add("d-none");
+      signupBtn.classList.add("active");
+      loginBtn.classList.remove("active");
+    });
+
+    // Default to show the login form initially
+    loginForm.classList.remove("d-none");
+    signupForm.classList.add("d-none");
+	const loginMessage = document.getElementById("loginMessage");
+	const signupMessage = document.getElementById("signupMessage");
+	function clearMessages() {
+	  loginMessage.textContent = "";
+	  loginMessage.className = "message";
+	  signupMessage.textContent = "";
+	  signupMessage.className = "message";
+	}
+
+	// AJAX for login
+	document.getElementById("loginFormElement").addEventListener("submit", function(e) {
+	  e.preventDefault();
+	  clearMessages();
+
+	  const registrationId = document.getElementById("loginRegistrationID").value.trim();
+	  const password = document.getElementById("loginPassword").value.trim();
+
+	  fetch("/students/login", {
+	    method: "POST",
+	    headers: {
+	      "Content-Type": "application/x-www-form-urlencoded"
+	    },
+	    body: new URLSearchParams({
+	      registrationId: registrationId,
+	      password: password
+	    })
+	  })
+	  .then(response => response.text())
+	  .then(text => {
+	    if (text.includes("Successful")) {
+	      loginMessage.textContent = text;
+	      loginMessage.classList.add("success");
+
+	      // ✅ Redirect to event_registration.html
+	      setTimeout(() => {
+	        window.location.href = "event-registration";
+	      }, 1000);
+	    } else {
+	      loginMessage.textContent = text;
+	      loginMessage.classList.add("error");
+	    }
+	  })
+	  .catch(() => {
+	    loginMessage.textContent = "An error occurred. Please try again.";
+	    loginMessage.classList.add("error");
+	  });
+	});
+
+
+	      // AJAX for signup
+	      document.getElementById("signupFormElement").addEventListener("submit", function(e) {
+	        e.preventDefault();
+	        clearMessages();
+
+	        const registrationId = document.getElementById("signupRegistrationID").value.trim();
+	        const email = document.getElementById("signupEmail").value.trim();
+	        const password = document.getElementById("signupPassword").value.trim();
+	        const confirmPassword = document.getElementById("signupConfirmPassword").value.trim();
+
+	        // Simple client-side check for password match before sending request
+	        if(password !== confirmPassword) {
+	          signupMessage.textContent = "Passwords do not match!";
+	          signupMessage.classList.add("error");
+	          return;
+	        }
+
+	        fetch("/students/signup", {
+	          method: "POST",
+	          headers: {
+	            "Content-Type": "application/x-www-form-urlencoded"
+	          },
+	          body: new URLSearchParams({
+	            registrationId: registrationId,
+	            email: email,
+	            password: password,
+	            confirmPassword: confirmPassword
+	          })
+	        })
+	        .then(response => response.text())
+	        .then(text => {
+	          if(text.includes("Successful")) {
+	            signupMessage.textContent = text;
+	            signupMessage.classList.add("success");
+	            // Optional: clear the form
+	            document.getElementById("signupFormElement").reset();
+	          } else {
+	            signupMessage.textContent = text;
+	            signupMessage.classList.add("error");
+	          }
+	        })
+	        .catch(() => {
+	          signupMessage.textContent = "An error occurred. Please try again.";
+	          signupMessage.classList.add("error");
+	        });
+	      });
+  </script>
+
+
+
+  <!-- ADMIN -->
+  <section id="admin">
+    <div class="container text-center">
+      <h2>Admin Panel</h2>
+      <p>Manage event and student data here.</p>
+
+	  <!-- Admin Login Form -->
+	  <div class="row justify-content-center mt-4">
+	    <div class="col-md-6">
+	      <div id="adminLoginContainer" class="border p-4 rounded bg-dark text-white shadow">
+	        <h4 class="mb-3">Admin Login</h4>
+	        <form id="adminLoginForm">
+	          <div class="mb-3">
+	            <label for="adminUsername" class="form-label">Username</label>
+	            <input type="text" class="form-control" id="adminUsername" required />
+	          </div>
+	          <div class="mb-3">
+	            <label for="adminPassword" class="form-label">Password</label>
+	            <input type="password" class="form-control" id="adminPassword" required />
+	          </div>
+	          <button type="submit" class="btn btn-warning w-100">Login</button>
+	        </form>
+	        <div id="adminLoginError" class="text-danger mt-3 d-none">Invalid credentials. Please try again.</div>
+	      </div>
+	    </div>
+	  </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    document.getElementById("adminLoginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("adminUsername").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
+      const errorDiv = document.getElementById("adminLoginError");
+
+      fetch("http://localhost:8080/api/admins/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userId: username,
+          password: password
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = "/admin"; // redirect on success
+          } else {
+            errorDiv.classList.remove("d-none");
+          }
+        })
+        .catch(err => {
+          errorDiv.classList.remove("d-none");
+        });
+    });
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Presidency University | Event Management System</p>
+  </footer>
+
+  <!-- Scroll Up Button -->
+  <button id="scrollUpBtn" title="Scroll Up">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap & Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("EventFetchServlet")
+        .then(response => response.json())
+        .then(events => {
+          const container = document.getElementById("eventCardsContainer");
+          events.forEach(event => {
+            const card = document.createElement("div");
+            card.className = "col-md-4";
+            card.innerHTML = `
+              <div class="flip-container">
+                <div class="flipper">
+                  <div class="front">
+                    <h3>${event.name}</h3>
+                  </div>
+                  <div class="back">
+                    <p>${event.description}</p>
+                  </div>
+                </div>
+              </div>`;
+            container.appendChild(card);
+          });
+        })
+        .catch(error => console.error("Error loading events:", error));
+    });
+
+    // Scroll up button
+    const scrollBtn = document.getElementById("scrollUpBtn");
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+ 
+  <!--<script>
+    // Admin login functionality
+    document.getElementById("adminLoginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const username = document.getElementById("adminUsername").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
+      const errorDiv = document.getElementById("adminLoginError");
+      const loginContainer = document.getElementById("adminLoginContainer");
+      const adminContent = document.getElementById("adminContent");
+
+      if (username === "admin" && password === "shang") {
+        // Success
+        loginContainer.classList.add("d-none");
+        adminContent.classList.remove("d-none");
+      } else {
+        // Error
+        errorDiv.classList.remove("d-none");
+      }
+    });
+  </script>-->
+
+</body>
+</html>
