@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bus Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    body {
+        margin: 0; /* remove default margin */
+        height: 100vh; /* ensure body takes full height */
+        background-image: url('../images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        margin-top: 27.5px;
+        background-color: rgba(0, 4, 53, .9);
+        color: white;
+        border-radius: 1.25rem;
+        box-shadow: 0 0.625rem 1.5rem rgba(0, 4, 53, .5);
+        width: 75%;
+        padding-bottom: 20px;
+    }
+    .container a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 20dvw;
+        margin-left: 35%;
+          /* optional */
+    }
+    .container tbody a{
+        display: unset;
+        margin-left: unset;
+        justify-content:unset;
+        text-align: unset;
+        align-items: unset;
+    }
+    .container h1{
+        padding-top: 10px;
+        text-align: center;
+    }
+    .container table {
+        margin-top: 15px;
+        padding-top: 2px;
+        color: white;
+    }
+    .container a ion-icon {
+        font-size: 25px;
+    }
+</style>
+<body>
+    <div class="container mt-4">
+        <h1>Bus List</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Bus Number</th>
+                    <th>Location 1</th>
+                    <th>Location 2</th>
+                    <th>Location 3</th>
+                    <th>Driver Name</th>
+                    <th>Driver Number</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="bus : ${buses}">
+                    <td th:text="${bus.busNo}"></td>
+                    <td th:text="${bus.location1}"></td>
+                    <td th:text="${bus.location2}"></td>
+                    <td th:text="${bus.location3}"></td>
+                    <td th:text="${bus.driverName}"></td>
+                    <td th:text="${bus.driverNum}"></td>
+                    <td>
+                        <a th:href="@{/buses/edit/{busNo}(busNo=${bus.busNo})}" class="btn btn-warning">Edit</a>
+                        <a th:href="@{/buses/{busNo}/delete(busNo=${bus.busNo})}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/buses/new" class="btn btn-primary mb-3">Add New Bus</a>
+        <a href="#" th:href="@{/dashboard}" class="btn btn-success mb-3"><ion-icon name="caret-back-outline"></ion-icon></a>
+    </div>
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
